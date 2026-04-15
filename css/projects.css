@@ -1,0 +1,94 @@
+/* projects.css — Projects page grid layout and placeholder styles */
+
+/* ── Back link (reused from experience page pattern) ───── */
+.back-link {
+  position: fixed;
+  top: var(--space-6);
+  left: var(--space-6);
+  z-index: var(--z-nav);
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  letter-spacing: var(--tracking-wide);
+  color: var(--color-gold);
+  text-decoration: none;
+  transition: opacity var(--dur-base) ease;
+  cursor: pointer;
+}
+.back-link:hover {
+  opacity: 0.7;
+}
+
+/* ── Page header ────────────────────────────────────────── */
+.projects-header {
+  padding-top: calc(var(--space-32) + var(--space-8));
+  padding-bottom: var(--space-8);
+  text-align: center;
+}
+
+.projects-header .section-sub {
+  margin-inline: auto;
+  margin-bottom: 0;
+}
+
+/* ── Grid section ───────────────────────────────────────── */
+.projects-grid-section {
+  padding-top: var(--space-8);
+  padding-bottom: var(--space-32);
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+}
+
+@media (max-width: 1024px) {
+  .projects-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+  .projects-grid { grid-template-columns: 1fr; }
+}
+
+/* ── Override card initial state for this page ──────────── */
+.projects-grid .project-card {
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+/* ── Placeholder cards ──────────────────────────────────── */
+.project-card--placeholder {
+  opacity: 0;
+  transform: translateY(24px);
+  cursor: default;
+  pointer-events: none;
+}
+
+.project-card--placeholder .card-title,
+.project-card--placeholder .card-hook,
+.project-card--placeholder .card-desc,
+.project-card--placeholder .card-type {
+  opacity: 0.4;
+}
+
+.project-card--placeholder .card-title {
+  color: var(--color-text-muted);
+}
+
+.project-card--placeholder:hover {
+  transform: none;
+  box-shadow: none;
+  border-color: var(--color-border);
+}
+
+/* ── Responsive ─────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .back-link {
+    top: var(--space-4);
+    left: var(--space-4);
+  }
+  .projects-header {
+    padding-top: calc(var(--space-24) + var(--space-8));
+  }
+}

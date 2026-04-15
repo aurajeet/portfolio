@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="page-title">Project — Aurajeet Mahapatra</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/project-viewer.css">
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js"
+      }
+    }
+  </script>
+</head>
+<body>
+
+  <div id="page-transition-overlay"></div>
+  <script>if(sessionStorage.getItem('warp-active'))document.getElementById('page-transition-overlay').classList.add('active')</script>
+
+  <div id="nebula">
+    <div class="nebula-wisp nebula-wisp--1"></div>
+    <div class="nebula-wisp nebula-wisp--2"></div>
+    <div class="nebula-wisp nebula-wisp--3"></div>
+  </div>
+
+  <!-- Top bar: back link + project title + prototype CTA -->
+  <div class="viewer-topbar">
+    <a href="projects.html" class="back-link">← Back</a>
+    <span class="viewer-project-title" id="viewer-title"></span>
+    <a href="#" class="prototype-cta" id="prototype-cta" target="_blank" rel="noopener">View Prototype →</a>
+  </div>
+
+  <!-- Embedded PDF viewer -->
+  <div class="viewer-embed-wrap">
+    <embed src="" type="application/pdf" class="viewer-embed" id="pdf-embed">
+    <div class="viewer-fallback" id="viewer-fallback">
+      <p>Your browser doesn't support embedded PDFs.</p>
+      <a href="#" class="viewer-fallback-link" id="fallback-link">Download PDF →</a>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script type="module" src="js/project-viewer-main.js"></script>
+</body>
+</html>

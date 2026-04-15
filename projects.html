@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects — Aurajeet Mahapatra</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/sections.css">
+  <link rel="stylesheet" href="css/projects.css">
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js"
+      }
+    }
+  </script>
+</head>
+<body>
+
+  <!-- Warp-jump transition overlay (opaque on arrival, faded by JS) -->
+  <div id="page-transition-overlay"></div>
+  <script>if(sessionStorage.getItem('warp-active'))document.getElementById('page-transition-overlay').classList.add('active')</script>
+
+  <!-- Layer 1: Three.js star canvas injected by space-bg.js -->
+  <!-- Layer 1b: Nebula gradients -->
+  <div id="nebula">
+    <div class="nebula-wisp nebula-wisp--1"></div>
+    <div class="nebula-wisp nebula-wisp--2"></div>
+    <div class="nebula-wisp nebula-wisp--3"></div>
+  </div>
+
+  <a href="index.html" class="back-link" aria-label="Back to home">← Back</a>
+
+  <div class="content">
+
+    <section class="projects-header">
+      <div class="container">
+        <p class="label section-label">PM PROJECTS</p>
+        <h1 class="section-heading">Real problems. Real thinking. Real artefacts.</h1>
+        <p class="section-sub">Each one is a real artefact — a different product problem, a different way of thinking through it.</p>
+      </div>
+    </section>
+
+    <section class="projects-grid-section">
+      <div class="container">
+        <div class="projects-grid">
+
+          <!-- Real project 1 — Netflix -->
+          <a href="project-viewer.html?project=netflix" class="project-card">
+            <div class="card-top">
+              <span class="card-type">Case Study</span>
+              <span class="card-pdf-badge">Entertainment</span>
+            </div>
+            <h3 class="card-title">Netflix</h3>
+            <p class="card-hook">Growth & engagement</p>
+            <p class="card-desc">The world's biggest streaming platform is losing the attention war. A case study on where they're bleeding and what actually moves the needle.</p>
+            <span class="card-cta">View Document →</span>
+          </a>
+
+          <!-- Real project 2 — Amazon Prime Video -->
+          <a href="project-viewer.html?project=amazon" class="project-card">
+            <div class="card-top">
+              <span class="card-type">Opportunity Brief</span>
+              <span class="card-pdf-badge">Entertainment</span>
+            </div>
+            <h3 class="card-title">Amazon Prime Video</h3>
+            <p class="card-hook">Paradox of choice</p>
+            <p class="card-desc">Prime Video's biggest competitor isn't Netflix. It's the back button. Survey-backed research and four RICE-scored solutions.</p>
+            <span class="card-cta">View Document →</span>
+          </a>
+
+          <!-- Real project 3 — Jupiter -->
+          <a href="project-viewer.html?project=jupiter" class="project-card">
+            <div class="card-top">
+              <span class="card-type">Teardown</span>
+              <span class="card-pdf-badge">Fintech</span>
+            </div>
+            <h3 class="card-title">Jupiter "Magic Spends"</h3>
+            <p class="card-hook">Why users weren't investing</p>
+            <p class="card-desc">A fintech app with 2M+ users and near-zero investment adoption. One feature changes that.</p>
+            <span class="card-cta">View Document →</span>
+          </a>
+
+          <!-- Placeholder 1 -->
+          <div class="project-card project-card--placeholder">
+            <div class="card-top">
+              <span class="card-type">Coming Soon</span>
+            </div>
+            <h3 class="card-title">[Untitled Project]</h3>
+            <p class="card-hook">In progress</p>
+            <p class="card-desc">In progress. Check back soon.</p>
+          </div>
+
+          <!-- Placeholder 2 -->
+          <div class="project-card project-card--placeholder">
+            <div class="card-top">
+              <span class="card-type">Coming Soon</span>
+            </div>
+            <h3 class="card-title">[Untitled Project]</h3>
+            <p class="card-hook">In progress</p>
+            <p class="card-desc">In progress. Check back soon.</p>
+          </div>
+
+          <!-- Placeholder 3 -->
+          <div class="project-card project-card--placeholder">
+            <div class="card-top">
+              <span class="card-type">Coming Soon</span>
+            </div>
+            <h3 class="card-title">[Untitled Project]</h3>
+            <p class="card-hook">In progress</p>
+            <p class="card-desc">In progress. Check back soon.</p>
+          </div>
+
+
+        </div>
+      </div>
+    </section>
+
+    <footer id="site-footer">
+      <span>Aurajeet Mahapatra — 2026</span>
+      <span>Built with Claude Code</span>
+    </footer>
+
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script type="module" src="js/projects-main.js"></script>
+</body>
+</html>

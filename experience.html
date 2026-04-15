@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Experience — Aurajeet Mahapatra</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/experience.css">
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js"
+      }
+    }
+  </script>
+</head>
+<body>
+
+  <div id="page-transition-overlay"></div>
+  <script>if(sessionStorage.getItem('warp-active'))document.getElementById('page-transition-overlay').classList.add('active')</script>
+
+  <div id="nebula">
+    <div class="nebula-wisp nebula-wisp--1"></div>
+    <div class="nebula-wisp nebula-wisp--2"></div>
+    <div class="nebula-wisp nebula-wisp--3"></div>
+  </div>
+
+  <a href="index.html" class="back-link" aria-label="Back to home">← Back</a>
+
+  <div id="sphere-viewport"></div>
+
+  <!-- Per-card atmosphere color grading (fixed background) -->
+  <div class="exp-atmosphere" id="exp-atmosphere">
+    <div class="exp-atmo" id="exp-atmo-0"></div>
+    <div class="exp-atmo" id="exp-atmo-1"></div>
+    <div class="exp-atmo" id="exp-atmo-2"></div>
+    <div class="exp-atmo" id="exp-atmo-3"></div>
+  </div>
+
+  <div class="content exp-content">
+
+    <!-- Intro: sphere + heading -->
+    <section class="exp-header" id="exp-header">
+      <p class="label exp-label">EXPERIENCE</p>
+      <h1 class="exp-heading">The long way round.</h1>
+      <p class="exp-sub">Scroll down to see what I picked up along the way.</p>
+      <div class="scroll-hint" id="scroll-hint" aria-hidden="true">
+        <div class="scroll-hint-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cards section: timeline sidebar + vertically stacked cards -->
+    <section class="exp-body" id="exp-body">
+      <nav class="exp-timeline" id="exp-timeline" aria-label="Experience timeline">
+        <div class="exp-tl-track"></div>
+        <div class="exp-tl-node" data-step="0">
+          <span class="exp-tl-dot"></span>
+          <span class="exp-tl-label">
+            <span class="exp-tl-year">NEXT</span>
+            <span class="exp-tl-role">Product Manager</span>
+          </span>
+        </div>
+        <div class="exp-tl-node" data-step="1">
+          <span class="exp-tl-dot"></span>
+          <span class="exp-tl-label">
+            <span class="exp-tl-year">2025</span>
+            <span class="exp-tl-role">Business Manager</span>
+          </span>
+        </div>
+        <div class="exp-tl-node" data-step="2">
+          <span class="exp-tl-dot"></span>
+          <span class="exp-tl-label">
+            <span class="exp-tl-year">2023</span>
+            <span class="exp-tl-role">Assoc. Consultant</span>
+          </span>
+        </div>
+        <div class="exp-tl-node" data-step="3">
+          <span class="exp-tl-dot"></span>
+          <span class="exp-tl-label">
+            <span class="exp-tl-year">2019</span>
+            <span class="exp-tl-role">B.Tech</span>
+          </span>
+        </div>
+      </nav>
+
+      <div class="exp-cards-flow" id="exp-cards-flow">
+        <div class="exp-card" id="exp-card-0">
+          <span class="exp-card__date">NEXT</span>
+          <span class="exp-card__context">Next stop.</span>
+          <h3 class="exp-card__title">Product Manager</h3>
+          <span class="exp-card__company">Wherever the right problem lives</span>
+          <p class="exp-card__desc">I've spent years making decisions with incomplete data, managing people I didn't hire, and shipping outcomes under pressure. Turns out, that's just product management with a different job title. Now I'm making it official.</p>
+          <div class="exp-card__tags">
+            <span class="exp-tag">Systems thinker</span>
+            <span class="exp-tag">Structured by default</span>
+            <span class="exp-tag">Ships under pressure</span>
+          </div>
+        </div>
+
+        <div class="exp-card" id="exp-card-1">
+          <span class="exp-card__date">2025 — PRESENT</span>
+          <span class="exp-card__context">Then I ran something.</span>
+          <h3 class="exp-card__title">Business Manager</h3>
+          <span class="exp-card__company">HEBE · B2B Essential Oil Manufacturing and Trading</span>
+          <p class="exp-card__desc">Inherited a ₹1.6Cr business, a network of 5,000 farmers, and zero digital infrastructure. Left it at ₹2.1Cr, fully digitized, and considerably less chaotic.</p>
+          <div class="exp-card__tags">
+            <span class="exp-tag">P&amp;L ownership</span>
+            <span class="exp-tag">Product-market fit</span>
+            <span class="exp-tag">Go-to-market</span>
+            <span class="exp-tag">Revenue growth</span>
+            <span class="exp-tag">0 to 1</span>
+          </div>
+        </div>
+
+        <div class="exp-card" id="exp-card-2">
+          <span class="exp-card__date">2023 — 2025</span>
+          <span class="exp-card__context">Before that, I learned to think.</span>
+          <h3 class="exp-card__title">Associate Consultant</h3>
+          <span class="exp-card__company">Nation With NaMo · 4 states · 5 campaigns</span>
+          <p class="exp-card__desc">Growth strategy. Experimentation. Analytics infrastructure. Cross-functional team management. All of it at scale, all of it under pressure.</p>
+          <div class="exp-card__tags">
+            <span class="exp-tag">User research</span>
+            <span class="exp-tag">Segmentation</span>
+            <span class="exp-tag">Analytics dashboard</span>
+            <span class="exp-tag">Personalisation</span>
+            <span class="exp-tag">Campaign lifecycle ownership</span>
+            <span class="exp-tag">Go-to-market strategy</span>
+          </div>
+        </div>
+
+        <div class="exp-card" id="exp-card-3">
+          <span class="exp-card__date">2019 — 2023</span>
+          <span class="exp-card__context">And it all started here.</span>
+          <h3 class="exp-card__title">B.Tech, Mechanical Engineering</h3>
+          <span class="exp-card__company">Birla Institute of Technology, Mesra · 8.84 / 10</span>
+          <p class="exp-card__desc">Studied mechanical engineering. Somehow ended up in politics, business, and product. The degree didn't predict this. Neither did I.</p>
+          <div class="exp-card__tags">
+            <span class="exp-tag">Systems thinking</span>
+            <span class="exp-tag">First principles</span>
+            <span class="exp-tag">Analytical rigour</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script type="module" src="js/experience-main.js"></script>
+</body>
+</html>

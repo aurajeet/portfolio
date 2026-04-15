@@ -1,0 +1,328 @@
+/* experience.css — Scrolling experience page with sphere intro */
+
+/* ── Back link ──────────────────────────────────────────── */
+.back-link {
+  position: fixed;
+  top: var(--space-6);
+  left: var(--space-6);
+  z-index: var(--z-nav);
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  letter-spacing: var(--tracking-wide);
+  color: var(--color-gold);
+  text-decoration: none;
+  transition: opacity var(--dur-base) ease;
+  cursor: pointer;
+}
+.back-link:hover { opacity: 0.7; }
+
+/* ── Sphere viewport (intro only) ──────────────────────── */
+#sphere-viewport {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-sphere);
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(to bottom, white 60%, transparent 95%);
+  mask-image: linear-gradient(to bottom, white 60%, transparent 95%);
+}
+
+/* ── Page content ──────────────────────────────────────── */
+.exp-content {
+  position: relative;
+  z-index: var(--z-content);
+}
+
+/* ── Intro header ──────────────────────────────────────── */
+.exp-header {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--space-6);
+  padding-bottom: 42vh;
+  position: relative;
+}
+
+.exp-label { margin-bottom: var(--space-4); }
+
+.exp-heading {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 600;
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-text);
+  margin-bottom: var(--space-4);
+}
+
+.exp-sub {
+  font-family: var(--font-sans);
+  font-size: var(--text-lg);
+  color: var(--color-text-muted);
+  max-width: 500px;
+  line-height: var(--leading-normal);
+}
+
+/* ── Scroll hint ────────────────────────────────────────── */
+.scroll-hint {
+  position: absolute;
+  bottom: var(--space-8);
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  color: var(--color-gold);
+  animation: scroll-bob 2s ease-in-out infinite;
+}
+
+@keyframes scroll-bob {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50%      { transform: translateX(-50%) translateY(8px); }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Atmosphere layers (fixed background, per-card color grading)
+   ═══════════════════════════════════════════════════════════ */
+
+.exp-atmosphere {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-nebula);
+  pointer-events: none;
+}
+
+.exp-atmo {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  will-change: opacity;
+}
+
+#exp-atmo-0 {
+  background:
+    radial-gradient(ellipse 70% 55% at 55% 45%, rgba(40, 180, 200, 0.14) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 40% at 30% 60%, rgba(20, 140, 160, 0.10) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 30% at 75% 35%, rgba(60, 200, 220, 0.07) 0%, transparent 55%);
+}
+
+#exp-atmo-1 {
+  background:
+    radial-gradient(ellipse 70% 55% at 50% 50%, rgba(200, 160, 60, 0.16) 0%, transparent 65%),
+    radial-gradient(ellipse 55% 45% at 70% 40%, rgba(180, 130, 40, 0.10) 0%, transparent 60%),
+    radial-gradient(ellipse 45% 35% at 25% 65%, rgba(220, 170, 50, 0.07) 0%, transparent 55%);
+}
+
+#exp-atmo-2 {
+  background:
+    radial-gradient(ellipse 65% 55% at 50% 45%, rgba(40, 80, 200, 0.15) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 40% at 70% 55%, rgba(100, 50, 180, 0.10) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 35% at 30% 40%, rgba(60, 100, 220, 0.08) 0%, transparent 55%);
+}
+
+#exp-atmo-3 {
+  background:
+    radial-gradient(ellipse 65% 50% at 50% 50%, rgba(30, 160, 100, 0.13) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 40% at 35% 55%, rgba(40, 180, 120, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 30% at 70% 40%, rgba(20, 140, 90, 0.06) 0%, transparent 55%);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Cards section: sidebar timeline + vertical card flow
+   ═══════════════════════════════════════════════════════════ */
+
+.exp-body {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-8);
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 40vh var(--space-6) var(--space-32);
+}
+
+/* ── Sticky timeline sidebar ───────────────────────────── */
+.exp-timeline {
+  position: sticky;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 170px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+}
+
+.exp-tl-track {
+  position: absolute;
+  left: 5px;
+  top: 20px;
+  bottom: 20px;
+  width: 1px;
+  background: var(--color-border);
+}
+
+.exp-tl-node {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) 0;
+}
+
+.exp-tl-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  border: 2px solid var(--color-text-faint);
+  background: transparent;
+  flex-shrink: 0;
+  transition: all 0.35s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.exp-tl-node.active .exp-tl-dot {
+  border-color: var(--color-gold);
+  background: var(--color-gold);
+  box-shadow: 0 0 12px rgba(245, 185, 68, 0.4);
+}
+
+.exp-tl-label {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.exp-tl-year {
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-wide);
+  color: var(--color-text-faint);
+  transition: color 0.35s ease;
+}
+
+.exp-tl-node.active .exp-tl-year {
+  color: var(--color-gold);
+}
+
+.exp-tl-role {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  color: var(--color-text-faint);
+  transition: color 0.35s ease;
+}
+
+.exp-tl-node.active .exp-tl-role {
+  color: var(--color-text-muted);
+}
+
+/* ── Vertical card flow ────────────────────────────────── */
+.exp-cards-flow {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  min-width: 0;
+}
+
+.exp-card {
+  background: rgba(12, 13, 20, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+.exp-card__date {
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.exp-card__context {
+  font-family: var(--font-serif);
+  font-size: var(--text-sm);
+  font-style: italic;
+  color: var(--color-text-muted);
+}
+
+.exp-card__title {
+  font-family: var(--font-serif);
+  font-size: var(--text-xl);
+  font-weight: 600;
+  line-height: var(--leading-snug);
+  color: var(--color-text);
+}
+
+.exp-card__company {
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-gold);
+}
+
+.exp-card__desc {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  line-height: var(--leading-normal);
+  margin-top: var(--space-1);
+}
+
+.exp-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+}
+
+.exp-tag {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--color-gold);
+  border: 1px solid var(--color-gold-dim);
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: rgba(245, 185, 68, 0.06);
+  white-space: nowrap;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Responsive
+   ═══════════════════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+  .back-link {
+    top: var(--space-4);
+    left: var(--space-4);
+  }
+
+  .exp-timeline { display: none; }
+
+  .exp-body {
+    padding: var(--space-6) var(--space-4) var(--space-24);
+  }
+
+  .exp-card {
+    padding: var(--space-4);
+  }
+
+  .exp-card__title {
+    font-size: var(--text-lg);
+  }
+}

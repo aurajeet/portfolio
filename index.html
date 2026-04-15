@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aurajeet Mahapatra — Product Manager</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/hero.css">
+  <link rel="stylesheet" href="css/sections.css">
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js"
+      }
+    }
+  </script>
+</head>
+<body>
+
+  <!-- Warp-jump transition overlay (opaque on arrival, faded by JS) -->
+  <div id="page-transition-overlay"></div>
+  <script>if(sessionStorage.getItem('warp-active'))document.getElementById('page-transition-overlay').classList.add('active')</script>
+
+  <!-- Layer 1: Three.js canvas injected by space-bg.js -->
+  <!-- Layer 1b: Nebula wisps (individually animated gradient layers) -->
+  <div id="nebula">
+    <div class="nebula-wisp nebula-wisp--1"></div>
+    <div class="nebula-wisp nebula-wisp--2"></div>
+    <div class="nebula-wisp nebula-wisp--3"></div>
+  </div>
+  <!-- Layer 1c: Background atmospheres — scroll-driven color grading -->
+  <div id="atmosphere">
+    <div class="atmo-layer" id="atmo-projects"></div>
+    <div class="atmo-layer" id="atmo-ai"></div>
+    <div class="atmo-layer" id="atmo-about"></div>
+    <div class="atmo-layer" id="atmo-contact"></div>
+  </div>
+  <!-- Layer 3: 2D particle canvas injected by particles.js -->
+
+  <!-- Navigation -->
+  <nav id="site-nav">
+    <a href="#hero" class="nav-monogram">AM</a>
+    <ul class="nav-links">
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Page content -->
+  <div class="content">
+
+    <!-- ═══ Hero ═══ -->
+    <section id="hero">
+      <h1 id="hero-name" aria-label="Aurajeet Mahapatra">Aurajeet Mahapatra</h1>
+
+      <div class="hero-tagline-wrap">
+        <p class="tagline-main">I make complicated things feel obvious.</p>
+        <p class="tagline-sub">Scroll down to see if it worked.</p>
+      </div>
+
+      <div class="hero-metrics">
+        <p class="label metrics-label">WHAT I'VE MOVED</p>
+        <div class="metrics-grid">
+          <div class="metric">
+            <span class="metric-number"
+                  data-target="1.2" data-suffix="M+" data-decimals="1">0</span>
+            <span class="metric-label">Users Acquired</span>
+          </div>
+          <div class="metric">
+            <span class="metric-number"
+                  data-target="35" data-suffix="%">0</span>
+            <span class="metric-label">Engagement Lifted</span>
+          </div>
+          <div class="metric">
+            <span class="metric-number"
+                  data-target="40" data-suffix="%">0</span>
+            <span class="metric-label">Faster Decisions</span>
+          </div>
+          <div class="metric">
+            <span class="metric-number"
+                  data-target="31" data-suffix="%">0</span>
+            <span class="metric-label">Revenue Grown</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="scroll-hint" id="scroll-hint" aria-hidden="true">
+        <div class="scroll-hint-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ Projects ═══ -->
+    <section id="projects">
+      <div class="container">
+        <p class="label section-label">PM PROJECTS</p>
+        <h2 class="section-heading">Real problems. Real thinking. Real artefacts.</h2>
+        <p class="section-sub">Each one is a real artefact — a different product problem, a different way of thinking through it.</p>
+
+        <div class="project-cards">
+          <a href="project-viewer.html?project=netflix&from=home" class="project-card" id="card-netflix">
+            <div class="card-top">
+              <span class="card-type">Case Study</span>
+              <span class="card-pdf-badge">Entertainment</span>
+            </div>
+            <h3 class="card-title">Netflix</h3>
+            <p class="card-hook">Growth & engagement</p>
+            <p class="card-desc">The world's biggest streaming platform is losing the attention war. A case study on where they're bleeding and what actually moves the needle.</p>
+            <span class="card-cta">View Document →</span>
+          </a>
+
+          <a href="project-viewer.html?project=amazon&from=home" class="project-card" id="card-amazon">
+            <div class="card-top">
+              <span class="card-type">Opportunity Brief</span>
+              <span class="card-pdf-badge">Entertainment</span>
+            </div>
+            <h3 class="card-title">Amazon Prime Video</h3>
+            <p class="card-hook">Paradox of choice</p>
+            <p class="card-desc">Prime Video's biggest competitor isn't Netflix. It's the back button. Survey-backed research and four RICE-scored solutions.</p>
+            <span class="card-cta">View Document →</span>
+          </a>
+
+          <a href="project-viewer.html?project=jupiter&from=home" class="project-card" id="card-jupiter">
+            <div class="card-top">
+              <span class="card-type">Teardown</span>
+              <span class="card-pdf-badge">Fintech</span>
+            </div>
+            <h3 class="card-title">Jupiter "Magic Spends"</h3>
+            <p class="card-hook">Why users weren't investing</p>
+            <p class="card-desc">A fintech app with 2M+ users and near-zero investment adoption. One feature changes that.</p>
+            <span class="card-cta">View Document →</span>
+          </a>
+        </div>
+
+        <div class="section-cta-wrap">
+          <a href="projects.html" class="section-cta" id="cta-projects">View All Projects →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ AI Fluency ═══ -->
+    <section id="ai-fluency">
+      <div class="container">
+        <h2 class="section-heading ai-heading">Unfair advantage.</h2>
+        <p class="section-sub">AI is how I think faster, build faster, and ship faster.</p>
+
+        <div class="ai-tools">
+          <div class="ai-tool" id="tool-openclaw">
+            <div class="tool-icon-wrap">
+              <img src="Assets/openclaw.png" alt="OpenClaw" class="tool-icon"
+                   onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <span class="tool-icon-fallback">OC</span>
+            </div>
+            <span class="tool-label">OpenClaw</span>
+          </div>
+
+          <div class="ai-tool" id="tool-cowork">
+            <div class="tool-icon-wrap">
+              <img src="Assets/Claude-Cowork.jpg" alt="Claude Cowork" class="tool-icon"
+                   onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <span class="tool-icon-fallback">CW</span>
+            </div>
+            <span class="tool-label">Claude Cowork</span>
+          </div>
+
+          <div class="ai-tool" id="tool-code">
+            <div class="tool-icon-wrap">
+              <img src="Assets/Claude_AI_symbol.svg.png" alt="Claude Code" class="tool-icon"
+                   onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <span class="tool-icon-fallback">CC</span>
+            </div>
+            <span class="tool-label">Claude Code</span>
+          </div>
+
+          <div class="ai-tool" id="tool-chatprd">
+            <div class="tool-icon-wrap">
+              <img src="Assets/perplexity-ai-icon.webp" alt="Perplexity" class="tool-icon"
+                   onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <span class="tool-icon-fallback">PP</span>
+            </div>
+            <span class="tool-label">Perplexity</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ About ═══ -->
+    <section id="about">
+      <div class="container">
+        <p class="label section-label">Background</p>
+        <p class="about-body">I've spent the last few years building growth funnels, analytics tools, and operational workflows under high-stakes environments. Different industries, same instinct: find the real problem, then solve it properly.</p>
+        <div class="section-cta-wrap">
+          <a href="experience.html" class="section-cta" id="cta-experience">View Full Experience →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ Contact ═══ -->
+    <section id="contact">
+      <div class="container">
+        <p class="label section-label">Contact</p>
+        <h2 class="section-heading">Let's connect.</h2>
+        <p class="section-sub">Open to product roles. Always happy to have a conversation first.</p>
+
+        <div class="contact-buttons">
+          <a href="mailto:aurajeetm@gmail.com" class="contact-btn contact-btn--primary" id="btn-email">Email Me</a>
+          <a href="https://www.linkedin.com/in/aurajeet-mahapatra/" target="_blank" rel="noopener" class="contact-btn contact-btn--secondary" id="btn-linkedin">LinkedIn</a>
+          <a href="Assets/Aurajeet_Mahapatra.pdf" target="_blank" rel="noopener" class="contact-btn contact-btn--secondary" id="btn-resume">View Resume</a>
+          <a href="tel:+918550964470" class="contact-btn contact-btn--secondary" id="btn-phone">+91 85509 64470</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ Footer ═══ -->
+    <footer id="site-footer">
+      <span>Aurajeet Mahapatra — 2026</span>
+      <span>Built with Claude Code</span>
+    </footer>
+
+  </div>
+
+  <!-- GSAP core + ScrollTrigger — loaded before module scripts so window.gsap is available -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

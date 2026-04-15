@@ -1,0 +1,165 @@
+/* project-viewer.css — Embedded PDF viewer with prototype CTA */
+
+/* ── Top bar ──────────────────────────────────────────────── */
+.viewer-topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-nav);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4) var(--space-6);
+  background: rgba(4, 5, 10, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.viewer-topbar .back-link {
+  position: static;
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  letter-spacing: var(--tracking-wide);
+  color: var(--color-gold);
+  text-decoration: none;
+  transition: opacity var(--dur-base) ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.viewer-topbar .back-link:hover {
+  opacity: 0.7;
+}
+
+.viewer-project-title {
+  font-family: var(--font-serif);
+  font-size: clamp(0.85rem, 2vw, 1.1rem);
+  font-weight: 500;
+  color: var(--color-text-muted);
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 0 var(--space-4);
+  flex: 1;
+  min-width: 0;
+}
+
+/* ── Prototype CTA — golden primary button ────────────────── */
+.prototype-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: #04050a;
+  background: var(--color-gold);
+  padding: var(--space-2) var(--space-6);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition:
+    box-shadow var(--dur-base) ease,
+    transform var(--dur-base) ease,
+    background var(--dur-base) ease;
+}
+
+.prototype-cta:hover {
+  background: var(--color-gold-bright);
+  box-shadow: 0 0 24px rgba(245, 185, 68, 0.45), 0 0 8px rgba(245, 185, 68, 0.25);
+  transform: translateY(-1px);
+}
+
+.prototype-cta:active {
+  transform: translateY(0);
+}
+
+/* Disabled state when no prototype URL is set yet */
+.prototype-cta--disabled {
+  opacity: 0.35;
+  pointer-events: none;
+  cursor: default;
+}
+
+/* ── PDF embed ────────────────────────────────────────────── */
+.viewer-embed-wrap {
+  position: fixed;
+  top: 53px; /* topbar height */
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: var(--z-content);
+  background: var(--color-bg);
+}
+
+.viewer-embed {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+/* ── Fallback for browsers without embed support ──────────── */
+.viewer-fallback {
+  display: none;
+  position: absolute;
+  inset: 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  text-align: center;
+  padding: var(--space-8);
+}
+
+.viewer-fallback p {
+  font-family: var(--font-sans);
+  font-size: var(--text-lg);
+  color: var(--color-text-muted);
+}
+
+.viewer-fallback-link {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-gold);
+  text-decoration: none;
+  border: 1px solid var(--color-border);
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius-md);
+  transition: border-color var(--dur-base) ease, background var(--dur-base) ease;
+}
+
+.viewer-fallback-link:hover {
+  border-color: var(--color-gold);
+  background: rgba(245, 185, 68, 0.06);
+}
+
+/* ── Responsive ───────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .viewer-topbar {
+    padding: var(--space-3) var(--space-4);
+  }
+
+  .viewer-project-title {
+    display: none;
+  }
+
+  .prototype-cta {
+    font-size: 10px;
+    padding: var(--space-2) var(--space-4);
+  }
+
+  .viewer-embed-wrap {
+    top: 45px;
+  }
+}

@@ -1,0 +1,506 @@
+/* ============================================================
+   sections.css — Styles for nav, projects, ai-fluency, about,
+   contact, and footer sections
+   ============================================================ */
+
+/* ── Nav ─────────────────────────────────────────────────── */
+#site-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-nav);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4) var(--space-8);
+  /* Transparent by default; JS adds .scrolled class for backdrop */
+  transition: background var(--dur-slow) ease, backdrop-filter var(--dur-slow) ease;
+}
+
+#site-nav.scrolled {
+  background: rgba(4, 5, 10, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.nav-monogram {
+  font-family: var(--font-serif);
+  font-size: var(--text-xl);
+  font-weight: 700;
+  color: var(--color-gold);
+  letter-spacing: -0.02em;
+  text-decoration: none;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: var(--space-8);
+}
+
+.nav-links a {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  transition: color var(--dur-fast) ease;
+}
+
+.nav-links a:hover {
+  color: var(--color-gold);
+}
+
+@media (max-width: 768px) {
+  #site-nav {
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transform: translateY(100%);
+    width: 100%;
+    padding: 0;
+    justify-content: center;
+    background: rgba(12, 13, 20, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 0;
+    box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.4);
+    transition: transform 0.35s ease;
+  }
+
+  #site-nav.nav-visible {
+    transform: translateY(0);
+  }
+
+  .nav-monogram {
+    display: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 0;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .nav-links li {
+    flex: 1;
+    display: flex;
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .nav-links li:last-child {
+    border-right: none;
+  }
+
+  .nav-links a {
+    width: 100%;
+    text-align: center;
+    color: var(--color-text-muted);
+    font-size: 0.7rem;
+    padding: 16px 0;
+    border-radius: 0;
+    background: transparent;
+    border: none;
+    transition: color var(--dur-fast) ease,
+                background var(--dur-fast) ease;
+  }
+
+  .nav-links a:hover,
+  .nav-links a:active {
+    color: var(--color-gold);
+    background: rgba(245, 185, 68, 0.08);
+  }
+}
+
+/* ── Section shared ──────────────────────────────────────── */
+section {
+  padding: var(--space-32) 0;
+}
+
+.section-label {
+  margin-bottom: var(--space-4);
+}
+
+.section-heading {
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-weight: 600;
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  margin-bottom: var(--space-4);
+}
+
+.section-sub {
+  font-size: var(--text-lg);
+  color: var(--color-text-muted);
+  max-width: 600px;
+  line-height: var(--leading-normal);
+  margin-bottom: var(--space-16);
+}
+
+.section-cta-wrap {
+  margin-top: var(--space-12);
+  text-align: center;
+}
+
+.section-cta {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-gold);
+  text-decoration: none;
+  border: 1px solid var(--color-border);
+  padding: var(--space-4) var(--space-8);
+  border-radius: var(--radius-md);
+  transition: border-color var(--dur-base) ease, color var(--dur-base) ease, background var(--dur-base) ease;
+  position: relative; /* orbit particles position relative to this */
+}
+
+.section-cta:hover {
+  border-color: var(--color-gold);
+  background: rgba(245,185,68,0.06);
+}
+
+/* ── Projects section ────────────────────────────────────── */
+#projects .section-sub {
+  margin-bottom: var(--space-12);
+}
+
+.project-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+}
+
+@media (max-width: 1024px) {
+  .project-cards { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+  .project-cards { grid-template-columns: 1fr; }
+}
+
+.project-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  cursor: pointer;
+  transition: transform var(--dur-slow) var(--ease-out),
+              box-shadow var(--dur-slow) var(--ease-out),
+              border-color var(--dur-slow) var(--ease-out);
+  /* Start invisible — sections.js animates in */
+  opacity: 0;
+  transform: translateY(32px);
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.4), 0 0 0 1px rgba(245,185,68,0.15);
+  border-color: rgba(245,185,68,0.25);
+}
+
+.card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card-type {
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.card-pdf-badge {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  border: 1px solid var(--color-gold-dim);
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+  background: rgba(245,185,68,0.08);
+  transition: transform var(--dur-fast) var(--ease-spring);
+}
+
+.project-card:hover .card-pdf-badge {
+  transform: scale(1.1) translateY(-1px);
+}
+
+.card-title {
+  font-family: var(--font-serif);
+  font-size: var(--text-xl);
+  font-weight: 600;
+  line-height: var(--leading-snug);
+  color: var(--color-text);
+}
+
+.card-hook {
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--color-gold);
+}
+
+.card-desc {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  line-height: var(--leading-normal);
+  flex: 1;
+}
+
+.card-cta {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  margin-top: var(--space-2);
+  transition: color var(--dur-fast) ease;
+}
+
+.card-cta:hover {
+  color: var(--color-gold);
+}
+
+/* ── AI Fluency section ──────────────────────────────────── */
+#ai-fluency {
+  text-align: center;
+}
+
+#ai-fluency .section-sub {
+  margin-inline: auto;
+  margin-bottom: var(--space-16);
+}
+
+.ai-heading {
+  /* Scale-punch animation handled by sections.js */
+  transform-origin: center;
+}
+
+.ai-tools {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-16);
+  flex-wrap: wrap;
+}
+
+@media (max-width: 640px) {
+  .ai-tools { gap: var(--space-8); }
+}
+
+.ai-tool {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  cursor: default;
+  /* position: relative needed so JS can animate the icon's translateX */
+  position: relative;
+}
+
+.tool-icon-wrap {
+  width: 72px;
+  height: 72px;
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: border-color var(--dur-base) ease, box-shadow var(--dur-base) ease;
+}
+
+.tool-icon-wrap:hover {
+  border-color: rgba(245,185,68,0.3);
+  box-shadow: 0 0 20px rgba(245,185,68,0.1);
+}
+
+.tool-icon {
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+  display: block;
+}
+
+.tool-icon-fallback {
+  display: none;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--color-gold);
+  letter-spacing: 0.05em;
+}
+
+.tool-label {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-text-muted);
+  letter-spacing: var(--tracking-wide);
+}
+
+/* Terminal cursor for Claude Code icon animation */
+.tool-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 14px;
+  background: var(--color-gold);
+  vertical-align: middle;
+  animation: cursor-blink 0.8s step-end infinite;
+}
+
+
+/* ── About section ───────────────────────────────────────── */
+#about {
+  max-width: 720px;
+  margin-inline: auto;
+  /* Text-centred on mobile, left-aligned on desktop — actually keep left-aligned */
+}
+
+.about-body {
+  font-size: var(--text-lg);
+  line-height: var(--leading-normal);
+  color: var(--color-text-muted);
+  margin-top: var(--space-4);
+  /* Start invisible — fade in as block on scroll */
+  opacity: 0;
+}
+
+#about .section-cta-wrap {
+  text-align: left;
+}
+
+/* ── Contact section ─────────────────────────────────────── */
+#contact {
+  text-align: center;
+  padding-bottom: var(--space-32);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#contact .section-sub {
+  margin-inline: auto;
+  margin-bottom: var(--space-12);
+}
+
+.contact-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-4);
+}
+
+.contact-btn {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: var(--space-4) var(--space-8);
+  border-radius: var(--radius-md);
+  transition: transform var(--dur-base) ease, box-shadow var(--dur-base) ease;
+  position: relative; /* for orbit particles */
+}
+
+.contact-btn--primary {
+  background: var(--color-gold);
+  color: #04050a;
+}
+
+.contact-btn--primary:hover {
+  box-shadow: 0 0 24px rgba(245,185,68,0.4);
+  transform: translateY(-2px);
+}
+
+.contact-btn--secondary {
+  background: transparent;
+  color: var(--color-gold);
+  border: 1px solid var(--color-border);
+}
+
+.contact-btn--secondary:hover {
+  border-color: var(--color-gold);
+  background: rgba(245,185,68,0.06);
+}
+
+/* Button hover animations — added via JS, not pure CSS,
+   but define the keyframes here */
+@keyframes btn-shake {
+  0%, 100% { transform: translateX(0); }
+  20%       { transform: translateX(-3px); }
+  40%       { transform: translateX(3px); }
+  60%       { transform: translateX(-2px); }
+  80%       { transform: translateX(2px); }
+}
+
+@keyframes btn-pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(245,185,68,0.4); }
+  50%       { box-shadow: 0 0 0 6px rgba(245,185,68,0); }
+}
+
+@keyframes btn-slide-open {
+  0%   { transform: translateX(0); }
+  50%  { transform: translateX(3px); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes btn-vibrate {
+  0%, 100% { transform: rotate(0deg); }
+  25%       { transform: rotate(-2deg); }
+  75%       { transform: rotate(2deg); }
+}
+
+/* ── Footer ──────────────────────────────────────────────── */
+#site-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-8) var(--space-8);
+  border-top: 1px solid var(--color-border);
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  color: var(--color-text-faint);
+  letter-spacing: var(--tracking-wide);
+}
+
+@media (max-width: 640px) {
+  #site-footer {
+    flex-direction: column;
+    gap: var(--space-2);
+    text-align: center;
+  }
+}
