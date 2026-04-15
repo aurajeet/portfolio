@@ -190,19 +190,19 @@ class HeroSphere {
 
     // ── Gold rings: 3 rings, each launching 400 ms apart ────────────
     this._rings.forEach(({ mesh, mat }, i) => {
-      gsap.timeline({ delay: 0.3 + i * 0.4 })
+      gsap.timeline({ delay: 0.15 + i * 0.25 })
         .set(mesh.scale, { x: 0.001, y: 0.001 })
         .set(mat,        { opacity: 0.3 })
         .to(mesh.scale,  { x: maxRingScale, y: maxRingScale,
-                           duration: 1.2, ease: 'power2.out' })
-        .to(mat,         { opacity: 0, duration: 1.2, ease: 'power1.in' }, '<');
+                           duration: 0.8, ease: 'power2.out' })
+        .to(mat,         { opacity: 0, duration: 0.8, ease: 'power1.in' }, '<');
     });
 
-    // ── Sphere expansion: 300 ms delay, 1800 ms ease-out ────────────
+    // ── Sphere expansion: 150 ms delay, 1000 ms ease-out ────────────
     gsap.to(this.points.scale, {
       x: 1, y: 1, z: 1,
-      delay:    0.3,
-      duration: 1.8,
+      delay:    0.15,
+      duration: 1.0,
       ease:     'power3.out',
       onComplete,
     });

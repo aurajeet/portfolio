@@ -3,13 +3,13 @@ import { heroSphere }    from './sphere.js';
 /* ── Hero Section — Animation Orchestrator ──────────────────────
    Cinematic reveal sequence (all timings from page load):
      t = 0 ms   — page dark; only stars visible
-     t = 300 ms — sphere begins expanding from a point of light
-     t = 300 ms — gold ring 1 launches outward
-     t = 700 ms — gold ring 2 launches
-     t = 1100ms — gold ring 3 launches
-     t = 2100ms — sphere at full size → name fades in letter by letter
-     t ≈ 3500ms — tagline line 1 fades in
-     t ≈ 4600ms — metrics fade in, countup starts
+     t = 150 ms — sphere begins expanding + gold ring 1
+     t = 400 ms — gold ring 2
+     t = 650 ms — gold ring 3
+     t ≈ 1150ms — sphere at full size → name fades in letter by letter
+     t ≈ 1550ms — tagline fades in
+     t ≈ 1850ms — metrics + labels fade in, countup starts
+     t ≈ 2350ms — scroll hint appears
    ──────────────────────────────────────────────────────────────── */
 
 const reducedMotion =
@@ -27,12 +27,12 @@ export function initHero() {
   _initSphereFade();
 }
 
-// ── Called when sphere reaches full size (~2.1 s after page load) ──
+// ── Called when sphere reaches full size (~1.15 s after page load) ──
 function _onSphereRevealed() {
   _animateName();
-  _animateTagline();      // delay: 1.4 s within function → ~3.5 s total
-  _revealMetrics();       // delay: 2.5 s within function → ~4.6 s total
-  _initScrollHint();      // delay: 2.0 s within function → ~4.1 s total
+  _animateTagline();
+  _revealMetrics();
+  _initScrollHint();
 }
 
 // ── Name: letter-by-letter fade-up ──────────────────────────────────
@@ -55,14 +55,13 @@ function _animateName() {
 
   if (reducedMotion) return;
 
-  // 0.8 s total: 0.1 delay + 16×0.025 stagger + 0.3 duration ≈ 0.8 s
   gsap.from('#hero-name .char:not(.char--space)', {
     opacity: 0,
     y: 18,
-    duration: 0.3,
-    stagger: 0.025,
+    duration: 0.25,
+    stagger: 0.02,
     ease: 'power2.out',
-    delay: 0.1,
+    delay: 0.05,
   });
 }
 
@@ -76,18 +75,17 @@ function _animateTagline() {
     return;
   }
 
-  // delay: 0.84 s (1.4 × 0.6); durations/gap also ×0.6
-  gsap.timeline({ delay: 0.84 })
+  gsap.timeline({ delay: 0.4 })
     .fromTo(
       '.tagline-main',
       { opacity: 0, y: 12 },
-      { opacity: 1, y: 0, duration: 0.42, ease: 'power2.out' }
+      { opacity: 1, y: 0, duration: 0.3, ease: 'power2.out' }
     )
     .fromTo(
       '.tagline-sub',
       { opacity: 0 },
-      { opacity: 0.7, duration: 0.36, ease: 'power1.out' },
-      '+=0.15'
+      { opacity: 0.7, duration: 0.25, ease: 'power1.out' },
+      '+=0.08'
     );
 }
 
@@ -99,14 +97,12 @@ function _revealMetrics() {
     return;
   }
 
-  // delay: 1.5 s (2.5 × 0.6); duration: 0.48 s (0.8 × 0.6)
-  // Metrics fade completes at ~2.0 s after sphere reveal
   gsap.to('.hero-metrics', {
     opacity: 1,
-    duration: 0.48,
-    delay: 1.5,
+    duration: 0.35,
+    delay: 0.7,
     ease: 'power2.out',
-    onComplete: _initMetrics, // start countup once metrics are visible
+    onComplete: _initMetrics,
   });
 }
 
@@ -122,8 +118,6 @@ function _initMetrics() {
       el.textContent = decimals > 0
         ? target.toFixed(decimals) + suffix
         : target + suffix;
-      const label = el.closest('.metric')?.querySelector('.metric-label');
-      if (label) label.style.opacity = '1';
     });
     return;
   }
@@ -146,7 +140,7 @@ function _countUp(el) {
   const target   = parseFloat(el.dataset.target);
   const suffix   = el.dataset.suffix   || '';
   const decimals = parseInt(el.dataset.decimals || '0', 10);
-  const DURATION = 1800;
+  const DURATION = 1000;
   let   startTime = null;
 
   function step(ts) {
@@ -160,9 +154,6 @@ function _countUp(el) {
 
     if (progress < 1) {
       requestAnimationFrame(step);
-    } else {
-      const label = el.closest('.metric')?.querySelector('.metric-label');
-      if (label) gsap.to(label, { opacity: 1, duration: 0.4, ease: 'power1.out' });
     }
   }
   requestAnimationFrame(step);
@@ -178,11 +169,10 @@ function _initScrollHint() {
     return;
   }
 
-  // Appears 0.5 s after metrics fade finishes (metrics done at ~2.0 s)
   gsap.to(hint, {
     opacity: 0.75,
-    duration: 0.8,
-    delay: 2.5,
+    duration: 0.6,
+    delay: 1.2,
     ease: 'power1.out',
   });
 }

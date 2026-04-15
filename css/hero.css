@@ -129,7 +129,7 @@
   color: var(--color-text-muted);
   letter-spacing: var(--tracking-wide);
   text-transform: uppercase;
-  opacity: 0; /* GSAP fades in after countup */
+  opacity: 1;
 }
 
 /* ── Scroll hint ─────────────────────────────────────────────── */
