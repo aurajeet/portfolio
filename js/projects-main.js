@@ -12,7 +12,7 @@ const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matc
 
 document.addEventListener('DOMContentLoaded', () => {
   spaceBg.init();
-  const transition = new PageTransition(spaceBg);
+  const transition = new PageTransition();
 
   if (!perf.isLow) cursorTrail.init();
   progressBar.init();

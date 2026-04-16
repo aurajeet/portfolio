@@ -6,20 +6,24 @@ import { heroSphere }    from './sphere.js';
      t = 150 ms — sphere begins expanding + gold ring 1
      t = 400 ms — gold ring 2
      t = 650 ms — gold ring 3
-     t ≈ 1150ms — sphere at full size → name fades in letter by letter
-     t ≈ 1550ms — tagline fades in
-     t ≈ 1850ms — metrics + labels fade in, countup starts
-     t ≈ 2350ms — scroll hint appears
+     t ≈ 1150ms — sphere at full size → role label fades in
+     t ≈ 1250ms — name fades in letter by letter
+     t ≈ 1650ms — positioning statement fades up
+     t ≈ 1900ms — skill tags stagger in
+     t ≈ 2200ms — metrics + context fade in, countup starts
+     t ≈ 2700ms — scroll hint appears
    ──────────────────────────────────────────────────────────────── */
 
 const reducedMotion =
   window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 export function initHero() {
-  // ── Dark initial state: only name + metrics need hiding ──────────
-  // (taglines are already opacity:0 from hero.css)
-  gsap.set('#hero-name',    { opacity: 0 });
-  gsap.set('.hero-metrics', { opacity: 0 });
+  gsap.set('#hero-name',        { opacity: 0 });
+  gsap.set('.hero-role-label',  { opacity: 0 });
+  gsap.set('.hero-positioning', { opacity: 0 });
+  gsap.set('.hero-skill-tag',   { opacity: 0 });
+  gsap.set('.hero-metrics',     { opacity: 0 });
+  gsap.set('.metrics-context',  { opacity: 0 });
 
   heroSphere.init();
   heroSphere.reveal(_onSphereRevealed);
@@ -27,12 +31,28 @@ export function initHero() {
   _initSphereFade();
 }
 
-// ── Called when sphere reaches full size (~1.15 s after page load) ──
 function _onSphereRevealed() {
+  _animateRoleLabel();
   _animateName();
-  _animateTagline();
+  _animatePositioning();
+  _animateSkillTags();
   _revealMetrics();
   _initScrollHint();
+}
+
+// ── Role label: quick fade-in, first thing after sphere ─────────────
+function _animateRoleLabel() {
+  if (reducedMotion) {
+    const el = document.querySelector('.hero-role-label');
+    if (el) el.style.opacity = '1';
+    return;
+  }
+
+  gsap.to('.hero-role-label', {
+    opacity: 1,
+    duration: 0.3,
+    ease: 'power2.out',
+  });
 }
 
 // ── Name: letter-by-letter fade-up ──────────────────────────────────
@@ -41,7 +61,6 @@ function _animateName() {
   if (!nameEl) return;
 
   const text = nameEl.textContent.trim();
-  // aria-label in HTML preserves screen-reader text after innerHTML swap
   nameEl.innerHTML = [...text]
     .map((c) =>
       c === ' '
@@ -50,7 +69,6 @@ function _animateName() {
     )
     .join('');
 
-  // Ensure the name wrapper itself is visible first
   gsap.set('#hero-name', { opacity: 1 });
 
   if (reducedMotion) return;
@@ -61,38 +79,54 @@ function _animateName() {
     duration: 0.25,
     stagger: 0.02,
     ease: 'power2.out',
-    delay: 0.05,
+    delay: 0.1,
   });
 }
 
-// ── Tagline: two-part sequential fade ───────────────────────────────
-function _animateTagline() {
+// ── Positioning statement: fade-up ──────────────────────────────────
+function _animatePositioning() {
   if (reducedMotion) {
-    const main = document.querySelector('.tagline-main');
-    const sub  = document.querySelector('.tagline-sub');
-    if (main) main.style.opacity = '1';
-    if (sub)  sub.style.opacity  = '0.7';
+    const el = document.querySelector('.hero-positioning');
+    if (el) el.style.opacity = '1';
     return;
   }
 
-  gsap.timeline({ delay: 0.4 })
-    .fromTo(
-      '.tagline-main',
-      { opacity: 0, y: 12 },
-      { opacity: 1, y: 0, duration: 0.3, ease: 'power2.out' }
-    )
-    .fromTo(
-      '.tagline-sub',
-      { opacity: 0 },
-      { opacity: 0.7, duration: 0.25, ease: 'power1.out' },
-      '+=0.08'
-    );
+  gsap.to('.hero-positioning', {
+    opacity: 0.9,
+    y: 0,
+    duration: 0.35,
+    delay: 0.5,
+    ease: 'power2.out',
+  });
+  gsap.set('.hero-positioning', { y: 12 });
 }
 
-// ── Metrics: fade in block, then countup ────────────────────────────
+// ── Skill tags: left-to-right stagger ───────────────────────────────
+function _animateSkillTags() {
+  if (reducedMotion) {
+    document.querySelectorAll('.hero-skill-tag')
+      .forEach((el) => (el.style.opacity = '1'));
+    return;
+  }
+
+  gsap.to('.hero-skill-tag', {
+    opacity: 1,
+    y: 0,
+    duration: 0.3,
+    stagger: 0.07,
+    delay: 0.75,
+    ease: 'power2.out',
+  });
+  gsap.set('.hero-skill-tag', { y: 8 });
+}
+
+// ── Metrics: fade in block + context line, then countup ─────────────
 function _revealMetrics() {
   if (reducedMotion) {
-    document.querySelector('.hero-metrics').style.opacity = '1';
+    const m = document.querySelector('.hero-metrics');
+    const c = document.querySelector('.metrics-context');
+    if (m) m.style.opacity = '1';
+    if (c) c.style.opacity = '0.7';
     _initMetrics();
     return;
   }
@@ -100,9 +134,16 @@ function _revealMetrics() {
   gsap.to('.hero-metrics', {
     opacity: 1,
     duration: 0.35,
-    delay: 0.7,
+    delay: 1.0,
     ease: 'power2.out',
     onComplete: _initMetrics,
+  });
+
+  gsap.to('.metrics-context', {
+    opacity: 0.7,
+    duration: 0.3,
+    delay: 1.05,
+    ease: 'power2.out',
   });
 }
 
@@ -159,7 +200,7 @@ function _countUp(el) {
   requestAnimationFrame(step);
 }
 
-// ── Scroll hint: fades in 2 s after reveal ──────────────────────────
+// ── Scroll hint: fades in after full sequence ───────────────────────
 function _initScrollHint() {
   const hint = document.getElementById('scroll-hint');
   if (!hint) return;
@@ -172,12 +213,12 @@ function _initScrollHint() {
   gsap.to(hint, {
     opacity: 0.75,
     duration: 0.6,
-    delay: 1.2,
+    delay: 1.5,
     ease: 'power1.out',
   });
 }
 
-// ── Sphere fade — gentle opacity fade as user scrolls past hero ──────
+// ── Sphere fade — gentle opacity fade as user scrolls past hero ─────
 function _initSphereFade() {
   if (reducedMotion) return;
 

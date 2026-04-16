@@ -27,7 +27,7 @@ const PROJECTS = {
 
 document.addEventListener('DOMContentLoaded', () => {
   spaceBg.init();
-  new PageTransition(spaceBg);
+  new PageTransition();
   if (!perf.isLow) cursorTrail.init();
 
   const params  = new URLSearchParams(window.location.search);

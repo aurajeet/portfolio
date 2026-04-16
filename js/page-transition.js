@@ -1,8 +1,8 @@
 /*
- * PageTransition — Warp-jump transitions between pages.
+ * PageTransition — Smooth transitions between pages.
  *
- * Exit:  fade content → ramp star-field warp streaks → overlay → navigate
- * Enter: overlay visible → stars decelerate from warp → overlay fades out
+ * Exit:  fade content → overlay → navigate
+ * Enter: overlay visible → overlay fades out
  *
  * Uses sessionStorage('warp-active') to coordinate the handoff between
  * the departing page and the arriving page.
@@ -11,8 +11,7 @@
 const STORAGE_KEY = 'warp-active';
 
 class PageTransition {
-  constructor(spaceBg) {
-    this._spaceBg = spaceBg;
+  constructor() {
     this._isExiting = false;
     this._arriving = !!sessionStorage.getItem(STORAGE_KEY);
 
@@ -34,7 +33,7 @@ class PageTransition {
   get isArriving()    { return this._arriving; }
   get entranceDelay() { return this._arriving ? 0.5 : 0; }
 
-  /* ── Exit: current page → warp → navigate ───────────────────── */
+  /* ── Exit: current page → overlay → navigate ──────────────────── */
 
   _interceptLinks() {
     document.addEventListener('click', (e) => {
@@ -80,8 +79,6 @@ class PageTransition {
     if (backLink) gsap.to(backLink, { opacity: 0, duration: 0.2 });
     if (nav)      gsap.to(nav,      { opacity: 0, duration: 0.2 });
 
-    this._spaceBg.enterWarp();
-
     gsap.to(this._overlay, {
       opacity: 1,
       duration: 0.3,
@@ -92,7 +89,7 @@ class PageTransition {
     });
   }
 
-  /* ── Arrival: warp decelerate → overlay fade out ────────────── */
+  /* ── Arrival: overlay fade out ────────────────────────────────── */
 
   _handleArrival() {
     sessionStorage.removeItem(STORAGE_KEY);
@@ -108,12 +105,10 @@ class PageTransition {
       return;
     }
 
-    this._spaceBg.exitWarp();
-
     gsap.to(this._overlay, {
       opacity: 0,
       duration: 0.45,
-      delay: 0.25,
+      delay: 0.15,
       ease: 'power2.out',
       onComplete: () => {
         this._overlay.style.pointerEvents = 'none';

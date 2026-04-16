@@ -15,7 +15,7 @@ let sphereAlive = false;
 
 document.addEventListener('DOMContentLoaded', () => {
   spaceBg.init();
-  const transition = new PageTransition(spaceBg);
+  const transition = new PageTransition();
 
   const sphereEl = document.getElementById('sphere-viewport');
   if (!perf.isLow && sphereEl) {

@@ -17,7 +17,7 @@ if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
 
 document.addEventListener('DOMContentLoaded', () => {
   spaceBg.init();
-  const transition = new PageTransition(spaceBg);
+  const transition = new PageTransition();
 
   shootingStars.init();
 
