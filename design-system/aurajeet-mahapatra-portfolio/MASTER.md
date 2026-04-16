@@ -7,7 +7,7 @@
 ---
 
 **Project:** Aurajeet Mahapatra Portfolio
-**Updated:** 2026-04-12
+**Updated:** 2026-04-16
 **Category:** Portfolio/Personal
 **Source of truth:** `css/main.css` `:root` block
 
@@ -195,6 +195,24 @@
 }
 ```
 
+*Contact buttons are reused in two locations: the Contact section at the bottom and the CTA strip between hero and projects.*
+
+### Metric Source Labels
+
+```css
+.metric-source {
+  font-family: var(--font-sans);
+  font-size: clamp(0.65rem, 1vw, 0.7rem);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--color-text-muted);
+  opacity: 0.7;
+  margin-top: var(--space-1);
+}
+```
+
+*Per-metric attribution label, displayed below each metric's label in the hero.*
+
 ### Prototype CTA (Project Viewer)
 
 ```css
@@ -252,7 +270,7 @@
 - Background atmosphere color grading via CSS gradient overlays (continuous scroll blend, max 60% opacity)
 - GSAP scroll-triggered section reveals
 - IntersectionObserver for metrics countup
-- Parallax star layers (3 depth levels)
+- Rotational star layers (3 depth levels, no scroll-driven parallax)
 
 **Hero Sphere:**
 Static 10k-particle sphere with organic vein texture, breathing animation, gold ring reveal. Fades out via scroll-coupled opacity (starts at hero center, fully transparent by hero bottom). No drain, no particle handoff.

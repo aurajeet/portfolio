@@ -2,8 +2,8 @@
 **Owner:** Aurajeet Mahapatra
 **Audience:** HR, Hiring Managers (Senior PMs at tech companies)
 **Goal:** Position Aurajeet as a structured, execution-oriented early-career PM with technical fluency and strong product instinct.
-**Status:** All phases (1–6) complete. Phase 7 (project viewer + mobile polish) complete.
-**Last updated:** 2026-04-12
+**Status:** All phases (1–7) complete. Phase 8 (hero copy & UX refinements) complete.
+**Last updated:** 2026-04-16
 
 ---
 
@@ -46,7 +46,7 @@ These layers are always present across every page, stacked in this order (back t
 
 ### Layer 1 — Deep Space Background `[BUILT]`
 **File:** `js/space-bg.js`
-A fixed Three.js canvas (`#space-bg`, z-index 0). Three star-particle layers at different depths, sizes, and drift speeds create parallax. Background colour matches `--color-bg` (#04050a). Star colours are cool white/warm white/soft grey — no gold at this depth.
+A fixed Three.js canvas (`#space-bg`, z-index 0). Three star-particle layers at different depths, sizes, and drift speeds. Each layer rotates at its own speed with subtle continuous twinkle on all particles. Background colour matches `--color-bg` (#04050a). Star colours are cool white/warm white/soft grey — no gold at this depth. No scroll-driven parallax — stars are purely rotational.
 
 ### Layer 1b — Nebula Gradients `[BUILT]`
 **File:** CSS in `#nebula` (index.html)
@@ -120,28 +120,42 @@ Aurajeet Mahapatra
 ```
 *Animation: `hero.js` wraps each character in `.char` spans. GSAP staggers them in (0.3s duration, 0.025s stagger, 0.1s delay) — fires after sphere reveal completes (~2.1s).*
 
-**Tagline:**
+**Positioning:**
 ```
-I make complicated things feel obvious.
-Scroll down to see if it worked.
+Engineer turned Product Manager with experience across growth, analytics,
+and 0-to-1 execution — in political tech, fintech, and bootstrapped products.
 ```
-*Line 1 fades in 0.84s after sphere reveal (GSAP timeline). Line 2 fades in softer (opacity 0.7) after a 0.15s gap.*
+*Fades in 0.84s after sphere reveal (GSAP timeline).*
 
-**Impact Snapshot Label:**
+**Skill Tags:**
 ```
-WHAT I'VE MOVED
+Growth & Experimentation · Analytics & Dashboards · 0→1 Product Builds · Cross-functional Leadership
+```
+*Font size: `clamp(0.75rem, 1.2vw, 0.85rem)` — bumped up from the original 0.65rem floor for better legibility.*
+
+**Impact Label:**
+```
+IMPACT
 ```
 
-**Metrics:**
+**Metrics (with per-metric attribution):**
 
-| Number | Label |
-|--------|-------|
-| 1.2M+ | Users Acquired |
-| 35% | Engagement Lifted |
-| 40% | Faster Decisions |
-| 31% | Revenue Grown |
+| Number | Label | Source |
+|--------|-------|--------|
+| 1.2M+ | Users Acquired | Political campaigns |
+| 35% | Engagement Lifted | Product experiments |
+| 40% | Faster Decisions | Analytics dashboards |
+| 31% | Revenue Grown | Bootstrapped business |
+
+Each metric now displays its own italic source label (`.metric-source`) directly below the metric label. This replaces the previous shared `metrics-context` line ("across state-level campaigns and a bootstrapped business") which was a single attribution for all four metrics.
 
 *Metrics block fades in 1.5s after sphere reveal. Numbers count up simultaneously via IntersectionObserver + requestAnimationFrame (1.8s, ease-out-cubic). Gold numbers, labels fade in after count completes.*
+
+**CTA Strip (between hero and projects):**
+```
+VIEW RESUME  ·  EMAIL  ·  +91 85509 64470
+```
+A centered row of contact buttons (`div.hero-cta-strip`) placed between the hero section and the projects section. Gives hiring managers immediate access to resume and contact info without scrolling to the bottom of the page. Uses the same `contact-btn` component styles as the contact section (primary for resume, secondary for email and phone).
 
 **Scroll Hint:**
 Small pulsing chevron at bottom of hero. Fades in 2.5s after sphere reveal. Floats up/down via CSS `@keyframes scroll-hint-float` (7px, 2s cycle).
@@ -600,7 +614,7 @@ portfolio-PRD.md            This document
 
 css/
   main.css                  Design tokens, reset, layer positioning, atmospheres, z-index scale, mobile responsive lighting
-  hero.css                  Hero layout, typography, metrics, scroll hint
+  hero.css                  Hero layout, typography, metrics (with per-metric source), CTA strip, scroll hint
   sections.css              Nav, projects, AI fluency, about, contact, footer, overlay styles
   projects.css              Projects page — grid layout, placeholder card styles, responsive
   project-viewer.css        Project viewer — top bar, prototype CTA, PDF embed, responsive
@@ -610,7 +624,7 @@ js/
   main.js                   Entry point (index.html) — imports space-bg, hero, sections, ai-animations
   projects-main.js          Entry point (projects.html) — space-bg + card stagger animations
   project-viewer-main.js    Entry point (project-viewer.html) — query param routing, PDF/prototype setup
-  space-bg.js               Layer 1 — Three.js star field (3 parallax layers)
+  space-bg.js               Layer 1 — Three.js star field (3 rotational layers, no parallax)
   sphere.js                 Layer 2 — Three.js hero sphere (10k particles, GLSL shaders)
   hero.js                   Hero animation orchestrator (reveal, text, metrics, sphere fade)
   sections.js               Scroll-triggered section animations, atmospheres (mobile-adjusted), contact hovers
@@ -655,6 +669,7 @@ design-system/
 | 5 | Projects page — 8-card grid (3 real + 5 placeholder) with stagger animations | **Complete** |
 | 6 | Polish — cursor trail, scroll progress bar, performance detection, cross-page wiring | **Complete** |
 | 7 | Project viewer page + mobile lighting fix + navigation fixes | **Complete** |
+| 8 | Hero copy & UX refinements — positioning rewrite, per-metric attribution, CTA strip, parallax removal, mobile nav robustness | **Complete** |
 
 ### Implementation Notes
 
@@ -682,6 +697,16 @@ Key deviations from original plan that are now the canonical design:
 
 11. **PageTransition handles query params and hashes.** The link interceptor originally checked `href.endsWith('.html')`, which failed for URLs with query params (`?project=...`) or hash fragments (`#projects`). Fixed to strip query/hash before checking: `href.split('?')[0].split('#')[0].endsWith('.html')`.
 
+12. **Hero positioning rewritten for recruiter clarity.** The original tagline ("Engineer by training. Consultant at political scale. Business owner by necessity. Product manager by instinct.") was poetic but vague. Replaced with a concrete positioning statement that names specific domains (political tech, fintech, bootstrapped products) and skill areas (growth, analytics, 0-to-1 execution). Reads as a professional summary rather than a narrative hook.
+
+13. **Per-metric source attribution replaces shared context line.** The previous `metrics-context` element was a single line attributing all four metrics to "state-level campaigns and a bootstrapped business." This was replaced with individual `.metric-source` spans under each metric, giving each number its own provenance (e.g., "Political campaigns" for 1.2M+ users, "Bootstrapped business" for 31% revenue). More specific, more credible.
+
+14. **CTA strip placed between hero and projects.** A `div.hero-cta-strip` with View Resume (primary), Email (secondary), and Phone (secondary) buttons sits between the hero section and the projects section. Rationale: hiring managers shouldn't have to scroll to the contact section at the bottom of the page to reach the resume or email. Reuses the existing `contact-btn` component styles.
+
+15. **Star field parallax removed.** The three star-particle layers in `space-bg.js` previously shifted vertically on scroll via a `parallax` multiplier per layer. This was removed — stars now rotate and twinkle but have no scroll-driven vertical movement. Scroll tracking (`_scrollY`, `_initScrollTracking()`) and per-layer `parallax` config values were deleted. Simplifies the star field and avoids competing with the section atmospheres for scroll-driven visual attention.
+
+16. **Mobile nav refactored for robustness.** The `_initNav()` function in `sections.js` was rewritten: GSAP ScrollTrigger call wrapped in try/catch for graceful degradation if GSAP is unavailable. Mobile nav-visible threshold lowered from 50px to 10px (shows sooner). Handler extracted into proper `_attachMobileNav()` / `_detachMobileNav()` functions with cleanup. Added `matchMedia('change')` listener so the handler correctly attaches/detaches when the viewport crosses the 768px breakpoint (e.g., orientation change). Initial state check on load ensures nav is visible immediately if the page loads already scrolled.
+
 ---
 
-*Document updated 2026-04-12 to reflect Phase 7 — project viewer, mobile lighting, navigation fixes.*
+*Document updated 2026-04-16 to reflect Phase 8 — hero copy refinements, per-metric attribution, CTA strip, parallax removal, mobile nav robustness.*

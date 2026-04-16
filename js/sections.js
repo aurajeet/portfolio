@@ -39,21 +39,52 @@ function _initNav() {
   const nav = document.getElementById('site-nav');
   if (!nav) return;
 
-  ScrollTrigger.create({
-    trigger: '#hero',
-    start: 'bottom 80px',
-    onEnterBack: () => nav.classList.remove('scrolled'),
-    onLeave:     () => nav.classList.add('scrolled'),
-  });
+  try {
+    ScrollTrigger.create({
+      trigger: '#hero',
+      start: 'bottom 80px',
+      onEnterBack: () => nav.classList.remove('scrolled'),
+      onLeave:     () => nav.classList.add('scrolled'),
+    });
+  } catch (_) { /* GSAP unavailable — degrade gracefully */ }
 
-  if (window.matchMedia('(max-width: 768px)').matches) {
+  const mobileQuery = window.matchMedia('(max-width: 768px)');
+
+  function _attachMobileNav() {
     let navShown = false;
-    window.addEventListener('scroll', () => {
-      const scrolled = window.scrollY > 50;
+
+    function _onScroll() {
+      const scrolled = window.scrollY > 10;
       if (scrolled && !navShown) { nav.classList.add('nav-visible'); navShown = true; }
       else if (!scrolled && navShown) { nav.classList.remove('nav-visible'); navShown = false; }
-    }, { passive: true });
+    }
+
+    window.addEventListener('scroll', _onScroll, { passive: true });
+
+    if (window.scrollY > 10) { nav.classList.add('nav-visible'); navShown = true; }
+
+    return _onScroll;
   }
+
+  function _detachMobileNav(handler) {
+    if (handler) window.removeEventListener('scroll', handler);
+    nav.classList.remove('nav-visible');
+  }
+
+  let activeHandler = null;
+
+  if (mobileQuery.matches) {
+    activeHandler = _attachMobileNav();
+  }
+
+  mobileQuery.addEventListener('change', (e) => {
+    if (e.matches) {
+      activeHandler = _attachMobileNav();
+    } else {
+      _detachMobileNav(activeHandler);
+      activeHandler = null;
+    }
+  });
 }
 
 // ── Background atmospheres: continuous scroll-driven blend ───────────

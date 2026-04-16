@@ -23,7 +23,6 @@ export function initHero() {
   gsap.set('.hero-positioning', { opacity: 0 });
   gsap.set('.hero-skill-tag',   { opacity: 0 });
   gsap.set('.hero-metrics',     { opacity: 0 });
-  gsap.set('.metrics-context',  { opacity: 0 });
 
   heroSphere.init();
   heroSphere.reveal(_onSphereRevealed);
@@ -124,9 +123,7 @@ function _animateSkillTags() {
 function _revealMetrics() {
   if (reducedMotion) {
     const m = document.querySelector('.hero-metrics');
-    const c = document.querySelector('.metrics-context');
     if (m) m.style.opacity = '1';
-    if (c) c.style.opacity = '0.7';
     _initMetrics();
     return;
   }
@@ -137,13 +134,6 @@ function _revealMetrics() {
     delay: 1.0,
     ease: 'power2.out',
     onComplete: _initMetrics,
-  });
-
-  gsap.to('.metrics-context', {
-    opacity: 0.7,
-    duration: 0.3,
-    delay: 1.05,
-    ease: 'power2.out',
   });
 }
 

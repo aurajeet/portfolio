@@ -4,9 +4,8 @@ import * as THREE from 'three';
  * SpaceBackground — Layer 0
  *
  * Three layers of star particles at different depths, rendered with custom
- * ShaderMaterial. Each layer rotates at its own speed and shifts vertically
- * on scroll (parallax) to create a sense of depth. Subtle continuous twinkle
- * on all particles keeps the field alive.
+ * ShaderMaterial. Each layer rotates at its own speed with subtle continuous
+ * twinkle on all particles to keep the field alive.
  */
 
 const VERT = /* glsl */`
@@ -52,8 +51,6 @@ class SpaceBackground {
     this.layers   = [];
     this.clock    = new THREE.Clock();
 
-    this._scrollY = 0;
-
     this._reducedMotion =
       window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   }
@@ -62,10 +59,6 @@ class SpaceBackground {
     this._setupRenderer();
     this._setupScene();
     this._createStarLayers();
-
-    if (!this._reducedMotion) {
-      this._initScrollTracking();
-    }
 
     this._resizeHandler = () => this._onResize();
     window.addEventListener('resize', this._resizeHandler);
@@ -91,15 +84,6 @@ class SpaceBackground {
     this.camera.position.z = 1;
   }
 
-  /* ── Scroll tracking (parallax) ───────────────────────────── */
-
-  _initScrollTracking() {
-    this._scrollY = window.scrollY;
-    window.addEventListener('scroll', () => {
-      this._scrollY = window.scrollY;
-    }, { passive: true });
-  }
-
   /* ── Star layers ───────────────────────────────────────────── */
 
   _createStarLayers() {
@@ -107,11 +91,11 @@ class SpaceBackground {
 
     const configs = [
       { count: 3000, spread: 1000, size: 0.8, opacity: 0.75, speed: 0.0003,
-        cr: 220/255, cg: 225/255, cb: 235/255, parallax: 0.0015 },
+        cr: 220/255, cg: 225/255, cb: 235/255 },
       { count: 1500, spread: 600,  size: 1.2, opacity: 0.65, speed: 0.0006,
-        cr: 235/255, cg: 230/255, cb: 220/255, parallax: 0.005 },
+        cr: 235/255, cg: 230/255, cb: 220/255 },
       { count:  600, spread: 350,  size: 1.6, opacity: 0.55, speed: 0.0010,
-        cr: 200/255, cg: 195/255, cb: 185/255, parallax: 0.012 },
+        cr: 200/255, cg: 195/255, cb: 185/255 },
     ];
 
     configs.forEach((cfg) => {
@@ -152,10 +136,7 @@ class SpaceBackground {
       });
 
       const points = new THREE.Points(geo, mat);
-      points.userData = {
-        speed:    cfg.speed,
-        parallax: cfg.parallax,
-      };
+      points.userData = { speed: cfg.speed };
       this.scene.add(points);
       this.layers.push(points);
     });
@@ -175,7 +156,6 @@ class SpaceBackground {
 
       if (!this._reducedMotion) {
         pts.material.uniforms.uTime.value = t;
-        pts.position.y = this._scrollY * pts.userData.parallax;
       }
     });
 

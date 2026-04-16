@@ -86,7 +86,7 @@
 
 .hero-skill-tag {
   font-family: var(--font-sans);
-  font-size: clamp(0.65rem, 1vw, 0.75rem);
+  font-size: clamp(0.75rem, 1.2vw, 0.85rem);
   font-weight: 400;
   color: var(--color-text-muted);
   letter-spacing: 0.04em;
@@ -105,15 +105,7 @@
   gap: var(--space-4);
 }
 
-.metrics-context {
-  font-family: var(--font-sans);
-  font-size: clamp(0.75rem, 1.2vw, 0.85rem);
-  font-weight: 300;
-  color: var(--color-text-muted);
-  letter-spacing: 0.02em;
-  margin: calc(-1 * var(--space-2)) 0 0 0;
-  opacity: 0;
-}
+/* metrics-context removed — attribution is now inline per metric */
 
 .metrics-grid {
   display: grid;
@@ -155,6 +147,23 @@
   opacity: 1;
 }
 
+.metric-source {
+  font-family: var(--font-sans);
+  font-size: clamp(0.65rem, 1vw, 0.7rem);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--color-text-muted);
+  opacity: 0.7;
+  margin-top: var(--space-1);
+}
+
+/* ── CTA strip between hero and projects ────────────────────── */
+.hero-cta-strip {
+  display: flex;
+  justify-content: center;
+  padding: var(--space-8) var(--container-pad);
+}
+
 /* ── Scroll hint ─────────────────────────────────────────────── */
 .scroll-hint {
   position: absolute;
@@ -179,6 +188,5 @@
   .scroll-hint-icon { animation: none; }
   .hero-role-label,
   .hero-positioning,
-  .hero-skill-tag,
-  .metrics-context { opacity: 1; }
+  .hero-skill-tag { opacity: 1; }
 }
