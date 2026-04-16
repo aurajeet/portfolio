@@ -44,55 +44,53 @@
   opacity: 0;
 }
 
-/* ── Name ────────────────────────────────────────────────────── */
+/* ── Name (subdued — headline is the visual anchor) ──────────── */
 #hero-name {
   font-family: var(--font-serif);
-  font-size: clamp(2rem, 4.5vw, 3.6rem);
-  font-weight: 600;
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  font-weight: 500;
   letter-spacing: var(--tracking-tight);
   color: var(--color-text);
   line-height: var(--leading-tight);
-  margin: 0;
+  margin: 0 0 var(--space-4) 0;
+  opacity: 0.85;
 }
 
-#hero-name .char {
-  display: inline-block;
-}
-#hero-name .char--space {
-  display: inline-block;
-  width: 0.28em;
+/* ── Headline — the dominant visual element ──────────────────── */
+.hero-headline {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  max-width: 700px;
+  margin: 0 auto;
 }
 
-/* ── Positioning statement ───────────────────────────────────── */
-.hero-positioning {
+.hero-headline-line {
+  display: block;
   font-family: var(--font-serif);
-  font-size: clamp(0.95rem, 1.8vw, 1.3rem);
-  font-weight: 400;
+  font-size: clamp(1.4rem, 3.2vw, 2.2rem);
+  font-weight: 600;
   color: var(--color-text);
-  line-height: var(--leading-snug);
-  max-width: 600px;
-  margin: var(--space-3) auto 0;
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
   opacity: 0;
 }
 
-/* ── Skill tags ──────────────────────────────────────────────── */
-.hero-skills {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: var(--space-2);
-  margin-top: var(--space-4);
+.hero-headline-accent {
+  color: var(--color-gold);
+  font-style: italic;
 }
 
-.hero-skill-tag {
-  font-family: var(--font-sans);
-  font-size: clamp(0.75rem, 1.2vw, 0.85rem);
+/* ── Context paragraph ───────────────────────────────────────── */
+.hero-context {
+  font-family: var(--font-serif);
+  font-size: clamp(0.9rem, 1.5vw, 1.05rem);
   font-weight: 400;
   color: var(--color-text-muted);
-  letter-spacing: 0.04em;
-  padding: 0.35em 0.9em;
-  border: 1px solid rgba(232, 232, 232, 0.15);
-  border-radius: 100px;
+  line-height: var(--leading-snug);
+  max-width: 580px;
+  margin: var(--space-4) auto 0;
   opacity: 0;
 }
 
@@ -187,6 +185,6 @@
 @media (prefers-reduced-motion: reduce) {
   .scroll-hint-icon { animation: none; }
   .hero-role-label,
-  .hero-positioning,
-  .hero-skill-tag { opacity: 1; }
+  .hero-headline-line,
+  .hero-context { opacity: 1; }
 }

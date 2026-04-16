@@ -19,6 +19,7 @@ export function initSections() {
   if (!reducedMotion) _setInitialStates();
   _initNav();
   _initAtmospheres();
+  _initHeroCtaStrip();
   _initProjectCards();
   _initAIFluency();
   _initAbout();
@@ -30,7 +31,8 @@ function _setInitialStates() {
   gsap.set('.ai-heading', { opacity: 0 });
   gsap.set('.ai-tool', { opacity: 0 });
   gsap.set('#contact .section-heading', { opacity: 0 });
-  gsap.set('.contact-btn', { opacity: 0 });
+  gsap.set('#contact .contact-btn', { opacity: 0 });
+  gsap.set('.hero-cta-strip .contact-btn', { opacity: 0, y: 12 });
 }
 
 // ── Nav: transparent → backdrop blur on scroll ──────────────────────
@@ -146,6 +148,36 @@ function _initAtmospheres() {
       }
     );
   }
+}
+
+// ── Hero CTA strip: reveal as user scrolls past hero ────────────────
+
+function _initHeroCtaStrip() {
+  const strip = document.querySelector('.hero-cta-strip');
+  if (!strip) return;
+
+  if (reducedMotion) {
+    strip.querySelectorAll('.contact-btn').forEach((b) => { b.style.opacity = '1'; });
+    return;
+  }
+
+  strip.querySelectorAll('.contact-btn').forEach((btn, i) => {
+    gsap.fromTo(btn,
+      { opacity: 0, y: 12 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.4,
+        delay: i * 0.1,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: '.hero-cta-strip',
+          start: 'top 90%',
+          once: true,
+        },
+      }
+    );
+  });
 }
 
 // ── Projects: staggered card reveal ─────────────────────────────────
@@ -264,7 +296,7 @@ function _initContact() {
     );
   }
 
-  const buttons = document.querySelectorAll('.contact-btn');
+  const buttons = document.querySelectorAll('#contact .contact-btn');
   buttons.forEach((btn, i) => {
     gsap.fromTo(btn,
       { opacity: 0, y: 12 },

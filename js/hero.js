@@ -7,10 +7,11 @@ import { heroSphere }    from './sphere.js';
      t = 400 ms — gold ring 2
      t = 650 ms — gold ring 3
      t ≈ 1150ms — sphere at full size → role label fades in
-     t ≈ 1250ms — name fades in letter by letter
-     t ≈ 1650ms — positioning statement fades up
-     t ≈ 1900ms — skill tags stagger in
-     t ≈ 2200ms — metrics + context fade in, countup starts
+     t ≈ 1250ms — name fades in
+     t ≈ 1450ms — headline line 1 fades up
+     t ≈ 1650ms — headline line 2 (gold accent) fades up
+     t ≈ 1900ms — context paragraph fades up
+     t ≈ 2200ms — metrics fade in, countup starts
      t ≈ 2700ms — scroll hint appears
    ──────────────────────────────────────────────────────────────── */
 
@@ -18,11 +19,11 @@ const reducedMotion =
   window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 export function initHero() {
-  gsap.set('#hero-name',        { opacity: 0 });
-  gsap.set('.hero-role-label',  { opacity: 0 });
-  gsap.set('.hero-positioning', { opacity: 0 });
-  gsap.set('.hero-skill-tag',   { opacity: 0 });
-  gsap.set('.hero-metrics',     { opacity: 0 });
+  gsap.set('#hero-name',           { opacity: 0 });
+  gsap.set('.hero-role-label',     { opacity: 0 });
+  gsap.set('.hero-headline-line',  { opacity: 0 });
+  gsap.set('.hero-context',        { opacity: 0 });
+  gsap.set('.hero-metrics',        { opacity: 0 });
 
   heroSphere.init();
   heroSphere.reveal(_onSphereRevealed);
@@ -33,8 +34,8 @@ export function initHero() {
 function _onSphereRevealed() {
   _animateRoleLabel();
   _animateName();
-  _animatePositioning();
-  _animateSkillTags();
+  _animateHeadline();
+  _animateContext();
   _revealMetrics();
   _initScrollHint();
 }
@@ -54,69 +55,64 @@ function _animateRoleLabel() {
   });
 }
 
-// ── Name: letter-by-letter fade-up ──────────────────────────────────
+// ── Name: clean fade-in (subdued, not the focus) ────────────────────
 function _animateName() {
   const nameEl = document.getElementById('hero-name');
   if (!nameEl) return;
 
-  const text = nameEl.textContent.trim();
-  nameEl.innerHTML = [...text]
-    .map((c) =>
-      c === ' '
-        ? '<span class="char char--space" aria-hidden="true"> </span>'
-        : `<span class="char" aria-hidden="true">${c}</span>`
-    )
-    .join('');
+  if (reducedMotion) {
+    nameEl.style.opacity = '0.85';
+    return;
+  }
 
-  gsap.set('#hero-name', { opacity: 1 });
-
-  if (reducedMotion) return;
-
-  gsap.from('#hero-name .char:not(.char--space)', {
-    opacity: 0,
-    y: 18,
-    duration: 0.25,
-    stagger: 0.02,
-    ease: 'power2.out',
+  gsap.to('#hero-name', {
+    opacity: 0.85,
+    duration: 0.4,
     delay: 0.1,
-  });
-}
-
-// ── Positioning statement: fade-up ──────────────────────────────────
-function _animatePositioning() {
-  if (reducedMotion) {
-    const el = document.querySelector('.hero-positioning');
-    if (el) el.style.opacity = '1';
-    return;
-  }
-
-  gsap.to('.hero-positioning', {
-    opacity: 0.9,
-    y: 0,
-    duration: 0.35,
-    delay: 0.5,
     ease: 'power2.out',
   });
-  gsap.set('.hero-positioning', { y: 12 });
 }
 
-// ── Skill tags: left-to-right stagger ───────────────────────────────
-function _animateSkillTags() {
+// ── Headline: two-line staggered fade-up ────────────────────────────
+function _animateHeadline() {
+  const lines = document.querySelectorAll('.hero-headline-line');
+  if (!lines.length) return;
+
   if (reducedMotion) {
-    document.querySelectorAll('.hero-skill-tag')
-      .forEach((el) => (el.style.opacity = '1'));
+    lines.forEach((el) => (el.style.opacity = '1'));
     return;
   }
 
-  gsap.to('.hero-skill-tag', {
+  lines.forEach((line, i) => {
+    gsap.set(line, { y: 14 });
+    gsap.to(line, {
+      opacity: 1,
+      y: 0,
+      duration: 0.4,
+      delay: 0.35 + i * 0.2,
+      ease: 'power2.out',
+    });
+  });
+}
+
+// ── Context paragraph: fade-up after headline ───────────────────────
+function _animateContext() {
+  const el = document.querySelector('.hero-context');
+  if (!el) return;
+
+  if (reducedMotion) {
+    el.style.opacity = '1';
+    return;
+  }
+
+  gsap.set(el, { y: 10 });
+  gsap.to(el, {
     opacity: 1,
     y: 0,
-    duration: 0.3,
-    stagger: 0.07,
-    delay: 0.75,
+    duration: 0.35,
+    delay: 0.85,
     ease: 'power2.out',
   });
-  gsap.set('.hero-skill-tag', { y: 8 });
 }
 
 // ── Metrics: fade in block + context line, then countup ─────────────
