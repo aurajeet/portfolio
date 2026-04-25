@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Netflix · Engagement Recovery · Aurajeet Mahapatra</title>
+  <meta name="description" content="A self-directed product critique on Netflix engagement, with three hypotheses and four RICE-scored interventions.">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Netflix · Engagement Recovery — Spec Exercise">
+  <meta property="og:description" content="A self-directed product exercise: where Netflix is bleeding engagement and what actually moves it back.">
+  <meta property="og:image" content="/Assets/og-default.png">
+  <meta property="og:url" content="https://aurajeet.com/case/netflix">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/Assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/case-study.css">
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <nav class="site-nav" aria-label="Primary">
+    <a href="/" class="site-nav__monogram" aria-label="Home">AM</a>
+    <ul class="site-nav__links">
+      <li><a href="/#case-studies" aria-current="page">Work</a></li>
+      <li><a href="/about">About</a></li>
+      <li><a href="/notes">Notes</a></li>
+      <li><a href="/resume" target="_blank" rel="noopener">Resume</a></li>
+    </ul>
+  </nav>
+
+  <main id="main">
+    <article class="cs container">
+      <header class="cs__hero">
+        <p class="cs__meta">SPEC EXERCISE · SELF-DIRECTED · 2025</p>
+        <h1 class="cs__title">Reversing the engagement drop: a Netflix product critique</h1>
+        <p class="cs__sub">
+          A self-directed product exercise on where Netflix is bleeding viewer engagement and which interventions actually
+          move the metric back.
+        </p>
+        <div class="cs__tags">
+          <span class="tag">Spec Exercise</span>
+          <span class="tag">Strategy</span>
+          <span class="tag">Prioritization</span>
+        </div>
+      </header>
+
+      <div class="cs__ribbon">
+        <div class="stat-ribbon">
+          <div class="stat">
+            <span class="stat__value">3</span>
+            <span class="stat__label">Hypotheses</span>
+          </div>
+          <div class="stat">
+            <span class="stat__value">4</span>
+            <span class="stat__label">RICE-scored solutions</span>
+          </div>
+          <div class="stat">
+            <span class="stat__value">1</span>
+            <span class="stat__label">Recommendation</span>
+          </div>
+        </div>
+      </div>
+
+      <p class="cs__disclaimer">
+        This is a self-directed product exercise based on publicly available information about Netflix. I have not worked
+        at Netflix, do not have access to internal data, and am not affiliated with the company. The exercise simulates
+        how I would approach the problem if asked.
+      </p>
+
+      <div class="cs__prose">
+        <h2>The prompt</h2>
+        <p>
+          Netflix is the world's largest streaming platform. By multiple public measures, the share of user attention it
+          captures is shrinking — not because subscribers leave, but because they spend less time inside the app per session
+          when they do open it. The exercise: locate where the engagement is leaking and propose a small set of interventions
+          ranked by expected impact and effort.
+        </p>
+
+        <h2>Approach</h2>
+        <p>
+          I framed the problem as a funnel: open-app → browse → start-playing → watch-through. Each stage has its own
+          drop-off, and at each stage Netflix competes against a different set of alternatives — short-form video for the
+          open, social platforms for the browse, and other long-form services for the watch. I drew on Netflix's annual
+          letters, public engagement metrics from comScore-class sources, and my own use of the product across two years.
+        </p>
+
+        <h2>Findings</h2>
+
+        <h3>Hypothesis 1: The browse stage is the leakiest</h3>
+        <p>
+          The open is healthy — most subscribers still open the app. The watch-through is also healthy among titles that
+          get past minute three. The bottleneck appears to be browse: viewers open the app, spend three to seven minutes
+          scrolling, and either start something they only half-watch or close the app without playing anything. The browse
+          experience competes against the back button.
+        </p>
+
+        <h3>Hypothesis 2: Recommendation is solving the wrong problem</h3>
+        <p>
+          The current recommendation surface optimizes for "shows you might like." The browse-stage problem is closer to
+          "shows you can commit to right now." Those are different objectives. A recommender that knew it was Tuesday
+          night at 10pm and you had thirty minutes would behave differently from one optimizing all-time affinity.
+        </p>
+
+        <h3>Hypothesis 3: Short-form is winning the open competition</h3>
+        <p>
+          The competing time on the device — TikTok, Reels, Shorts — has trained a "see something interesting in 30 seconds"
+          expectation that long-form browse cannot match. Netflix is not losing the watch competition; it is losing the
+          decision-to-watch competition.
+        </p>
+
+        <h2>Recommendations</h2>
+        <p>
+          Four interventions, RICE-scored:
+        </p>
+        <ol>
+          <li><strong>Time-aware recommendations.</strong> Surface a "for tonight, in your time budget" carousel as the
+            first row when the app is opened during normal viewing windows. R: 8, I: 8, C: 5, E: 5 → RICE 64.</li>
+          <li><strong>Browse short-circuit.</strong> A "play something now" button that hard-commits the viewer to a
+            three-minute auto-played title from a curated list. R: 7, I: 6, C: 4, E: 3 → RICE 56.</li>
+          <li><strong>Trailer-first browse mode.</strong> Shrink the autoplay-trailer behavior into a swipeable, short-form
+            feed for the first ninety seconds of browse, then expand to traditional rows if no engagement. R: 6, I: 7, C: 6, E: 7 → RICE 36.</li>
+          <li><strong>Explicit session-length picker.</strong> A "30 min / 1 hr / 2 hr" picker at app open that filters the
+            row set to titles that fit. R: 5, I: 5, C: 5, E: 4 → RICE 31.</li>
+        </ol>
+        <p>
+          <strong>Single recommendation:</strong> ship #1 (time-aware recommendations). The hypothesis is the cleanest, the
+          mechanism the most natural extension of the existing recommender, and the test the most readable: a/b on browse-to-play
+          conversion in the first sixty seconds of session.
+        </p>
+
+        <h2>Reflections</h2>
+        <p>
+          The exercise made me think about how much of "product strategy" at this level is really about reframing the
+          metric. The team probably has good ideas; what they may not have is consensus on which engagement leak matters
+          most. A clean, falsifiable hypothesis is more valuable than a feature.
+        </p>
+        <p>
+          The honest limit of this exercise: without internal data, all four interventions are directional guesses. The
+          fastest version of this work in a real role would be a one-week sprint with the analytics team to confirm or
+          reject Hypothesis 1 before any of the other work is done.
+        </p>
+      </div>
+
+      <section class="cs__pdf-wrap">
+        <h2 style="font-family: var(--ff-mono); font-size: var(--fs-tiny); text-transform: uppercase; letter-spacing: var(--ls-mono-caps); color: var(--text-secondary); margin-block-end: var(--sp-3);">DEEP DIVE: ORIGINAL DECK</h2>
+        <object data="/Assets/Netflix.pdf" type="application/pdf" class="cs__pdf">
+          <div class="cs__pdf-fallback">
+            <p>Your browser doesn't support inline PDFs.</p>
+            <a href="/Assets/Netflix.pdf" target="_blank" rel="noopener">Download the deck (PDF, 7.4 MB) →</a>
+          </div>
+        </object>
+      </section>
+
+      <nav class="cs__nav" aria-label="Case study navigation">
+        <a href="/case/hebe" class="link--mono">← Previous: HEBE</a>
+        <a href="/case/amazon-prime" class="link--mono">Next: Amazon Prime Video →</a>
+      </nav>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <span class="site-footer__credit">Aurajeet Mahapatra · 2026</span>
+    <span class="site-footer__contact">
+      <a href="mailto:aurajeetm@gmail.com">aurajeetm@gmail.com</a>
+      <span class="site-footer__sep">·</span>
+      <a href="https://www.linkedin.com/in/aurajeet-mahapatra/" target="_blank" rel="noopener">LinkedIn</a>
+      <span class="site-footer__sep">·</span>
+      <a href="tel:+918550964470">+91 85509 64470</a>
+    </span>
+  </footer>
+
+  <script type="module" src="/js/reveal.js"></script>
+</body>
+</html>
