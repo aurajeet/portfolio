@@ -2,7 +2,18 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
-    { "source": "/resume", "destination": "/Assets/Aurajeet_Mahapatra.pdf", "permanent": false }
+    { "source": "/resume", "destination": "/Assets/Aurajeet_Mahapatra.pdf", "permanent": false },
+
+    { "source": "/projects.html", "destination": "/#case-studies", "permanent": true },
+    { "source": "/projects", "destination": "/#case-studies", "permanent": true },
+
+    { "source": "/experience.html", "destination": "/about", "permanent": true },
+    { "source": "/experience", "destination": "/about", "permanent": true },
+
+    { "source": "/project-viewer.html", "has": [{ "type": "query", "key": "project", "value": "netflix" }], "destination": "/case/netflix", "permanent": true },
+    { "source": "/project-viewer.html", "has": [{ "type": "query", "key": "project", "value": "amazon" }], "destination": "/case/amazon-prime", "permanent": true },
+    { "source": "/project-viewer.html", "has": [{ "type": "query", "key": "project", "value": "jupiter" }], "destination": "/#case-studies", "permanent": true },
+    { "source": "/project-viewer.html", "destination": "/#case-studies", "permanent": true }
   ],
   "headers": [
     {
