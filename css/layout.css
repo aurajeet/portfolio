@@ -55,14 +55,17 @@
     display: grid;
     grid-template-columns: minmax(0, 1fr) 360px;
     align-items: stretch;
-    min-height: 560px;
+    /* Symmetric breathing room: var(--sp-24) above (here) matches the
+     * var(--sp-24) padding-block-start of the .section that follows the hero,
+     * so the photo sits with equal gaps top and bottom. */
+    padding-block-start: var(--sp-24);
     padding-block-end: 0;
   }
 
   .hero__text-wrap {
     max-width: none;
     margin-inline: 0;
-    padding-block: var(--sp-20) var(--sp-16);
+    padding-block: 0;
     padding-inline-end: var(--sp-12);
     /* Align left edge with .container content (which uses var(--sp-16) padding-inline at >= 64rem) */
     padding-inline-start: max(var(--sp-16), calc((100vw - var(--container-max)) / 2 + var(--sp-16)));
@@ -123,11 +126,16 @@
   .hero__portrait {
     max-width: none;
     width: 100%;
-    height: 100%;
-    aspect-ratio: auto;
+    height: auto;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    object-position: 50% 25%;
     margin: 0;
     border: none;
     border-radius: 0;
+    /* Anchor to the top of the cell — text cell may grow taller, but the
+     * image keeps its natural 3:4 box at the configured 360px column width. */
+    align-self: start;
   }
 }
 
