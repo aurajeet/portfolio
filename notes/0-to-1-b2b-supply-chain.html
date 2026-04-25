@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>0-to-1 in a B2B Supply Chain · Aurajeet Mahapatra</title>
+  <meta name="description" content="What software 0-to-1 advice fails to translate when the supply chain is 5,000 farmers and the instrumentation does not exist yet.">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="0-to-1 in a B2B supply chain: what I'd tell my last-year self about HEBE">
+  <meta property="og:description" content="What software 0-to-1 advice fails to translate to physical operations.">
+  <meta property="og:image" content="/Assets/og-default.png">
+  <meta property="og:url" content="https://aurajeet.com/notes/0-to-1-b2b-supply-chain">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/Assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/case-study.css">
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <nav class="site-nav" aria-label="Primary">
+    <a href="/" class="site-nav__monogram" aria-label="Home">AM</a>
+    <ul class="site-nav__links">
+      <li><a href="/#case-studies">Work</a></li>
+      <li><a href="/about">About</a></li>
+      <li><a href="/notes" aria-current="page">Notes</a></li>
+      <li><a href="/resume" target="_blank" rel="noopener">Resume</a></li>
+    </ul>
+  </nav>
+
+  <main id="main">
+    <article class="essay container">
+      <p class="essay__date">26 APR 2026</p>
+      <h1 class="essay__title">0-to-1 in a B2B supply chain: what I'd tell my last-year self about HEBE</h1>
+
+      <div class="essay__body">
+        <p>
+          Most 0-to-1 advice was written for software. It assumes you can instrument anything in a sprint, that the cost
+          of a failed experiment is a feature flag, and that the bottleneck is product-market fit rather than physical
+          throughput. When I took over HEBE — a B2B essential-oil business with 5,000 farmer suppliers — I read all of
+          that advice and tried to apply it. Some of it worked. Most of it didn't, and the parts that didn't taught me
+          more than the parts that did.
+        </p>
+
+        <h2>Instrumentation isn't free</h2>
+        <p>
+          In software, "instrument first" is cheap. Add an event, deploy, wait an hour. In a physical supply chain,
+          instrumentation costs the headcount of whoever has to update the spreadsheet, and that headcount is usually
+          someone whose job description doesn't include data entry. I underestimated this. I built batch-level cost
+          tracking in month four when I should have built it in month one. The cost of building it earlier would have
+          been one part-time hire for the office; the cost of not building it was three months of business decisions
+          made on instinct.
+        </p>
+
+        <h2>The recommender is a person</h2>
+        <p>
+          Software 0-to-1 talks about recommendations and personalization as if they were technical problems. In a
+          5,000-farmer network, the recommender is the procurement manager, and the personalization is the relationship
+          they have with each district. Trying to build a "supplier-rating algorithm" in the first quarter would have
+          missed the point. The first version of any instrumentation you build for physical operations needs to make the
+          existing humans more efficient, not replace them.
+        </p>
+
+        <h2>Pricing is a relationship problem</h2>
+        <p>
+          The single most useful change I made was repricing. The hard part wasn't building the pricing tier system; it
+          was the months of conversations with old-line buyers about why their pricing was being revisited. Software's
+          pricing-test culture — "ship a new tier, A/B it" — is wrong here. There is no A/B; there is a relationship that
+          pricing changes either preserve or break. The instrumentation tells you what the right price is. The
+          relationship tells you whether you can charge it.
+        </p>
+
+        <h2>Cycles are slower; commitments are faster</h2>
+        <p>
+          Software 0-to-1 has weekly experiments. Supply-chain 0-to-1 has quarterly experiments — a procurement decision
+          tested over a single growing season, a pricing decision tested across a quarter of customer cycles. The
+          experiments are slower. But the commitments around them — "we will not buy from this district next year" — are
+          much faster, because they have to be made on a calendar, not on data.
+        </p>
+
+        <h2>What I'd tell my last-year self</h2>
+        <p>
+          Build the spreadsheet that tracks per-batch cost in week one, not week sixteen. Spend month one shadowing the
+          existing operators before changing anything. Reprice late, not early. Don't try to hire ahead of the
+          instrumentation; the instrumentation tells you which hire to make. Treat the relationships as the user research,
+          not as a soft skill.
+        </p>
+        <p>
+          And read the same product books, but read them as analogies, not as instructions.
+        </p>
+      </div>
+
+      <nav class="cs__nav" aria-label="Notes navigation">
+        <a href="/notes" class="link--mono">← All notes</a>
+      </nav>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <span class="site-footer__credit">Aurajeet Mahapatra · 2026</span>
+    <span class="site-footer__contact">
+      <a href="mailto:aurajeetm@gmail.com">aurajeetm@gmail.com</a>
+      <span class="site-footer__sep">·</span>
+      <a href="https://www.linkedin.com/in/aurajeet-mahapatra/" target="_blank" rel="noopener">LinkedIn</a>
+      <span class="site-footer__sep">·</span>
+      <a href="tel:+918550964470">+91 85509 64470</a>
+    </span>
+  </footer>
+
+  <script type="module" src="/js/reveal.js"></script>
+</body>
+</html>
