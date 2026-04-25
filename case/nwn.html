@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nation With NaMo · Field-Program Product · Aurajeet Mahapatra</title>
+  <meta name="description" content="Building growth, experimentation, and analytics infrastructure for state-scale field programs at Nation With NaMo, 2023–2025.">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Nation With NaMo · Field-Program Product">
+  <meta property="og:description" content="Growth, experimentation, and analytics infrastructure across four state-level programs.">
+  <meta property="og:image" content="/Assets/og-default.png">
+  <meta property="og:url" content="https://aurajeet.com/case/nwn">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/Assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/case-study.css">
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <nav class="site-nav" aria-label="Primary">
+    <a href="/" class="site-nav__monogram" aria-label="Home">AM</a>
+    <ul class="site-nav__links">
+      <li><a href="/#case-studies" aria-current="page">Work</a></li>
+      <li><a href="/about">About</a></li>
+      <li><a href="/notes">Notes</a></li>
+      <li><a href="/resume" target="_blank" rel="noopener">Resume</a></li>
+    </ul>
+  </nav>
+
+  <main id="main">
+    <article class="cs container">
+      <header class="cs__hero">
+        <p class="cs__meta">NATION WITH NAMO · ASSOCIATE CONSULTANT · 2023–2025</p>
+        <h1 class="cs__title">Building growth and analytics infrastructure for state-scale field programs</h1>
+        <p class="cs__sub">
+          Two years across four programs. Owned the experimentation backlog, the segmentation logic, and the analytics
+          dashboards that program teams used to make weekly decisions.
+        </p>
+        <div class="cs__tags">
+          <span class="tag">Growth</span>
+          <span class="tag">Experimentation</span>
+          <span class="tag">Analytics</span>
+          <span class="tag">Segmentation</span>
+          <span class="tag">Cross-functional ownership</span>
+        </div>
+      </header>
+
+      <div class="cs__ribbon">
+        <div class="stat-ribbon">
+          <div class="stat">
+            <span class="stat__value">1.2M+</span>
+            <span class="stat__label">Users acquired · [USER CONFIRMS]</span>
+          </div>
+          <div class="stat">
+            <span class="stat__value">35%</span>
+            <span class="stat__label">Engagement lift · [USER CONFIRMS]</span>
+          </div>
+          <div class="stat">
+            <span class="stat__value">4</span>
+            <span class="stat__label">State programs</span>
+          </div>
+          <div class="stat">
+            <span class="stat__value">5</span>
+            <span class="stat__label">Launch cycles</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="cs__prose">
+
+        <h2>Context</h2>
+        <p>
+          When I joined Nation With NaMo in 2023, the field-program app for our first state had a six-figure user base, a
+          single-funnel growth model that flattened after onboarding, and no segmentation infrastructure. The program team
+          knew which features they wanted to ship next; they did not know which features would move which user segments.
+          Decisions were directional rather than evidenced.
+        </p>
+        <p>
+          The constraint that defined the work: each program ran on a fixed launch cycle of roughly six to eight weeks.
+          That cycle was the unit of iteration. Anything that could not be designed, built, instrumented, run, and read
+          inside one cycle was effectively out of scope. The analytics layer had to be ready before the program launched,
+          because there was no opportunity to retrofit it after.
+        </p>
+        <p>
+          [USER REVISES: insert one paragraph of program-specific context here once we choose which campaign(s) to spotlight per §12 #8.]
+        </p>
+
+        <h2>My role</h2>
+        <p>
+          I owned the experimentation roadmap, the analytics infrastructure, and the segmentation logic. I worked with a
+          [USER CONFIRMS — approximately 8 to 12]-person engineering team, a smaller design partner team, and a
+          [USER CONFIRMS — approximately 25 to 50]-person field-operations team. I did not own the platform engineering
+          underneath the app, and I did not own the field operations directly; my work sat between them, translating
+          field signal into experiments and experiments into product decisions.
+        </p>
+
+        <h2>Approach</h2>
+
+        <h3>Discovery and segmentation</h3>
+        <p>
+          The first month was qualitative. I shadowed field-operations workflows in two districts, sat through three
+          program reviews, and ran a series of short user interviews to map who was actually using the app and what they
+          were trying to accomplish. The output was a behavioral segmentation: roughly four cohorts defined by activity
+          frequency, role inside the program, and acquisition channel.
+        </p>
+        <p>
+          Once segmentation existed, the segments became the unit of measurement. Every metric we tracked from that point
+          forward broke down by segment. This single change eliminated about 40% of the false-positive
+          interpretations the team had been making with aggregate numbers.
+        </p>
+
+        <h3>Experimentation infrastructure</h3>
+        <p>
+          The experimentation system was the most useful investment of the year. We started with a backlog of roughly
+          twenty hypotheses sourced from field interviews and prior-program retrospectives. I introduced a lightweight
+          RICE-scored prioritization that the program team used in weekly planning. Each cycle we ran two to four
+          multivariate tests in parallel, each tied to a specific segment hypothesis.
+        </p>
+        <p>
+          The infrastructure underneath was simpler than I expected to need. We instrumented event flows in the app via
+          [USER CONFIRMS — Mixpanel / Amplitude / custom], wrote test definitions in a shared notion DB, and read results
+          weekly. The bottleneck was rarely the data. The bottleneck was the discipline of writing falsifiable hypotheses.
+        </p>
+
+        <h3>Analytics and dashboarding</h3>
+        <p>
+          By month four we had three dashboards the program team consulted weekly: a growth dashboard (acquisition by
+          channel × cohort), an engagement dashboard (active-user retention by segment), and an experiment scorecard
+          (running tests, current state, ship/kill recommendation). Dashboards lived in [USER CONFIRMS — Metabase / Looker /
+          custom] and rolled up to a one-page program summary I sent to leadership every Friday.
+        </p>
+
+        <h3>Cross-functional execution</h3>
+        <p>
+          Inside one launch cycle, the working agreement was simple: I produced experiment briefs by Monday morning,
+          engineering shipped instrumentation and treatment branches by Wednesday, the field team ran the cycle, and we
+          read results the following Monday. The roadmap was a rolling six-week view, not a quarterly plan, because
+          program priorities shifted faster than that.
+        </p>
+
+        <h2>Outcomes</h2>
+        <p>
+          By the end of two years and four programs:
+        </p>
+        <ul>
+          <li>[USER CONFIRMS] roughly 1.2 million cumulative users acquired across the four programs.</li>
+          <li>Engagement (defined as 4-week retention of activated users) lifted by approximately 35% on the third program
+            relative to the first, attributable to segmentation-driven onboarding.</li>
+          <li>The experimentation cadence stabilized at 2 to 4 tests per cycle, with a ship-or-kill decision on each.</li>
+          <li>The analytics dashboards I built are still in use as of [USER CONFIRMS month/year].</li>
+        </ul>
+
+        <h2>Reflections</h2>
+        <p>
+          The single decision I would make differently: I should have built the segmentation infrastructure two months
+          earlier than I did. By the time we had it, the first three programs had already shipped on flat targeting, and we
+          had to retrofit segment-level reads from incomplete data. Two months of foresight would have saved an entire
+          cycle of partial visibility.
+        </p>
+        <p>
+          The harder lesson: experimentation discipline is mostly about saying no. The team was generative — every program
+          review produced ten new ideas — and the work that made the experimentation system useful was the boring
+          gatekeeping that kept the cycle from running ten thin tests when it could run two well-designed ones.
+        </p>
+      </div>
+
+      <section class="cs__methods">
+        <div>
+          <h3>Methods</h3>
+          <ul>
+            <li>User research</li>
+            <li>Behavioral segmentation</li>
+            <li>Multivariate testing</li>
+            <li>Funnel analysis</li>
+            <li>RICE prioritization</li>
+            <li>Cross-functional roadmapping</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Tools</h3>
+          <ul>
+            <li>SQL</li>
+            <li>[USER CONFIRMS — Mixpanel / Amplitude]</li>
+            <li>[USER CONFIRMS — Metabase / Looker]</li>
+            <li>Notion</li>
+            <li>Excel / Sheets</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Collaborators</h3>
+          <ul>
+            <li>~10-person engineering team</li>
+            <li>3-person design partner team</li>
+            <li>~30-person field-ops team</li>
+            <li>Program owners (4)</li>
+          </ul>
+        </div>
+      </section>
+
+      <nav class="cs__nav" aria-label="Case study navigation">
+        <a href="/" class="link--mono">← All work</a>
+        <a href="/case/hebe" class="link--mono">Next: HEBE →</a>
+      </nav>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <span class="site-footer__credit">Aurajeet Mahapatra · 2026</span>
+    <span class="site-footer__contact">
+      <a href="mailto:aurajeetm@gmail.com">aurajeetm@gmail.com</a>
+      <span class="site-footer__sep">·</span>
+      <a href="https://www.linkedin.com/in/aurajeet-mahapatra/" target="_blank" rel="noopener">LinkedIn</a>
+      <span class="site-footer__sep">·</span>
+      <a href="tel:+918550964470">+91 85509 64470</a>
+    </span>
+  </footer>
+
+  <script type="module" src="/js/reveal.js"></script>
+</body>
+</html>
