@@ -35,6 +35,20 @@
   }
 }
 
+.hero__inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--sp-10);
+}
+
+@media (min-width: 64rem) {
+  .hero__inner {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
+    gap: var(--sp-16);
+    align-items: center;
+  }
+}
+
 .hero__role {
   font-family: var(--ff-mono);
   font-size: var(--fs-tiny);
@@ -61,6 +75,33 @@
   color: var(--text);
   max-width: 50ch;
   margin: 0;
+}
+
+.hero__portrait {
+  display: block;
+  width: 100%;
+  max-width: 320px;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  object-position: 50% 25%;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  background: var(--bg-subtle);
+  margin-inline: auto;
+}
+
+@media (min-width: 48rem) {
+  .hero__portrait {
+    max-width: 380px;
+  }
+}
+
+@media (min-width: 64rem) {
+  .hero__portrait {
+    max-width: 360px;
+    margin-inline: 0;
+    justify-self: end;
+  }
 }
 
 /* ─── Case-study grid (home page) ─────────────────────── */
