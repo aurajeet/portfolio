@@ -1,0 +1,237 @@
+/* Case-study and long-form prose styles.
+ * Loaded only on case study and notes pages.
+ * Depends on: tokens, base, components, layout
+ * Reference: spec §5.3 case-study template
+ */
+
+/* ─── Case study layout ────────────────────────────────── */
+.cs {
+  padding-block: var(--sp-12) var(--sp-16);
+}
+
+@media (min-width: 64rem) {
+  .cs {
+    padding-block: var(--sp-16) var(--sp-24);
+  }
+}
+
+.cs__hero {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+  margin-block-end: var(--sp-12);
+  max-width: var(--reading-max);
+}
+
+.cs__title {
+  font-family: var(--ff-serif);
+  font-weight: 700;
+  font-size: var(--fs-h1);
+  line-height: var(--lh-h1);
+  letter-spacing: var(--ls-heading);
+  margin: 0;
+  max-width: 24ch;
+}
+
+.cs__meta {
+  font-family: var(--ff-mono);
+  font-size: var(--fs-small);
+  text-transform: uppercase;
+  letter-spacing: var(--ls-mono-caps);
+  color: var(--text-secondary);
+}
+
+.cs__sub {
+  font-family: var(--ff-serif);
+  font-weight: 600;
+  font-size: var(--fs-h4);
+  line-height: 1.4;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.cs__tags {
+  display: flex;
+  gap: var(--sp-2);
+  flex-wrap: wrap;
+}
+
+/* Stat ribbon — uses .stat-ribbon from components.css */
+.cs__ribbon {
+  margin-block-end: var(--sp-12);
+  max-width: var(--artifact-max);
+}
+
+/* ─── Prose sections ───────────────────────────────────── */
+.cs__prose {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-8);
+  max-width: var(--reading-max);
+}
+
+.cs__prose h2 {
+  font-family: var(--ff-serif);
+  font-size: var(--fs-h3);
+  font-weight: 700;
+  line-height: var(--lh-h3);
+  margin-block: var(--sp-8) var(--sp-2);
+  letter-spacing: var(--ls-heading);
+}
+
+.cs__prose h2:first-child {
+  margin-block-start: 0;
+}
+
+.cs__prose h3 {
+  font-family: var(--ff-serif);
+  font-size: var(--fs-h4);
+  font-weight: 600;
+  line-height: var(--lh-h4);
+  margin-block: var(--sp-6) var(--sp-1);
+}
+
+.cs__prose p {
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  max-width: var(--reading-max);
+}
+
+.cs__prose ul,
+.cs__prose ol {
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  max-width: var(--reading-max);
+}
+
+/* ─── Disclaimer block (spec exercises) ────────────────── */
+.cs__disclaimer {
+  background: var(--bg-subtle);
+  border-left: 3px solid var(--accent);
+  padding: var(--sp-4) var(--sp-6);
+  font-size: var(--fs-small);
+  color: var(--text-secondary);
+  font-style: italic;
+  border-radius: 2px;
+  max-width: var(--reading-max);
+}
+
+/* ─── Methods/tools/collaborators block ────────────────── */
+.cs__methods {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--sp-4);
+  padding: var(--sp-8);
+  background: var(--bg-subtle);
+  border-radius: 4px;
+  max-width: var(--reading-max);
+}
+
+@media (min-width: 48rem) {
+  .cs__methods {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+.cs__methods h3 {
+  font-family: var(--ff-mono);
+  font-size: var(--fs-tiny);
+  text-transform: uppercase;
+  letter-spacing: var(--ls-mono-caps);
+  color: var(--text-secondary);
+  margin-block-end: var(--sp-2);
+}
+
+.cs__methods ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: var(--fs-small);
+}
+
+.cs__methods li {
+  margin-block-end: var(--sp-1);
+}
+
+/* ─── PDF embed ────────────────────────────────────────── */
+.cs__pdf-wrap {
+  max-width: var(--artifact-max);
+  margin-block-start: var(--sp-12);
+}
+
+.cs__pdf {
+  width: 100%;
+  height: 70vh;
+  min-height: 600px;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+}
+
+.cs__pdf-fallback {
+  padding: var(--sp-6);
+  background: var(--bg-subtle);
+  border-radius: 4px;
+  font-size: var(--fs-small);
+}
+
+/* ─── Case-study footer (next/prev nav) ────────────────── */
+.cs__nav {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  margin-block-start: var(--sp-16);
+  padding-block-start: var(--sp-8);
+  border-block-start: 1px solid var(--rule);
+  font-family: var(--ff-mono);
+  font-size: var(--fs-small);
+  flex-wrap: wrap;
+}
+
+/* ─── Notes essay prose (reuses cs__prose) ─────────────── */
+.essay {
+  padding-block: var(--sp-12);
+  max-width: var(--reading-max);
+  margin-inline: auto;
+}
+
+.essay__title {
+  font-family: var(--ff-serif);
+  font-size: var(--fs-h2);
+  font-weight: 700;
+  line-height: var(--lh-h2);
+  letter-spacing: var(--ls-heading);
+  margin-block-end: var(--sp-3);
+}
+
+.essay__date {
+  font-family: var(--ff-mono);
+  font-size: var(--fs-small);
+  text-transform: uppercase;
+  letter-spacing: var(--ls-mono-caps);
+  color: var(--text-secondary);
+  margin-block-end: var(--sp-12);
+}
+
+.essay__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-6);
+}
+
+.essay__body p {
+  font-size: var(--fs-large);
+  line-height: var(--lh-lede);
+}
+
+.essay__body h2 {
+  font-size: var(--fs-h3);
+  margin-block: var(--sp-6) var(--sp-1);
+}
+
+.essay__body blockquote {
+  border-left: 3px solid var(--accent);
+  padding-left: var(--sp-4);
+  font-style: italic;
+  color: var(--text-secondary);
+  margin-block: var(--sp-4);
+}
