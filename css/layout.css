@@ -1,0 +1,214 @@
+/* Page-level layouts.
+ * Depends on: tokens.css, base.css, components.css
+ * Reference: spec §7.4, §7.3
+ */
+
+/* ─── Section ──────────────────────────────────────────── */
+.section {
+  padding-block: var(--sp-12);
+}
+
+@media (min-width: 64rem) {
+  .section {
+    padding-block: var(--sp-24);
+  }
+}
+
+.section--tight {
+  padding-block: var(--sp-8);
+}
+
+@media (min-width: 64rem) {
+  .section--tight {
+    padding-block: var(--sp-12);
+  }
+}
+
+/* ─── Hero (home) ──────────────────────────────────────── */
+.hero {
+  padding-block: var(--sp-16) var(--sp-12);
+}
+
+@media (min-width: 64rem) {
+  .hero {
+    padding-block: var(--sp-24) var(--sp-16);
+  }
+}
+
+.hero__role {
+  font-family: var(--ff-mono);
+  font-size: var(--fs-tiny);
+  text-transform: uppercase;
+  letter-spacing: var(--ls-mono-caps);
+  color: var(--text-secondary);
+  margin-block-end: var(--sp-4);
+}
+
+.hero__name {
+  font-family: var(--ff-serif);
+  font-size: var(--fs-h1);
+  font-weight: 700;
+  line-height: var(--lh-h1);
+  letter-spacing: var(--ls-heading);
+  margin-block-end: var(--sp-6);
+}
+
+.hero__positioning {
+  font-family: var(--ff-serif);
+  font-weight: 600;
+  font-size: var(--fs-h3);
+  line-height: 1.4;
+  color: var(--text);
+  max-width: 50ch;
+  margin: 0;
+}
+
+/* ─── Case-study grid (home page) ─────────────────────── */
+.case-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--sp-4);
+}
+
+@media (min-width: 48rem) {
+  .case-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--sp-6);
+  }
+}
+
+/* ─── About teaser ─────────────────────────────────────── */
+.about-teaser {
+  max-width: var(--reading-max);
+}
+
+.about-teaser__body {
+  font-size: var(--fs-large);
+  line-height: var(--lh-lede);
+}
+
+/* ─── Contact strip ────────────────────────────────────── */
+.contact-strip {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  padding-block: var(--sp-6);
+}
+
+.contact-strip__lede {
+  font-size: var(--fs-body);
+  color: var(--text-secondary);
+}
+
+.contact-strip__links {
+  display: flex;
+  gap: var(--sp-4);
+  flex-wrap: wrap;
+  font-family: var(--ff-mono);
+  font-size: var(--fs-small);
+}
+
+.contact-strip__sep {
+  color: var(--text-tertiary);
+}
+
+/* ─── About page (long form) ──────────────────────────── */
+.about-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-6);
+  max-width: var(--reading-max);
+  font-size: var(--fs-body);
+}
+
+.about-body p {
+  font-size: var(--fs-large);
+  line-height: var(--lh-lede);
+  margin: 0;
+}
+
+.about-body h2 {
+  font-size: var(--fs-h3);
+  margin-block: var(--sp-6) var(--sp-2);
+}
+
+.about-tools {
+  margin-block-start: var(--sp-8);
+  padding-block-start: var(--sp-6);
+  border-block-start: 1px solid var(--rule);
+}
+
+.about-tools__icons {
+  display: flex;
+  gap: var(--sp-4);
+  flex-wrap: wrap;
+  margin-block-start: var(--sp-3);
+}
+
+.about-tools__icon {
+  width: 32px;
+  height: 32px;
+  opacity: 0.7;
+}
+
+/* ─── Notes index ──────────────────────────────────────── */
+.notes-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-8);
+  max-width: var(--reading-max);
+}
+
+.notes-list__item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  text-decoration: none;
+  color: var(--text);
+}
+
+.notes-list__item:hover .notes-list__title {
+  color: var(--accent);
+}
+
+.notes-list__title {
+  font-family: var(--ff-serif);
+  font-size: var(--fs-h4);
+  font-weight: 600;
+  line-height: var(--lh-h4);
+  transition: color var(--t-fast) var(--ease);
+}
+
+.notes-list__date {
+  font-family: var(--ff-mono);
+  font-size: var(--fs-tiny);
+  text-transform: uppercase;
+  letter-spacing: var(--ls-mono-caps);
+  color: var(--text-secondary);
+}
+
+.notes-list__desc {
+  color: var(--text-secondary);
+}
+
+/* ─── 404 ──────────────────────────────────────────────── */
+.notfound {
+  padding-block: var(--sp-24);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+  align-items: center;
+}
+
+.notfound__title {
+  font-family: var(--ff-mono);
+  font-size: var(--fs-h2);
+  letter-spacing: var(--ls-mono-caps);
+}
+
+.notfound__lede {
+  color: var(--text-secondary);
+  max-width: 40ch;
+  margin: 0;
+}
