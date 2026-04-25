@@ -2,7 +2,7 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
-    { "source": "/resume", "destination": "https://drive.google.com/file/d/1NIzDxWZWDqUEr56z9fVl5rMb8POS7CdZ/view?usp=sharing", "permanent": false },
+    { "source": "/resume", "destination": "https://drive.google.com/file/d/17HKcATOjPl1cKy7bRcvEReQUlW-yJQfQ/view?usp=sharing", "permanent": false },
 
     { "source": "/projects.html", "destination": "/#case-studies", "permanent": true },
     { "source": "/projects", "destination": "/#case-studies", "permanent": true },
