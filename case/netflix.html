@@ -3,18 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Netflix · Engagement Recovery · Aurajeet Mahapatra</title>
-  <meta name="description" content="A self-directed product critique on Netflix engagement, with three hypotheses and four RICE-scored interventions.">
+  <title>Netflix in India · Spec Exercise · Aurajeet Mahapatra</title>
+  <meta name="description" content="A self-directed product critique on Netflix India's distant-third 17% market share. The content is winning; the product isn't. Two product bets — Watch Party with Creator and Netflix Creative Studio — close the gap.">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Netflix · Engagement Recovery — Spec Exercise">
-  <meta property="og:description" content="A self-directed product exercise: where Netflix is bleeding engagement and what actually moves it back.">
+  <meta property="og:title" content="Netflix India: content winning, product not">
+  <meta property="og:description" content="Netflix India runs third at 17% market share with the positioning right. What's missing is a product layer that lets viewing feel social. Two product bets to close the gap.">
   <meta property="og:image" content="/Assets/og-default.png">
   <meta property="og:url" content="https://aurajeet.com/case/netflix">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="/Assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:ital,wght@0,600;0,700;1,600;1,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/tokens.css">
   <link rel="stylesheet" href="/css/base.css">
   <link rel="stylesheet" href="/css/components.css">
@@ -29,7 +29,6 @@
     <ul class="site-nav__links">
       <li><a href="/#case-studies" aria-current="page">Work</a></li>
       <li><a href="/about">About</a></li>
-      <li><a href="/notes">Notes</a></li>
       <li><a href="https://drive.google.com/file/d/17HKcATOjPl1cKy7bRcvEReQUlW-yJQfQ/view?usp=sharing" target="_blank" rel="noopener">Resume</a></li>
     </ul>
   </nav>
@@ -38,117 +37,125 @@
     <article class="cs container">
       <header class="cs__hero">
         <p class="cs__meta">SPEC EXERCISE · SELF-DIRECTED · 2025</p>
-        <h1 class="cs__title">Reversing the engagement drop: a Netflix product critique</h1>
+        <h1 class="cs__title">Netflix India's content is winning. Its product isn't.</h1>
         <p class="cs__sub">
-          A self-directed product exercise on where Netflix is bleeding viewer engagement and which interventions actually
-          move the metric back.
+          Netflix India runs third at 17% market share with the positioning right. What's missing is a product layer
+          that lets viewing feel social. Two product bets — Watch Party with Creator and Netflix Creative Studio —
+          close the gap.
         </p>
         <div class="cs__tags">
           <span class="tag">Spec Exercise</span>
-          <span class="tag">Strategy</span>
-          <span class="tag">Prioritization</span>
+          <span class="tag">Market Strategy</span>
+          <span class="tag">User Research</span>
+          <span class="tag">First Principles</span>
         </div>
       </header>
 
       <div class="cs__ribbon">
         <div class="stat-ribbon">
           <div class="stat">
-            <span class="stat__value">3</span>
-            <span class="stat__label">Hypotheses</span>
+            <span class="stat__value">5</span>
+            <span class="stat__label">OTTs analyzed</span>
           </div>
           <div class="stat">
             <span class="stat__value">4</span>
-            <span class="stat__label">RICE-scored solutions</span>
+            <span class="stat__label">User-research themes</span>
           </div>
           <div class="stat">
-            <span class="stat__value">1</span>
-            <span class="stat__label">Recommendation</span>
+            <span class="stat__value">2</span>
+            <span class="stat__label">Solutions proposed</span>
           </div>
         </div>
       </div>
 
       <p class="cs__disclaimer">
-        This is a self-directed product exercise based on publicly available information about Netflix. I have not worked
-        at Netflix, do not have access to internal data, and am not affiliated with the company. The exercise simulates
-        how I would approach the problem if asked.
+        This is a self-directed product exercise based on publicly available data about Netflix India and its competitors.
+        I have not worked at Netflix, do not have access to internal data, and am not affiliated with the company. The
+        exercise simulates how I would approach the problem if asked.
       </p>
 
       <div class="cs__prose">
-        <h2>The prompt</h2>
+        <h2>The problem</h2>
         <p>
-          Netflix is the world's largest streaming platform. By multiple public measures, the share of user attention it
-          captures is shrinking — not because subscribers leave, but because they spend less time inside the app per session
-          when they do open it. The exercise: locate where the engagement is leaking and propose a small set of interventions
-          ranked by expected impact and effort.
+          Netflix is a global success. Netflix India is not. In Q1 FY26, Netflix India runs at ~17% market share — a
+          distant third behind Disney Hotstar (26%, 300M+ subscribers) and Amazon Prime Video (24%, 67M subscribers).
+          Netflix India's own subscriber base is ~17M and revenue ₹38 Cr; both are growing, neither is closing the gap.
+          The exercise: figure out why, then propose product moves that would actually move it.
         </p>
 
         <h2>Approach</h2>
         <p>
-          I framed the problem as a funnel: open-app → browse → start-playing → watch-through. Each stage has its own
-          drop-off, and at each stage Netflix competes against a different set of alternatives — short-form video for the
-          open, social platforms for the browse, and other long-form services for the watch. I drew on Netflix's annual
-          letters, public engagement metrics from comScore-class sources, and my own use of the product across two years.
+          I decomposed growth and revenue into the variables that move them. Subscriber growth is a function of content
+          strategy, pricing, marketing, product/tech experience, and partnerships. Revenue is average plan price ×
+          (retention × prior-month paid subs + new subs gained this month). That gave five levers to investigate and a
+          formula to keep the work honest.
+        </p>
+        <p>
+          Then two parallel exercises: a competitive analysis across the five major Indian OTTs — Disney Hotstar, Amazon
+          Prime Video, JioCinema, ZEE5, SonyLiv — on content strategy and pricing, and casual interviews with existing
+          Netflix and other-OTT users on four themes: platform preference, first-time Netflix sign-up path,
+          last-watched-show discovery path, and streaming frequency.
         </p>
 
-        <h2>Findings</h2>
+        <h2>Insights</h2>
 
-        <h3>Hypothesis 1: The browse stage is the leakiest</h3>
+        <h3>Netflix's positioning is "the Apple of OTTs"</h3>
         <p>
-          The open is healthy — most subscribers still open the app. The watch-through is also healthy among titles that
-          get past minute three. The bottleneck appears to be browse: viewers open the app, spend three to seven minutes
-          scrolling, and either start something they only half-watch or close the app without playing anything. The browse
-          experience competes against the back button.
+          The user interviews reframed the picture. Three patterns: nobody opens Netflix for a Bollywood movie or a SOAP
+          — that traffic goes to Hotstar, JioCinema, or SonyLiv; for casual daily viewing, users default to the same; and
+          every interviewee could name multiple Netflix Originals while none could name a Hotstar Original. Netflix isn't
+          fighting for "what's playing tonight" — it's the intentional, binge-mode platform. Less volume, higher quality,
+          premium audience. The races on sports, regional, and live events belong to someone else.
         </p>
 
-        <h3>Hypothesis 2: Recommendation is solving the wrong problem</h3>
+        <h3>The real competitor isn't Hotstar — it's social media</h3>
         <p>
-          The current recommendation surface optimizes for "shows you might like." The browse-stage problem is closer to
-          "shows you can commit to right now." Those are different objectives. A recommender that knew it was Tuesday
-          night at 10pm and you had thirty minutes would behave differently from one optimizing all-time affinity.
+          If the positioning is right, why doesn't the revenue follow? Re-running first principles answered it. The
+          standard streaming framing — "people want convenient, personalized, uninterrupted access to high-quality
+          entertainment" — explains why Netflix wins on quality but not why subscribers don't multiply. Streaming isn't
+          the only entertainment.
         </p>
-
-        <h3>Hypothesis 3: Short-form is winning the open competition</h3>
         <p>
-          The competing time on the device — TikTok, Reels, Shorts — has trained a "see something interesting in 30 seconds"
-          expectation that long-form browse cannot match. Netflix is not losing the watch competition; it is losing the
-          decision-to-watch competition.
+          For a given user, the value of entertainment is a function of freedom; freedom is a function of time, money,
+          and age. Other OTTs target the low-freedom segment — at ₹29–₹199 per month, Hotstar and JioCinema deliver more
+          entertainment value than going out for a user with limited money or time. Netflix targets the high-freedom
+          segment, where the user is choosing between Netflix, social media, parties, travel, and hobbies.
+        </p>
+        <p>
+          Run that through Maslow: Netflix's content taps esteem needs (storytelling, quality); social media taps
+          belongingness (the social need). Watching Netflix is structurally isolated. Scrolling Reels with friends in a
+          group chat is not. Netflix is winning the content war and losing the belongingness war.
         </p>
 
         <h2>Recommendations</h2>
         <p>
-          Four interventions, RICE-scored:
+          Two solutions, both built to bring belongingness into Netflix viewing by formalizing the creator-economy loop
+          that already drives Netflix acquisition for free.
         </p>
         <ol>
-          <li><strong>Time-aware recommendations.</strong> Surface a "for tonight, in your time budget" carousel as the
-            first row when the app is opened during normal viewing windows. R: 8, I: 8, C: 5, E: 5 → RICE 64.</li>
-          <li><strong>Browse short-circuit.</strong> A "play something now" button that hard-commits the viewer to a
-            three-minute auto-played title from a curated list. R: 7, I: 6, C: 4, E: 3 → RICE 56.</li>
-          <li><strong>Trailer-first browse mode.</strong> Shrink the autoplay-trailer behavior into a swipeable, short-form
-            feed for the first ninety seconds of browse, then expand to traditional rows if no engagement. R: 6, I: 7, C: 6, E: 7 → RICE 36.</li>
-          <li><strong>Explicit session-length picker.</strong> A "30 min / 1 hr / 2 hr" picker at app open that filters the
-            row set to titles that fit. R: 5, I: 5, C: 5, E: 4 → RICE 31.</li>
+          <li>
+            <strong>Watch Party with Creator.</strong> A live, shared viewing layer where users watch Netflix content
+            alongside thousands of fans and a featured creator who reacts, comments, and engages in real time. The
+            creator earns through a revenue-share model. Turns a Netflix release from an isolated experience into a
+            communal one — closing the gap that social media currently fills.
+          </li>
+          <li>
+            <strong>Netflix Creative Studio.</strong> A video-editing environment built into the platform that lets
+            creators produce derivative content around Netflix shows — reactions, commentary, remixes, new storytelling
+            formats. Today that content lives on Instagram, YouTube, and TikTok and drives Netflix acquisition
+            organically. Bringing the creation surface inside Netflix turns the discovery loop into an owned channel and
+            gives Netflix a content engine that doesn't require a multi-million-dollar original.
+          </li>
         </ol>
         <p>
-          <strong>Single recommendation:</strong> ship #1 (time-aware recommendations). The hypothesis is the cleanest, the
-          mechanism the most natural extension of the existing recommender, and the test the most readable: a/b on browse-to-play
-          conversion in the first sixty seconds of session.
-        </p>
-
-        <h2>Reflections</h2>
-        <p>
-          The exercise made me think about how much of "product strategy" at this level is really about reframing the
-          metric. The team probably has good ideas; what they may not have is consensus on which engagement leak matters
-          most. A clean, falsifiable hypothesis is more valuable than a feature.
-        </p>
-        <p>
-          The honest limit of this exercise: without internal data, all four interventions are directional guesses. The
-          fastest version of this work in a real role would be a one-week sprint with the analytics team to confirm or
-          reject Hypothesis 1 before any of the other work is done.
+          Both target the same root cause and both lean on the same fact about how Netflix wins users today: discovery
+          happens because someone else talked about a Netflix show on a platform Netflix doesn't own. The two products
+          formalize that loop inside the platform.
         </p>
       </div>
 
       <section class="cs__pdf-wrap">
-        <h2 style="font-family: var(--ff-mono); font-size: var(--fs-tiny); text-transform: uppercase; letter-spacing: var(--ls-mono-caps); color: var(--text-secondary); margin-block-end: var(--sp-3);">DEEP DIVE: ORIGINAL DECK</h2>
+        <h2 class="section__label" style="margin-block-end: var(--sp-3);">DEEP DIVE: ORIGINAL DECK</h2>
         <object data="/Assets/Netflix.pdf" type="application/pdf" class="cs__pdf">
           <div class="cs__pdf-fallback">
             <p>Your browser doesn't support inline PDFs.</p>

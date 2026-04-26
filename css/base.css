@@ -30,7 +30,15 @@ body {
   font-weight: var(--fw-body);
   line-height: var(--lh-body);
   color: var(--text);
-  background: var(--bg);
+  /* Paper-textured background: solid tone underneath, fractal noise overlay on top.
+   * background-attachment:fixed anchors the grain to the viewport so the same paper
+   * pattern aligns under both the scrolling body and the sticky .site-nav (which
+   * mirrors these properties), preventing a visible seam at scroll. */
+  background-color: var(--bg);
+  background-image: var(--paper-noise);
+  background-repeat: repeat;
+  background-size: 240px 240px;
+  background-attachment: fixed;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   min-height: 100vh;
@@ -69,6 +77,17 @@ p {
 }
 
 p:last-child {
+  margin-block-end: 0;
+}
+
+/* When a <p> sits inside a flex stack, the stack's `gap` is the only
+ * source of vertical rhythm — strip the intrinsic margin so they don't
+ * stack additively (16px margin + 24px gap = 40px instead of 24px). */
+.stack > p,
+.about-body > p,
+.cs__prose > p,
+.cs__prose > ul,
+.cs__prose > ol {
   margin-block-end: 0;
 }
 

@@ -14,7 +14,7 @@
   <link rel="icon" href="/Assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:ital,wght@0,600;0,700;1,600;1,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/tokens.css">
   <link rel="stylesheet" href="/css/base.css">
   <link rel="stylesheet" href="/css/components.css">
@@ -29,7 +29,6 @@
     <ul class="site-nav__links">
       <li><a href="/#case-studies" aria-current="page">Work</a></li>
       <li><a href="/about">About</a></li>
-      <li><a href="/notes">Notes</a></li>
       <li><a href="https://drive.google.com/file/d/17HKcATOjPl1cKy7bRcvEReQUlW-yJQfQ/view?usp=sharing" target="_blank" rel="noopener">Resume</a></li>
     </ul>
   </nav>
@@ -40,17 +39,16 @@
         <p class="cs__meta">NATION WITH NAMO · ASSOCIATE CONSULTANT · JUL '23 – JUL '25</p>
         <h1 class="cs__title">Growth, experimentation, and analytics for five state-level electoral campaigns</h1>
         <p class="cs__sub">
-          Two years at Nation With NaMo across Madhya Pradesh, Arunachal Pradesh, Odisha, and West Bengal —
-          five campaigns, all won. Owned the experimentation backlog, the segmentation logic, and the
-          analytics dashboards that powered weekly decisions across a 12-person cross-functional team.
+          Two years at Nation With NaMo across Madhya Pradesh, Arunachal Pradesh, Odisha, and West Bengal,
+          spanning five campaigns, all won. Owned the experimentation backlog, the segmentation logic, and the
+          analytics dashboards that shaped weekly decisions for senior campaign leadership.
         </p>
         <div class="cs__tags">
-          <span class="tag">Growth</span>
-          <span class="tag">Experimentation</span>
-          <span class="tag">Analytics</span>
-          <span class="tag">Segmentation</span>
+          <span class="tag">Growth Experimentation</span>
+          <span class="tag">Segmentation &amp; Targeting</span>
+          <span class="tag">Analytics Infrastructure</span>
           <span class="tag">Geospatial Modeling</span>
-          <span class="tag">Cross-functional ownership</span>
+          <span class="tag">Cross-functional Execution</span>
         </div>
       </header>
 
@@ -79,30 +77,25 @@
 
         <h2>Context</h2>
         <p>
-          When I joined Nation With NaMo in July 2023, the organization was preparing to run state-level
-          campaigns across multiple Indian states — each with weeks-to-months cycles, large user bases,
-          and decisions that had to be made daily on incomplete data. Each campaign was an end-to-end
-          product: acquisition surfaces, content distribution, analytics for the program team, and the
-          cross-functional execution to ship on a fixed cycle. Over two years I worked across five
-          campaigns in four states — Madhya Pradesh, Arunachal Pradesh, Odisha, and West Bengal — all five won.
-        </p>
-        <p>
-          The constraint that defined the work: each campaign ran on a fixed cycle of roughly six to
-          eight weeks. That cycle was the unit of iteration. Anything that could not be designed, built,
-          instrumented, run, and read inside one cycle was effectively out of scope. The analytics
-          layer had to be ready before the campaign launched; there was no opportunity to retrofit it after.
+          Each project was a state-level electoral cycle that ran months but ended on an immovable date
+          — election day. Inside that window, the job was to land recommendations with senior political
+          leadership on candidate selection, campaign narrative, and where to deploy time and money —
+          synthesized from village-level field intelligence, survey rounds, and historical booth data
+          that was always incomplete and shifting as the campaign moved. There was no next sprint to
+          fix a wrong call. Every recommendation had to hold up against both the data and the ground.
         </p>
 
         <h2>My role</h2>
         <p>
-          I was an Associate Consultant — a hybrid analyst-and-product role inside the campaign machine.
-          My work split across three workstreams: a campaign war room (growth and content strategy
-          across three campaigns), a political war room (analytics infrastructure and geospatial modeling),
-          and governance advisory (policy interventions tested at the program level). I owned the
-          experimentation roadmap, the analytics dashboards, the segmentation logic, and the
-          cross-functional execution that turned insights into shippable changes. I did not own platform
-          engineering or field operations directly; my role sat between them, translating field signal
-          into experiments and experiments into campaign-team decisions.
+          I was an Associate Consultant — analyst, consultant, and product. As analyst I built the
+          electoral intelligence, segmentation, and geospatial models that fed leadership decisions.
+          As consultant I synthesized those into recommendations to senior political leadership on
+          candidate selection, campaign narrative, and manifesto direction. As product I owned the
+          experimentation backlog, the content-growth funnels, and the cross-functional execution
+          that shipped on cycle. These three modes ran across three workstreams — political war room,
+          campaign war room, and governance advisory. I did not own data engineering or field
+          operations; the role sat between them, translating field signal into experiments and
+          experiments into leadership decisions.
         </p>
 
         <h2>Approach</h2>
@@ -172,16 +165,10 @@
 
         <h2>Reflections</h2>
         <p>
-          The single decision I would make differently: I should have built segmentation infrastructure
-          two months earlier than I did. By the time we had it, the first three campaigns had already
-          shipped on flat targeting, and we had to retrofit segment-level reads from incomplete data.
-          Two months of foresight would have saved an entire cycle of partial visibility.
-        </p>
-        <p>
-          The harder lesson: experimentation discipline is mostly about saying no. The team was
-          generative — every campaign review produced ten new ideas — and the work that made the
-          experimentation system useful was the boring gatekeeping that kept the cycle from running
-          ten thin tests when it could run two well-designed ones.
+          The bottleneck was never collection — there was always more we could gather. It was
+          synthesis: forcing fragmented evidence into a recommendation a Chief Minister could act on
+          in ten minutes. Knowing when to stop reading and start writing was the highest-leverage
+          discipline.
         </p>
       </div>
 

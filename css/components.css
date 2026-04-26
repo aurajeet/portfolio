@@ -22,7 +22,7 @@
   }
 }
 
-/* Reading-width container for case studies / notes */
+/* Reading-width container for case studies */
 .container--reading {
   max-width: var(--reading-max);
 }
@@ -103,6 +103,7 @@ a.card:hover .card__title {
   font-weight: 700;
   font-size: var(--fs-h3);
   color: var(--text);
+  font-variant-numeric: tabular-nums;
   margin-block-start: var(--sp-2);
 }
 
@@ -114,6 +115,49 @@ a.card:hover .card__title {
   color: var(--text-secondary);
   display: block;
   margin-block-start: var(--sp-1);
+}
+
+/* Featured cards — depth case studies (NWN, HEBE).
+ * Bigger title, prominent tan-accent metric, full-width on desktop. */
+.card--featured {
+  padding: var(--sp-10);
+  gap: var(--sp-4);
+}
+
+@media (min-width: 48rem) {
+  .card--featured {
+    padding: var(--sp-12);
+    grid-column: 1 / -1;
+  }
+}
+
+.card--featured .card__title {
+  font-family: var(--ff-serif);
+  font-size: var(--fs-h2);
+  line-height: var(--lh-h2);
+  font-weight: 700;
+  letter-spacing: var(--ls-heading);
+  max-width: 22ch;
+}
+
+.card--featured .card__metric {
+  font-size: var(--fs-h2);
+  color: var(--accent-soft);
+  font-variant-numeric: tabular-nums;
+  margin-block-start: var(--sp-3);
+}
+
+/* Minor cards — spec exercises (Netflix, Amazon Prime).
+ * Eyebrow flagged in tan; metric quieted to grey so the eye reads them
+ * as supporting evidence, not headline work. */
+.card--minor .card__meta {
+  color: var(--accent-soft);
+}
+
+.card--minor .card__metric {
+  color: var(--text-secondary);
+  font-size: var(--fs-h4);
+  font-variant-numeric: tabular-nums;
 }
 
 /* ─── 5. Tag ───────────────────────────────────────────── */
@@ -147,7 +191,9 @@ a.card:hover .card__title {
   font-weight: 700;
   font-size: var(--fs-h2);
   line-height: 1;
-  color: var(--text);
+  color: var(--accent-soft);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
 }
 
 .stat__label {
@@ -168,8 +214,9 @@ a.card:hover .card__title {
 
 /* ─── 7. Link variants (.link is the default <a>) ─────── */
 .link--mono {
-  font-family: var(--ff-mono);
+  font-family: var(--ff-sans);
   font-size: var(--fs-small);
+  font-weight: 500;
 }
 
 .link--quiet {
@@ -184,10 +231,10 @@ a.card:hover .card__title {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-family: var(--ff-mono);
+  font-family: var(--ff-sans);
   font-size: var(--fs-small);
-  font-weight: 500;
-  letter-spacing: 0.02em;
+  font-weight: 600;
+  letter-spacing: 0.01em;
   padding: var(--sp-3) var(--sp-6);
   border-radius: 4px;
   text-decoration: none;
@@ -212,12 +259,13 @@ a.card:hover .card__title {
 
 .btn--secondary {
   background: transparent;
-  color: var(--text);
-  border-color: var(--rule);
+  color: var(--accent);
+  border-color: var(--accent);
 }
 .btn--secondary:hover {
+  background: var(--accent);
+  color: var(--bg);
   border-color: var(--accent);
-  color: var(--accent);
   text-decoration: none;
 }
 
@@ -233,8 +281,9 @@ a.card:hover .card__title {
   font-family: var(--ff-mono);
   font-size: var(--fs-small);
   text-transform: uppercase;
-  letter-spacing: var(--ls-mono-caps);
-  color: var(--text-secondary);
+  letter-spacing: 0.12em;
+  color: var(--accent-soft);
+  font-weight: 500;
 }
 
 /* ─── 11. PageHeader ──────────────────────────────────── */
@@ -242,7 +291,7 @@ a.card:hover .card__title {
   padding-block: var(--sp-16) var(--sp-12);
   display: flex;
   flex-direction: column;
-  gap: var(--sp-4);
+  gap: var(--sp-2);
 }
 
 .page-header__title {
@@ -252,6 +301,7 @@ a.card:hover .card__title {
   line-height: var(--lh-h1);
   letter-spacing: var(--ls-heading);
   max-width: 24ch;
+  margin-block-end: var(--sp-4);
 }
 
 .page-header__sub {
@@ -261,14 +311,17 @@ a.card:hover .card__title {
   max-width: var(--reading-max);
 }
 
-/* ─── 12. Section label (used inside <Section>) ───────── */
+/* ─── 12. Section label (used inside <Section>) ─────────
+ * Smaller + wider tracking + tan tint so it reads as a quiet eyebrow.
+ * Lets the H2/H3 content underneath read louder by contrast. */
 .section__label {
   font-family: var(--ff-mono);
-  font-size: var(--fs-tiny);
+  font-size: 0.6875rem;        /* 11px — was --fs-tiny (12px) */
   text-transform: uppercase;
-  letter-spacing: var(--ls-mono-caps);
-  color: var(--text-secondary);
+  letter-spacing: 0.14em;      /* was --ls-mono-caps (0.08em) */
+  color: var(--accent-soft);   /* was --text-secondary */
   margin-block-end: var(--sp-6);
+  font-weight: 500;
 }
 
 /* ─── Site nav ─────────────────────────────────────────── */
@@ -276,7 +329,15 @@ a.card:hover .card__title {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: var(--bg);
+  /* Mirror the body's paper texture so the sticky nav reads as part of the same
+   * sheet rather than a clean strip floating over textured content. The fixed
+   * attachment keeps the grain anchored to the viewport — same as body — so the
+   * pattern aligns continuously under the nav. */
+  background-color: var(--bg);
+  background-image: var(--paper-noise);
+  background-repeat: repeat;
+  background-size: 240px 240px;
+  background-attachment: fixed;
   border-bottom: 1px solid var(--rule);
   padding: var(--sp-4) var(--sp-6);
   display: flex;
@@ -324,11 +385,12 @@ a.card:hover .card__title {
 }
 
 .site-nav__links a {
-  font-family: var(--ff-mono);
+  font-family: var(--ff-sans);
   font-size: var(--fs-small);
+  font-weight: 500;
   color: var(--text);
   text-decoration: none;
-  letter-spacing: 0.02em;
+  letter-spacing: 0;
 }
 
 .site-nav__links a:hover {
@@ -350,7 +412,7 @@ a.card:hover .card__title {
   flex-direction: column;
   gap: var(--sp-4);
   align-items: flex-start;
-  font-family: var(--ff-mono);
+  font-family: var(--ff-sans);
   font-size: var(--fs-small);
   color: var(--text-secondary);
   flex-shrink: 0;
