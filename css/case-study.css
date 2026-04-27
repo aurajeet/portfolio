@@ -139,45 +139,100 @@
   text-transform: uppercase;
   letter-spacing: var(--ls-mono-caps);
   color: var(--text-secondary);
-  margin-block-end: var(--sp-2);
+  margin-block-end: var(--sp-3);
 }
 
-.cs__methods ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  font-size: var(--fs-small);
+/* Tag-chip row replaces the prior <ul>/<li> structure. The chip pill is
+ * defined once in components.css (.tag); this just lays them out as a
+ * wrapping flex row inside each methods/tools/collaborators column.
+ *
+ * The chip default is white-space: nowrap (single-line pills). Methods
+ * column labels can be longer than a thin column accommodates, so we
+ * relax to white-space: normal here — long labels wrap inside the pill
+ * as 2–3 lines. Keeps the literal copy intact (content stays untouched
+ * per spec) while preventing horizontal column overflow. */
+.cs__methods__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
 }
 
-.cs__methods li {
-  margin-block-end: var(--sp-1);
+.cs__methods__tags .tag {
+  white-space: normal;
+  text-align: left;
+  line-height: 1.35;
 }
 
-/* ─── PDF embed ────────────────────────────────────────── */
-.cs__pdf-wrap {
+/* ─── Deck preview card (Netflix, Amazon Prime) ────────────
+ * Replaces the prior auto-loaded <object> PDF embed. A static cover
+ * image (first page of the deck, 1600px wide JPEG) sits inside a
+ * bordered card; the whole card is a link that opens the full PDF
+ * in a new tab. Cuts ~10MB of payload from auto-load and gives
+ * mobile a reliable tap-to-open affordance instead of an inline
+ * embed that doesn't render. */
+.cs__deck-wrap {
   max-width: var(--artifact-max);
   margin-block-start: var(--sp-12);
 }
 
-.cs__pdf {
-  width: 100%;
-  height: 70vh;
-  min-height: 600px;
+.cs__deck {
+  display: block;
+  text-decoration: none;
+  background: var(--bg-card);
   border: 1px solid var(--rule);
   border-radius: 4px;
+  overflow: hidden;
+  transition: border-color var(--t-fast) var(--ease);
 }
 
-.cs__pdf-fallback {
-  padding: var(--sp-6);
-  background: var(--bg-subtle);
-  border-radius: 4px;
+.cs__deck:hover {
+  border-color: var(--accent);
+  text-decoration: none;
+}
+
+.cs__deck__cover {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-block-end: 1px solid var(--rule);
+}
+
+.cs__deck__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--sp-2) var(--sp-6);
+  padding: var(--sp-4) var(--sp-6);
+}
+
+.cs__deck__title {
+  font-family: var(--ff-serif);
+  font-size: var(--fs-h4);
+  font-weight: 600;
+  color: var(--text);
+  transition: color var(--t-fast) var(--ease);
+}
+
+.cs__deck:hover .cs__deck__title {
+  color: var(--accent);
+}
+
+.cs__deck__sub {
+  font-family: var(--ff-mono);
   font-size: var(--fs-small);
+  color: var(--text-secondary);
 }
 
-/* ─── Case-study footer (next/prev nav) ────────────────── */
+/* ─── Case-study footer (3-up prev / all work / next nav) ──
+ * Three-column layout: Prev — All work ↑ — Next. Edge pages use
+ * a `.cs__nav__spacer` placeholder (visibility: hidden) in the
+ * missing slot so the center link stays visually centered. */
 .cs__nav {
   display: flex;
-  justify-content: space-between;
+  align-items: center;
   gap: var(--sp-4);
   margin-block-start: var(--sp-16);
   padding-block-start: var(--sp-8);
@@ -185,5 +240,18 @@
   font-family: var(--ff-mono);
   font-size: var(--fs-small);
   flex-wrap: wrap;
+}
+
+.cs__nav > * {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.cs__nav__prev { text-align: left; }
+.cs__nav__center { text-align: center; }
+.cs__nav__next { text-align: right; }
+
+.cs__nav__spacer {
+  visibility: hidden;
 }
 

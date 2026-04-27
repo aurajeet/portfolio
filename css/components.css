@@ -53,14 +53,17 @@
 .row--between { justify-content: space-between; }
 
 /* ─── 4. Card ──────────────────────────────────────────── */
+/* Uniform homepage card. Same padding, same gap, same type scale across all
+ * four. The WORK / PM PROJECTS section labels do the work the .card--featured
+ * and .card--minor variants used to do, so those modifiers are gone in Commit 1. */
 .card {
   background: var(--bg-card);
   border: 1px solid var(--rule);
-  padding: var(--sp-8);
+  padding: var(--sp-10);
   border-radius: 4px;
   display: flex;
   flex-direction: column;
-  gap: var(--sp-3);
+  gap: var(--sp-4);
   text-decoration: none;
   color: var(--text);
   transition: border-color var(--t-fast) var(--ease);
@@ -98,11 +101,15 @@ a.card:hover .card__title {
   margin: 0;
 }
 
+/* All card metrics use the same role: t-h3 size + accent-soft tan.
+ * This is the editorial "headline number" — the result/outcome the eye
+ * lands on after the case name. Outcome > case name is intentional. */
 .card__metric {
   font-family: var(--ff-serif);
   font-weight: 700;
   font-size: var(--fs-h3);
-  color: var(--text);
+  line-height: var(--lh-h3);
+  color: var(--accent-soft);
   font-variant-numeric: tabular-nums;
   margin-block-start: var(--sp-2);
 }
@@ -110,54 +117,12 @@ a.card:hover .card__title {
 .card__metric-label {
   font-family: var(--ff-mono);
   font-size: var(--fs-tiny);
+  font-weight: 500;
   text-transform: uppercase;
   letter-spacing: var(--ls-mono-caps);
   color: var(--text-secondary);
   display: block;
   margin-block-start: var(--sp-1);
-}
-
-/* Featured cards — depth case studies (NWN, HEBE).
- * Bigger title, prominent tan-accent metric, full-width on desktop. */
-.card--featured {
-  padding: var(--sp-10);
-  gap: var(--sp-4);
-}
-
-@media (min-width: 48rem) {
-  .card--featured {
-    padding: var(--sp-12);
-    grid-column: 1 / -1;
-  }
-}
-
-.card--featured .card__title {
-  font-family: var(--ff-serif);
-  font-size: var(--fs-h2);
-  line-height: var(--lh-h2);
-  font-weight: 700;
-  letter-spacing: var(--ls-heading);
-  max-width: 22ch;
-}
-
-.card--featured .card__metric {
-  font-size: var(--fs-h2);
-  color: var(--accent-soft);
-  font-variant-numeric: tabular-nums;
-  margin-block-start: var(--sp-3);
-}
-
-/* Minor cards — spec exercises (Netflix, Amazon Prime).
- * Eyebrow flagged in tan; metric quieted to grey so the eye reads them
- * as supporting evidence, not headline work. */
-.card--minor .card__meta {
-  color: var(--accent-soft);
-}
-
-.card--minor .card__metric {
-  color: var(--text-secondary);
-  font-size: var(--fs-h4);
-  font-variant-numeric: tabular-nums;
 }
 
 /* ─── 5. Tag ───────────────────────────────────────────── */
@@ -312,16 +277,22 @@ a.card:hover .card__title {
 }
 
 /* ─── 12. Section label (used inside <Section>) ─────────
- * Smaller + wider tracking + tan tint so it reads as a quiet eyebrow.
+ * Quiet eyebrow style: token-sized, wider tracking, tan tint.
  * Lets the H2/H3 content underneath read louder by contrast. */
 .section__label {
   font-family: var(--ff-mono);
-  font-size: 0.6875rem;        /* 11px — was --fs-tiny (12px) */
-  text-transform: uppercase;
-  letter-spacing: 0.14em;      /* was --ls-mono-caps (0.08em) */
-  color: var(--accent-soft);   /* was --text-secondary */
-  margin-block-end: var(--sp-6);
+  font-size: var(--fs-tiny);
   font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;       /* tracking--wider, tighter than --ls-mono-caps */
+  color: var(--accent-soft);
+  margin-block-end: var(--sp-6);
+}
+
+/* Tight variant — smaller bottom margin when the label sits directly
+ * above a tightly-coupled element (e.g., a deep-dive PDF preview). */
+.section__label--tight {
+  margin-block-end: var(--sp-3);
 }
 
 /* ─── Site nav ─────────────────────────────────────────── */
@@ -449,6 +420,26 @@ a.card:hover .card__title {
 .site-footer a:hover {
   color: var(--accent);
   text-decoration: underline;
+}
+
+/* Slim variant — used on home + about, where the colophon already carries
+ * email/LinkedIn/resume/phone above. Footer collapses to credit + a quiet
+ * "Back to top ↑" link. The base flex rules already handle the layout
+ * (column on mobile, row + space-between at >= 48rem); the modifier just
+ * keeps the back-to-top right-aligned on mobile too, mirroring case-study
+ * pages where the link reads as a single right-side affordance. */
+.site-footer--slim {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.site-footer__top {
+  font-family: var(--ff-mono);
+  font-size: var(--fs-small);
+  font-weight: 500;
+  letter-spacing: var(--ls-mono-caps);
+  text-transform: uppercase;
 }
 
 /* ─── Reveal-on-scroll (used by js/reveal.js) ─────────── */

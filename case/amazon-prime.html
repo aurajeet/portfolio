@@ -28,6 +28,7 @@
     <a href="/" class="site-nav__monogram" aria-label="Home">AM</a>
     <ul class="site-nav__links">
       <li><a href="/#case-studies" aria-current="page">Work</a></li>
+      <li><a href="/#projects">Projects</a></li>
       <li><a href="/about">About</a></li>
       <li><a href="https://drive.google.com/file/d/17HKcATOjPl1cKy7bRcvEReQUlW-yJQfQ/view?usp=sharing" target="_blank" rel="noopener">Resume</a></li>
     </ul>
@@ -141,19 +142,25 @@
         </p>
       </div>
 
-      <section class="cs__pdf-wrap">
-        <h2 class="section__label" style="margin-block-end: var(--sp-3);">DEEP DIVE: ORIGINAL DECK</h2>
-        <object data="/Assets/Amazon%20Prime.pdf" type="application/pdf" class="cs__pdf">
-          <div class="cs__pdf-fallback">
-            <p>Your browser doesn't support inline PDFs.</p>
-            <a href="/Assets/Amazon%20Prime.pdf" target="_blank" rel="noopener">Download the deck (PDF, 2.8 MB) →</a>
+      <section class="cs__deck-wrap">
+        <h2 class="section__label section__label--tight">DEEP DIVE — ORIGINAL DECK</h2>
+        <a class="cs__deck" href="/Assets/Amazon%20Prime.pdf" target="_blank" rel="noopener">
+          <img class="cs__deck__cover"
+               src="/Assets/amazon-prime-cover.jpg"
+               alt="First page of the Amazon Prime Video deck"
+               width="1600" height="903"
+               loading="lazy" decoding="async">
+          <div class="cs__deck__meta">
+            <span class="cs__deck__title">Original deck</span>
+            <span class="cs__deck__sub">PDF · 2.8 MB · Opens in new tab ↗</span>
           </div>
-        </object>
+        </a>
       </section>
 
       <nav class="cs__nav" aria-label="Case study navigation">
-        <a href="/case/netflix" class="link--mono">← Previous: Netflix</a>
-        <a href="/" class="link--mono">All work →</a>
+        <a href="/case/netflix" class="link--mono cs__nav__prev">← Previous: Netflix</a>
+        <a href="/#case-studies" class="link--mono cs__nav__center">All work ↑</a>
+        <span class="cs__nav__spacer cs__nav__next" aria-hidden="true"></span>
       </nav>
     </article>
   </main>

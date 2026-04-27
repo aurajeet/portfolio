@@ -28,6 +28,7 @@
     <a href="/" class="site-nav__monogram" aria-label="Home">AM</a>
     <ul class="site-nav__links">
       <li><a href="/#case-studies" aria-current="page">Work</a></li>
+      <li><a href="/#projects">Projects</a></li>
       <li><a href="/about">About</a></li>
       <li><a href="https://drive.google.com/file/d/17HKcATOjPl1cKy7bRcvEReQUlW-yJQfQ/view?usp=sharing" target="_blank" rel="noopener">Resume</a></li>
     </ul>
@@ -85,10 +86,10 @@
 
         <h2>Approach</h2>
         <p>
-          I decomposed growth and revenue into the variables that move them. Subscriber growth is a function of content
-          strategy, pricing, marketing, product/tech experience, and partnerships. Revenue is average plan price ×
-          (retention × prior-month paid subs + new subs gained this month). That gave five levers to investigate and a
-          formula to keep the work honest.
+          I broke subscriber growth and revenue down into the metrics that move them. Subscriber growth is a function of
+          content strategy, pricing, marketing, product/tech experience, and partnerships. Revenue is average plan price
+          × (retention × prior-month paid subs + new subs gained this month). That gave five levers to investigate and
+          a formula to keep the work honest.
         </p>
         <p>
           Then two parallel exercises: a competitive analysis across the five major Indian OTTs — Disney Hotstar, Amazon
@@ -154,19 +155,25 @@
         </p>
       </div>
 
-      <section class="cs__pdf-wrap">
-        <h2 class="section__label" style="margin-block-end: var(--sp-3);">DEEP DIVE: ORIGINAL DECK</h2>
-        <object data="/Assets/Netflix.pdf" type="application/pdf" class="cs__pdf">
-          <div class="cs__pdf-fallback">
-            <p>Your browser doesn't support inline PDFs.</p>
-            <a href="/Assets/Netflix.pdf" target="_blank" rel="noopener">Download the deck (PDF, 7.4 MB) →</a>
+      <section class="cs__deck-wrap">
+        <h2 class="section__label section__label--tight">DEEP DIVE — ORIGINAL DECK</h2>
+        <a class="cs__deck" href="/Assets/Netflix.pdf" target="_blank" rel="noopener">
+          <img class="cs__deck__cover"
+               src="/Assets/netflix-cover.jpg"
+               alt="First page of the Netflix India deck"
+               width="1600" height="900"
+               loading="lazy" decoding="async">
+          <div class="cs__deck__meta">
+            <span class="cs__deck__title">Original deck</span>
+            <span class="cs__deck__sub">PDF · 7.4 MB · Opens in new tab ↗</span>
           </div>
-        </object>
+        </a>
       </section>
 
       <nav class="cs__nav" aria-label="Case study navigation">
-        <a href="/case/hebe" class="link--mono">← Previous: HEBE</a>
-        <a href="/case/amazon-prime" class="link--mono">Next: Amazon Prime Video →</a>
+        <a href="/case/hebe" class="link--mono cs__nav__prev">← Previous: HEBE</a>
+        <a href="/#case-studies" class="link--mono cs__nav__center">All work ↑</a>
+        <a href="/case/amazon-prime" class="link--mono cs__nav__next">Next: Amazon Prime Video →</a>
       </nav>
     </article>
   </main>

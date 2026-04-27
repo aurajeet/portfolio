@@ -150,3 +150,107 @@ li:last-child {
   text-decoration: none;
   color: var(--bg);
 }
+
+/* ─── Typographic Roles ─────────────────────────────────────────────────
+ * Single source of truth for type styling. Every component should map to
+ * exactly one of these roles. The few documented exceptions are:
+ *   • .btn       — fs-small / 600 (interactive, conventionally bolder)
+ *   • .cs__sub   — fs-h4 / 600 / italic (case-study subtitle, intentionally
+ *                  italic for editorial voice; same size as t-h4)
+ *
+ * | Role         | Family | Size token       | Weight |
+ * | ------------ | ------ | ---------------- | ------ |
+ * | t-display    | serif  | --fs-display     |  700   |
+ * | t-h1         | serif  | --fs-h1          |  700   |
+ * | t-h2         | serif  | --fs-h2          |  700   |
+ * | t-h3         | serif  | --fs-h3          |  700   |  (article-level h2)
+ * | t-h4         | serif  | --fs-h4          |  600   |  (card titles, prose h3)
+ * | t-lede       | serif  | --fs-large       |  400   |
+ * | t-body       | sans   | --fs-body        |  400   |
+ * | t-small      | sans   | --fs-small       |  500   |
+ * | t-mono-caps  | mono   | --fs-tiny        |  500   |  (default eyebrow)
+ * | t-mono-caps-lg | mono | --fs-small       |  500   |  (page-level eyebrow)
+ */
+.t-display {
+  font-family: var(--ff-serif);
+  font-size: var(--fs-display);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+}
+
+.t-h1 {
+  font-family: var(--ff-serif);
+  font-size: var(--fs-h1);
+  font-weight: 700;
+  line-height: var(--lh-h1);
+  letter-spacing: var(--ls-heading);
+}
+
+.t-h2 {
+  font-family: var(--ff-serif);
+  font-size: var(--fs-h2);
+  font-weight: 700;
+  line-height: var(--lh-h2);
+  letter-spacing: var(--ls-heading);
+}
+
+.t-h3 {
+  font-family: var(--ff-serif);
+  font-size: var(--fs-h3);
+  font-weight: 700;
+  line-height: var(--lh-h3);
+  letter-spacing: var(--ls-heading);
+}
+
+.t-h4 {
+  font-family: var(--ff-serif);
+  font-size: var(--fs-h4);
+  font-weight: 600;
+  line-height: var(--lh-h4);
+}
+
+.t-lede {
+  font-family: var(--ff-serif);
+  font-size: var(--fs-large);
+  font-weight: 400;
+  line-height: var(--lh-lede);
+}
+
+.t-body {
+  font-family: var(--ff-sans);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-body);
+  line-height: var(--lh-body);
+}
+
+.t-small {
+  font-family: var(--ff-sans);
+  font-size: var(--fs-small);
+  font-weight: 500;
+}
+
+.t-mono-caps {
+  font-family: var(--ff-mono);
+  font-size: var(--fs-tiny);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: var(--ls-mono-caps);
+}
+
+.t-mono-caps-lg {
+  font-family: var(--ff-mono);
+  font-size: var(--fs-small);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: var(--ls-mono-caps);
+}
+
+/* ─── Spacing utilities ─────────────────────────────────────────────────
+ * Use sparingly; prefer component variants when a pattern repeats. These
+ * exist primarily to replace ad-hoc inline `style="margin-..."` overrides
+ * in HTML pages.
+ */
+.u-mt-0  { margin-block-start: 0 !important; }
+.u-mt-12 { margin-block-start: var(--sp-12); }
+.u-mb-3  { margin-block-end: var(--sp-3); }

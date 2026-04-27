@@ -24,54 +24,53 @@
   }
 }
 
-/* ─── Hero (home) ──────────────────────────────────────── */
-/* Mobile: text-wrap (with container-style padding) + photo (centered, with border).
- * Desktop (>= 64rem): full-bleed grid. Photo extends to viewport's right edge,
- *   text aligns with the page-wide container content edge on the left.
+/* ─── Hero (home) — Magazine masthead ───────────────────
+ * Editorial two-column layout, constrained inside the page container.
+ * Mobile: stacked (text → photo). Desktop (>= 64rem): text + 340px photo
+ * with a vertical hairline between columns and a horizontal rule below.
+ * The photo wears the same thin 1px border as the cards for visual continuity.
  */
 .hero {
-  display: flex;
-  flex-direction: column;
-  padding-block-end: var(--sp-12);
+  padding-block: var(--sp-12) var(--sp-12);
+  border-block-end: 1px solid var(--rule);
 }
 
-.hero__text-wrap {
-  padding-block: var(--sp-16) var(--sp-10);
-  padding-inline: var(--sp-6);
+@media (min-width: 64rem) {
+  .hero {
+    padding-block: var(--sp-20);
+  }
+}
+
+.hero__inner {
   max-width: var(--container-max);
   margin-inline: auto;
-  width: 100%;
+  padding-inline: var(--sp-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-10);
 }
 
 @media (min-width: 48rem) {
-  .hero__text-wrap {
-    padding-block: var(--sp-20) var(--sp-10);
+  .hero__inner {
     padding-inline: var(--sp-12);
   }
 }
 
 @media (min-width: 64rem) {
-  .hero {
+  .hero__inner {
+    padding-inline: var(--sp-16);
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 360px;
-    align-items: stretch;
-    /* Symmetric breathing room: var(--sp-24) above (here) matches the
-     * var(--sp-24) padding-block-start of the .section that follows the hero,
-     * so the photo sits with equal gaps top and bottom. */
-    padding-block-start: var(--sp-24);
-    padding-block-end: 0;
+    grid-template-columns: minmax(0, 1fr) 340px;
+    column-gap: var(--sp-12);
+    /* Top-aligned: photo's top edge sits at the eyebrow's baseline. */
+    align-items: start;
   }
 
-  .hero__text-wrap {
-    max-width: none;
-    margin-inline: 0;
-    padding-block: 0;
+  /* Vertical hairline between text and photo columns. The padding pushes
+   * the photo away from the rule so the line breathes. */
+  .hero__text {
     padding-inline-end: var(--sp-12);
-    /* Align left edge with .container content (which uses var(--sp-16) padding-inline at >= 64rem) */
-    padding-inline-start: max(var(--sp-16), calc((100vw - var(--container-max)) / 2 + var(--sp-16)));
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    border-inline-end: 1px solid var(--rule);
   }
 }
 
@@ -126,15 +125,7 @@
   .hero__portrait {
     max-width: none;
     width: 100%;
-    height: auto;
-    aspect-ratio: 3 / 4;
-    object-fit: cover;
-    object-position: 50% 25%;
     margin: 0;
-    border: none;
-    border-radius: 0;
-    /* Anchor to the top of the cell — text cell may grow taller, but the
-     * image keeps its natural 3:4 box at the configured 360px column width. */
     align-self: start;
   }
 }
@@ -153,65 +144,217 @@
   }
 }
 
-/* ─── About teaser ─────────────────────────────────────── */
-.about-teaser {
-  max-width: var(--reading-max);
+/* ─── Background grid (home, "The thread.") ─────────────
+ * Mobile: stacked. Desktop (>= 48rem): 4/12 left rail + 8/12 right body.
+ * The left rail carries the section eyebrow + small serif heading;
+ * the right column carries the existing paragraph + outbound link. */
+.background-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--sp-6);
 }
 
-.about-teaser__body {
-  font-size: var(--fs-large);
-  line-height: var(--lh-lede);
+@media (min-width: 48rem) {
+  .background-grid {
+    grid-template-columns: 4fr 8fr;
+    column-gap: var(--sp-10);
+  }
 }
 
-/* ─── Contact strip ────────────────────────────────────── */
-.contact-strip {
-  display: flex;
-  flex-direction: column;
-  gap: var(--sp-5);
-  padding-block: var(--sp-6);
+.background-grid__heading {
+  font-family: var(--ff-serif);
+  font-size: var(--fs-h3);
+  font-weight: 700;
+  line-height: var(--lh-h3);
+  letter-spacing: var(--ls-heading);
+  color: var(--text);
+  margin: 0;
 }
 
-.contact-strip__lede {
-  font-size: var(--fs-body);
-  color: var(--text-secondary);
-  max-width: var(--reading-max);
-}
-
-/* Primary action row — filled "Book a 30-min chat" + outlined Resume.
- * Sits above the quieter inline links so the eye lands on the buttons first. */
-.contact-strip__cta {
-  display: flex;
-  gap: var(--sp-3);
-  flex-wrap: wrap;
-}
-
-.contact-strip__links {
-  display: flex;
-  gap: var(--sp-4);
-  flex-wrap: wrap;
-  font-family: var(--ff-mono);
-  font-size: var(--fs-small);
-  color: var(--text-secondary);
-}
-
-.contact-strip__links a {
-  color: var(--text-secondary);
-}
-
-.contact-strip__links a:hover {
-  color: var(--accent);
-}
-
-.contact-strip__sep {
-  color: var(--text-tertiary);
-}
-
-/* ─── About page (long form) ──────────────────────────── */
-.about-body {
+.background-grid__body {
   display: flex;
   flex-direction: column;
   gap: var(--sp-6);
+}
+
+.background-grid__body p {
+  font-size: var(--fs-large);
+  line-height: var(--lh-lede);
+  margin: 0;
   max-width: var(--reading-max);
+}
+
+/* ─── Colophon (contact block, home + about) ────────────
+ * Replaces the four-button contact strip. Quiet by default — a lede,
+ * a single primary "Email me →", then a labeled 2x2 grid where each
+ * value (the address / handle / phone) is the link itself. The mono-caps
+ * label sits above each value as an editorial "field name." */
+.colophon {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-6);
+  padding-block: var(--sp-6);
+}
+
+.colophon__lede {
+  font-size: var(--fs-large);
+  line-height: var(--lh-lede);
+  color: var(--text);
+  max-width: var(--reading-max);
+  margin: 0;
+}
+
+.colophon__cta {
+  display: flex;
+  /* keep the primary action visually anchored at the start of its row */
+  align-self: flex-start;
+}
+
+.colophon__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--sp-6);
+  /* unset <dl> defaults */
+  margin: 0;
+  padding-block-start: var(--sp-4);
+  border-block-start: 1px solid var(--rule);
+}
+
+@media (min-width: 48rem) {
+  .colophon__grid {
+    grid-template-columns: 1fr 1fr;
+    column-gap: var(--sp-12);
+    row-gap: var(--sp-6);
+  }
+}
+
+.colophon__item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+  margin: 0;
+}
+
+.colophon__item dt {
+  font-family: var(--ff-mono);
+  font-size: var(--fs-tiny);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: var(--ls-mono-caps);
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.colophon__item dd {
+  font-family: var(--ff-sans);
+  font-size: var(--fs-body);
+  color: var(--text);
+  margin: 0;
+}
+
+.colophon__item dd a {
+  color: var(--text);
+}
+
+.colophon__item dd a:hover {
+  color: var(--accent);
+}
+
+/* Caption sitting below a directory value (e.g., "hosted on Google Drive"
+ * under the Resume link). Quieter than dd, sized like a meta line. */
+.colophon__caption {
+  display: block;
+  font-family: var(--ff-sans);
+  font-size: var(--fs-small);
+  color: var(--text-tertiary);
+  margin-block-start: var(--sp-1);
+}
+
+/* Closing sign-off below the directory grid. Italic serif voice line that
+ * ends the page like a letter would. A hairline rule above mirrors the
+ * one capping the directory grid, giving the section symmetric editorial
+ * rhythm. Size sits between body and lede — large enough to read as a
+ * "callout," not so large it competes with the lede that opens the block. */
+.colophon__signoff {
+  font-family: var(--ff-serif);
+  font-size: 1.125rem;        /* 18px — intentional off-scale callout */
+  line-height: var(--lh-lede);
+  color: var(--text-secondary);
+  margin: 0;
+  padding-block-start: var(--sp-6);
+  border-block-start: 1px solid var(--rule);
+}
+
+.colophon__signoff em {
+  font-style: italic;
+  color: var(--text);
+}
+
+/* ─── About page — Wide editorial header ───────────────
+ * The header breaks out of the reading column to claim the full article
+ * container width (1120px). Eyebrow on its own row, then a 4/8 split
+ * below: serif title left, sub paragraph right. A horizontal rule
+ * closes the header before the timeline-rail body begins. */
+.about-header {
+  padding-block-end: var(--sp-10);
+  border-block-end: 1px solid var(--rule);
+  margin-block-end: var(--sp-12);
+}
+
+@media (min-width: 64rem) {
+  .about-header {
+    padding-block-end: var(--sp-12);
+    margin-block-end: var(--sp-16);
+  }
+}
+
+.about-header .meta-line {
+  margin-block-end: var(--sp-6);
+}
+
+.about-header__row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-6);
+}
+
+@media (min-width: 48rem) {
+  .about-header__row {
+    display: grid;
+    grid-template-columns: 4fr 8fr;
+    column-gap: var(--sp-12);
+    align-items: start;
+  }
+}
+
+.about-header__title {
+  font-family: var(--ff-serif);
+  font-weight: 700;
+  font-size: var(--fs-h1);
+  line-height: var(--lh-h1);
+  letter-spacing: var(--ls-heading);
+  color: var(--text);
+  margin: 0;
+  max-width: 14ch;
+}
+
+.about-header__sub {
+  font-size: var(--fs-large);
+  line-height: var(--lh-lede);
+  color: var(--text-secondary);
+  margin: 0;
+  max-width: 60ch;
+}
+
+/* ─── About page — Body (timeline rail) ─────────────────
+ * Returns to reading width below the wide header. Centered inside the
+ * now-wider article container. */
+.about-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-8);
+  max-width: var(--reading-max);
+  margin-inline: auto;
   font-size: var(--fs-body);
 }
 
@@ -223,26 +366,66 @@
 
 .about-body h2 {
   font-size: var(--fs-h3);
-  margin-block: var(--sp-4) var(--sp-1);
+  margin: 0;
 }
 
+/* About — Per-role section with year-range rail.
+ * Mobile: year reads as a mono-caps eyebrow above the h2.
+ * Desktop (>=48rem): 140px year rail + flexible body, baseline-aligned.
+ * Non-year sections (THESIS, LOOKING FOR) reuse the same rail width. */
+.about-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+
+.about-section__year {
+  font-family: var(--ff-mono);
+  font-size: var(--fs-tiny);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: var(--ls-mono-caps);
+  color: var(--accent-soft);
+  margin: 0;
+}
+
+.about-section__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+@media (min-width: 48rem) {
+  .about-section {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    column-gap: var(--sp-6);
+    align-items: baseline;
+  }
+
+  .about-section__year {
+    /* keep the rail visually aligned with the h2 cap-height */
+    padding-block-start: var(--sp-1);
+  }
+}
+
+/* About — Tools & methods.
+ * Sits inside .about-body as the closing block. Border-top reads as a
+ * chapter break. h2 → chip row → descriptive paragraph, separated by
+ * --sp-4 (16px) of breathing room per the spec. */
 .about-tools {
-  margin-block-start: var(--sp-8);
+  margin-block-start: var(--sp-4);
   padding-block-start: var(--sp-6);
   border-block-start: 1px solid var(--rule);
-}
-
-.about-tools__icons {
   display: flex;
+  flex-direction: column;
   gap: var(--sp-4);
-  flex-wrap: wrap;
-  margin-block-start: var(--sp-3);
 }
 
-.about-tools__icon {
-  width: 32px;
-  height: 32px;
-  opacity: 0.7;
+.about-tools__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
 }
 
 /* ─── 404 ──────────────────────────────────────────────── */
@@ -253,6 +436,15 @@
   flex-direction: column;
   gap: var(--sp-4);
   align-items: center;
+}
+
+.notfound__erratum {
+  font-family: var(--ff-serif);
+  font-style: italic;
+  font-weight: 600;
+  font-size: var(--fs-h4);
+  color: var(--text-secondary);
+  margin: 0;
 }
 
 .notfound__title {

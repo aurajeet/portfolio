@@ -27,6 +27,7 @@
     <a href="/" class="site-nav__monogram" aria-label="Home" aria-current="page">AM</a>
     <ul class="site-nav__links">
       <li><a href="/#case-studies">Work</a></li>
+      <li><a href="/#projects">Projects</a></li>
       <li><a href="/about">About</a></li>
       <li><a href="https://drive.google.com/file/d/17HKcATOjPl1cKy7bRcvEReQUlW-yJQfQ/view?usp=sharing" target="_blank" rel="noopener">Resume</a></li>
     </ul>
@@ -34,7 +35,7 @@
 
   <main id="main">
     <section class="hero">
-      <div class="hero__text-wrap">
+      <div class="hero__inner">
         <div class="hero__text">
           <p class="hero__role">PRODUCT MANAGER · BENGALURU, INDIA</p>
           <h1 class="hero__name">Aurajeet Mahapatra</h1>
@@ -44,21 +45,21 @@
             One year rebuilding HEBE — a ₹2 Cr B2B essential-oil business — into a digitally instrumented supply chain.
           </p>
         </div>
+        <img src="/Assets/aurajeet-portrait.jpg"
+             alt="Aurajeet Mahapatra"
+             class="hero__portrait"
+             width="810" height="1080"
+             loading="eager"
+             decoding="async">
       </div>
-      <img src="/Assets/aurajeet-portrait.jpg"
-           alt="Aurajeet Mahapatra"
-           class="hero__portrait"
-           width="810" height="1080"
-           loading="eager"
-           decoding="async">
     </section>
 
     <section class="section" id="case-studies">
       <div class="container">
-        <p class="section__label">SELECTED WORK</p>
+        <p class="section__label">WORK</p>
         <div class="case-grid">
 
-          <a href="/case/nwn" class="card card--featured reveal">
+          <a href="/case/nwn" class="card reveal">
             <span class="card__meta">JUL '23 – JUL '25 · ASSOCIATE CONSULTANT</span>
             <h3 class="card__title">Nation With NaMo · Five State-Level Campaigns</h3>
             <p class="card__desc">Growth, experimentation, and analytics infrastructure across five campaigns in four Indian states. All five won.</p>
@@ -71,7 +72,7 @@
             <span class="card__metric-label">35% engagement lift · 5 campaigns · 4 states</span>
           </a>
 
-          <a href="/case/hebe" class="card card--featured reveal">
+          <a href="/case/hebe" class="card reveal">
             <span class="card__meta">JUL '25 – PRESENT · PRODUCT &amp; OPERATIONS LEAD</span>
             <h3 class="card__title">HEBE · B2B Essential-Oil Marketplace</h3>
             <p class="card__desc">Built a B2B marketplace with farmer-level traceability across 5,000+ farmers and 100+ workers. ₹1.6 Cr → ₹2.1 Cr in 12 months.</p>
@@ -84,7 +85,16 @@
             <span class="card__metric-label">Revenue · 31% YoY</span>
           </a>
 
-          <a href="/case/netflix" class="card card--minor reveal">
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="projects">
+      <div class="container">
+        <p class="section__label">PM PROJECTS</p>
+        <div class="case-grid">
+
+          <a href="/case/netflix" class="card reveal">
             <span class="card__meta">SPEC EXERCISE · 2025</span>
             <h3 class="card__title">Netflix India · Content vs. Product</h3>
             <p class="card__desc">Why Netflix India's content wins but its product doesn't — and the two product bets that close the gap.</p>
@@ -97,7 +107,7 @@
             <span class="card__metric-label">5 OTTs analyzed · 4 user-research themes</span>
           </a>
 
-          <a href="/case/amazon-prime" class="card card--minor reveal">
+          <a href="/case/amazon-prime" class="card reveal">
             <span class="card__meta">SPEC EXERCISE · 2025</span>
             <h3 class="card__title">Amazon Prime Video · Decision Fatigue</h3>
             <p class="card__desc">Survey-backed research on why Prime Video viewers churn out before pressing play, and four ranked interventions.</p>
@@ -116,12 +126,17 @@
 
     <section class="section section--tight">
       <div class="container">
-        <p class="section__label">BACKGROUND</p>
-        <div class="about-teaser stack stack--6">
-          <p class="about-teaser__body">
-            Mechanical engineering at BIT Mesra. Two years on growth, experimentation, and analytics across five state-level campaigns at Nation With NaMo (4 states; all five won). One year rebuilding HEBE — a B2B essential-oil business with 5,000+ farmers and 100+ workers — into a digitally instrumented supply chain at ₹2.1 Cr revenue. Now applying for product roles at Indian tech companies.
-          </p>
-          <a href="/about" class="link--mono">Why product, why now →</a>
+        <div class="background-grid">
+          <div class="background-grid__rail">
+            <p class="section__label">BACKGROUND</p>
+            <h2 class="background-grid__heading">The thread.</h2>
+          </div>
+          <div class="background-grid__body">
+            <p>
+              Mechanical engineering at BIT Mesra. Two years on growth, experimentation, and analytics across five state-level campaigns at Nation With NaMo (4 states; all five won). One year rebuilding HEBE — a B2B essential-oil business with 5,000+ farmers and 100+ workers — into a digitally instrumented supply chain at ₹2.1 Cr revenue. Now applying for product roles at Indian tech companies.
+            </p>
+            <a href="/about" class="link--mono">Why product, why now →</a>
+          </div>
         </div>
       </div>
     </section>
@@ -129,28 +144,41 @@
     <section class="section section--tight" id="contact">
       <div class="container">
         <p class="section__label">CONTACT</p>
-        <div class="contact-strip">
-          <p class="contact-strip__lede">Open to product roles. Always happy to have a conversation first.</p>
-          <div class="contact-strip__cta">
-            <a href="mailto:aurajeetm@gmail.com?subject=30-minute%20conversation" class="btn btn--primary">Email Me →</a>
-            <a href="https://www.linkedin.com/in/aurajeet-mahapatra/" target="_blank" rel="noopener" class="btn btn--secondary">LinkedIn →</a>
-            <a href="https://drive.google.com/file/d/17HKcATOjPl1cKy7bRcvEReQUlW-yJQfQ/view?usp=sharing" target="_blank" rel="noopener" class="btn btn--secondary">View Resume →</a>
-            <a href="tel:+918550964470" class="btn btn--secondary">+91 85509 64470 →</a>
+        <div class="colophon">
+          <p class="colophon__lede">Open to product roles. Always happy to have a conversation first.</p>
+          <div class="colophon__cta">
+            <a href="mailto:aurajeetm@gmail.com?subject=30-minute%20conversation" class="btn btn--primary">Email me →</a>
           </div>
+          <dl class="colophon__grid">
+            <div class="colophon__item">
+              <dt>or copy</dt>
+              <dd><a href="mailto:aurajeetm@gmail.com">aurajeetm@gmail.com</a></dd>
+            </div>
+            <div class="colophon__item">
+              <dt>LinkedIn</dt>
+              <dd><a href="https://www.linkedin.com/in/aurajeet-mahapatra/" target="_blank" rel="noopener">linkedin.com/in/aurajeet-mahapatra ↗</a></dd>
+            </div>
+            <div class="colophon__item">
+              <dt>Resume</dt>
+              <dd>
+                <a href="https://drive.google.com/file/d/17HKcATOjPl1cKy7bRcvEReQUlW-yJQfQ/view?usp=sharing" target="_blank" rel="noopener">Resume (PDF) ↗</a>
+                <span class="colophon__caption">hosted on Google Drive</span>
+              </dd>
+            </div>
+            <div class="colophon__item">
+              <dt>Phone</dt>
+              <dd><a href="tel:+918550964470">+91 85509 64470</a></dd>
+            </div>
+          </dl>
+          <p class="colophon__signoff"><em>Thanks for reading this far.</em> — Aurajeet</p>
         </div>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer">
+  <footer class="site-footer site-footer--slim">
     <span class="site-footer__credit">Aurajeet Mahapatra · 2026</span>
-    <span class="site-footer__contact">
-      <a href="mailto:aurajeetm@gmail.com">aurajeetm@gmail.com</a>
-      <span class="site-footer__sep">·</span>
-      <a href="https://www.linkedin.com/in/aurajeet-mahapatra/" target="_blank" rel="noopener">LinkedIn</a>
-      <span class="site-footer__sep">·</span>
-      <a href="tel:+918550964470">+91 85509 64470</a>
-    </span>
+    <a href="#main" class="site-footer__top">Back to top ↑</a>
   </footer>
 
   <script type="module" src="/js/reveal.js"></script>
