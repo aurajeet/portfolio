@@ -1,712 +1,311 @@
 # Portfolio Website — Product Requirements Document
+
 **Owner:** Aurajeet Mahapatra
-**Audience:** HR, Hiring Managers (Senior PMs at tech companies)
-**Goal:** Position Aurajeet as a structured, execution-oriented early-career PM with technical fluency and strong product instinct.
-**Status:** All phases (1–7) complete. Phase 8 (hero copy & UX refinements) complete.
-**Last updated:** 2026-04-16
+**Audience:** HR, Hiring Managers (Senior PMs at tech / consumer / B2B companies)
+**Goal:** Position Aurajeet as a structured, execution-oriented early-career PM with a real track record across political tech, B2B operations, and growth analytics — using an editorial publication aesthetic that reads more like a quiet portfolio than a marketing site.
+**Status:** v2 redesign complete (2026-04-27).
+**Live URL:** https://aurajeet.com
+**Source:** GitHub `aurajeet/portfolio` — branch `main` deploys via Vercel.
+**Last updated:** 2026-04-27
 
 ---
 
-## Guiding Principle
-Every section answers one question a hiring manager has while scrolling:
-- Hero → *"Who is this person?"*
-- Projects → *"Can they think like a PM?"*
-- AI Fluency → *"Are they modern and fast?"*
-- About → *"Where do they come from?"*
-- Experience → *"What have they actually done?"*
-- Contact → *"How do I reach them?"*
+## v1 → v2 transition
+
+The original v1 site (April 2026) used a dark-space cinematic theme — Three.js particle sphere, gold accent on `#04050a` black, scroll-driven nebula atmospheres, GSAP-orchestrated cinematic reveals, GLSL shaders, cursor trails, scroll progress bars. The recruiter feedback that drove v2: too busy, too much motion, too "designer", and three concrete style problems (different card sizes, mixed work / projects sections, type sprawl).
+
+v2 strips all of that. Single static HTML/CSS site. No JavaScript except a 30-line IntersectionObserver-based scroll-reveal. No 3D, no particles, no atmospheres, no scroll-jacking, no gradients. The register is editorial / Swiss Modernism 2.0 / exaggerated minimalism — warm cream paper background with a tan accent, Source Serif 4 + Inter + JetBrains Mono, a 10-role typographic system, and content that does the talking.
+
+Branch chronology:
+- `main` carried v1 through 2026-04-16.
+- `redesign/v2` rebuilt the site from scratch over 2026-04-26 → 04-27 across 28 commits (full reset of HTML, then design tokens + base CSS + components + layout, then content — index, about, case studies, 404 — then assets + redirects).
+- v2 layout polish (typography consolidation + layout refinements) shipped 2026-04-27 in one merge.
+
+---
+
+## Goal
+
+Every page answers one question a hiring manager has while reading:
+
+| Page | Question |
+|---|---|
+| Home | "Who is this person and what's their best work?" |
+| About | "How did they get here?" |
+| Case study | "Can they think like a PM?" |
+
+The site is short. There are 7 routes (home, about, four case studies, 404). Reading the entire site takes ~10 minutes.
 
 ---
 
 ## Visual & Design System
 
-**Theme:** Dark background (`#04050a`) throughout
-**Accent colour:** Gold (`#f5b944`) — used on numbers, labels, active states, pins, glows. Bright gold (`#ffd700`) for active/glow states.
-**Typography:** Playfair Display (serif) for headings, Inter (sans-serif) for body text
-**Layout:** Single-page scroll (index.html) with three sub-pages (experience.html, projects.html, project-viewer.html)
-**Navigation:** AM monogram (top left) · Projects · About · Contact (top right)
-**Footer:** `Aurajeet Mahapatra — 2026` (left) · `Built with Claude Code` (right)
+**Theme:** Editorial print register on warm cream paper. Light only — no dark mode.
 
-**Key colour tokens (implemented in `css/main.css`):**
+**Style identity** (per UI/UX Pro Max framework):
+- Editorial Grid / Magazine (#47)
+- Swiss Modernism 2.0 (#32)
+- Exaggerated Minimalism (#29)
 
-| Token | Value | Role |
-|-------|-------|------|
-| `--color-bg` | `#04050a` | Page background |
-| `--color-surface` | `#0c0d14` | Cards, elevated surfaces |
-| `--color-gold` | `#f5b944` | Accent / CTA |
-| `--color-gold-bright` | `#ffd700` | Glow, active states |
-| `--color-text` | `#e8e8e8` | Primary text |
-| `--color-text-muted` | `#888` | Secondary / captions |
+**Anti-patterns (rejected):** AI purple/pink gradients, neon accents, dark mode, harsh animations, scroll-jacking, parallax, emoji icons, 3D, particle systems.
 
----
+**Color palette** (single source of truth: `css/tokens.css`):
 
-## Global Animation Layers
+| Role | Value | CSS variable |
+|---|---|---|
+| Page background | `#F6F4EF` | `--bg` |
+| Card background | `#FFFFFF` | `--bg-card` |
+| Subtle background (case-study tan blocks) | `#EAE0D4` | `--bg-subtle` |
+| Primary text | `#1A1A1A` | `--text` |
+| Secondary text | `#555555` | `--text-secondary` |
+| Tertiary text | `#888888` | `--text-tertiary` |
+| Accent (links, primary CTA) | `#403227` (dark brown) | `--accent` |
+| Accent hover | `#2A1F18` | `--accent-hover` |
+| Soft accent (metrics, eyebrow tan) | `#A68D6F` | `--accent-soft` |
+| Border / rule | `#D9C6B0` | `--rule` |
 
-These layers are always present across every page, stacked in this order (back to front):
+**Paper texture.** A 240×240px SVG fractal-noise overlay (~400 bytes inline data URI) tiled on `body` and `.site-nav` with `background-attachment: fixed`. Adds a subtle grain so the cream doesn't feel sterile. Auto-disabled under `prefers-contrast: more` and `forced-colors: active`.
 
-### Layer 1 — Deep Space Background `[BUILT]`
-**File:** `js/space-bg.js`
-A fixed Three.js canvas (`#space-bg`, z-index 0). Three star-particle layers at different depths, sizes, and drift speeds. Each layer rotates at its own speed with subtle continuous twinkle on all particles. Background colour matches `--color-bg` (#04050a). Star colours are cool white/warm white/soft grey — no gold at this depth. No scroll-driven parallax — stars are purely rotational.
+**Typography:**
+- Heading: Source Serif 4 (variable, weights 600/700, italic 600/700)
+- Body: Inter (variable, weights 400/500/600)
+- Mono: JetBrains Mono (variable, weights 400/500)
 
-### Layer 1b — Nebula Gradients `[BUILT]`
-**File:** CSS in `#nebula` (index.html)
-Fixed `<div>` with three `radial-gradient` ellipses — deep purple, navy, and dark green at very low opacity. Sits at z-index 1 above the star canvas.
+**10 typographic roles** (every component maps to exactly one):
 
-### Layer 2 — Hero Sphere (Three.js) `[BUILT]`
-**File:** `js/sphere.js`
-A dedicated Three.js canvas (`#sphere-canvas`, z-index 2 within hero). 10,000 white particles (#E8EAF0) distributed with vein rejection sampling — clusters along great-circle ridges producing an organic geological texture. Rendered via custom GLSL shaders.
+| Role | Family | Size | Weight | Usage |
+|---|---|---|---|---|
+| `t-display` | serif | `--fs-display` (44–68px) | 700 | Hero name only |
+| `t-h1` | serif | `--fs-h1` (36–49px) | 700 | Page titles |
+| `t-h2` | serif | `--fs-h2` (30–39px) | 700 | Section titles |
+| `t-h3` | serif | `--fs-h3` (24–31px) | 700 | Article-level h2, prose h2, card metrics |
+| `t-h4` | serif | `--fs-h4` (20–25px) | 600 | Card titles, prose h3, about h2 |
+| `t-lede` | serif | `--fs-large` (20px) | 400 | First-paragraph emphasis |
+| `t-body` | sans | `--fs-body` (16px) | 400 | Body text |
+| `t-small` | sans | `--fs-small` (14px) | 500 | Buttons, mono links, footer |
+| `t-mono-caps` | mono | `--fs-tiny` (12px) | 500 | Eyebrows, tags, meta lines, section labels |
+| `t-mono-caps-lg` | mono | `--fs-small` (14px) | 500 | Page-level eyebrows |
 
-**Reveal:** Sphere expands from near-zero scale over 1.8s with 3 gold ripple rings pulsing outward.
-**Idle:** Continuous slow Y-axis rotation + per-particle breathing in the vertex shader.
-**Mouse:** Tilts toward cursor + screen-space scatter (NDC proximity in vertex shader).
-**Ripple:** Outward ring wave on click; auto-fires every 5–13s from random surface point.
-**On scroll:** Gentle opacity fade tied to scroll position (starts at hero center, fully transparent by hero bottom). GSAP ScrollTrigger scrub. No drain, no particle handoff.
+Documented exceptions: `.btn` (sans / 14px / 600 — interactive convention) and `.cs__sub` (serif / 20–25px / 600 / italic — case-study subtitle, intentionally italic for editorial voice).
 
-### ~~Layer 3 — 2D Particle Canvas~~ `[REMOVED]`
-**File:** `js/particles.js` (dead code — not imported anywhere)
-The 2D particle flow system (drain, flow, orbit, convergence) was removed on 2026-04-11. The visual was too busy and distracted from the content. The hero sphere remains as the sole particle effect, fading gently on scroll.
+**Spacing scale** (8px base, in `--sp-*`): 4 / 8 / 12 / 16 / 20 / 24 / 32 / 40 / 48 / 64 / 80 / 96 px.
 
-### Layer 3b — Background Atmospheres (CSS) `[BUILT]`
-**File:** CSS gradients in `#atmosphere` divs (`css/main.css`), animated by `js/sections.js`
-The star field (Layer 1) remains constant — the one visual anchor across the entire page. What changes is the nebula/atmosphere layer: scroll-driven CSS gradient overlays that shift color continuously as the user scrolls.
+**Layout containers:**
+- `--container-max: 70rem` (1120px) — page width
+- `--reading-max: 42.5rem` (680px) — narrow reading column for case-study prose and about body
+- `--artifact-max: 52.5rem` (840px) — slightly wider, for stat ribbons and embedded images
 
-**Transition style:** Continuous blend — no hard cuts. Bell-curve opacity profile for mid-page sections (fade in → hold → fade out). Contact atmosphere fades in and sustains.
-
-**Max opacity:** 0.6 (reduced from 1.0 to keep atmospheres subtle).
-
-**Section atmospheres:**
-
-| Section | Color Palette | Feeling |
-|---------|---------------|---------|
-| Hero | Pure `#04050a` black | Cold void |
-| Projects | Warm amber/gold | Approaching warmth |
-| AI Fluency | Cool cyan + muted purple | Electric energy |
-| About | Warm brown undertone | Distant intimacy |
-| Contact | Aurora spectrum — green, blue, purple from below | Arrival |
-
-**Implementation:** CSS-only gradients. Opacity animated via GSAP ScrollTrigger scrub. Zero render cost.
-
-**Mobile responsive (≤768px):** All atmosphere gradient positions recentered toward 50% horizontally. Ellipses widened to fill narrow viewports. Nebula wisps also recentered. ScrollTrigger ranges tightened (`top 90%`/`bottom 10%`) so glow doesn't stretch over tall mobile sections. Peak opacity slightly boosted (0.7) to compensate for shorter visible window.
-
-### Layer 4 — Cursor Trail (Global) `[BUILT]`
-**File:** `js/cursor-trail.js`
-8 tiny gold dots follow the mouse cursor and dissipate within 0.5s. Each dot is progressively smaller and more transparent (tail effect). Desktop only — hidden on touch devices. Disabled on slow devices (`perf.isLow`) and when `prefers-reduced-motion` is active. CSS in `main.css` (`#cursor-trail`, `.trail-dot`).
-
-### Progress Bar (Global — Right Edge) `[BUILT]`
-**File:** `js/progress-bar.js`
-A 3px vertical gold line on the right edge of the screen. Fills top-to-bottom as the user scrolls. At 100% scroll, pulses with a gold glow (`box-shadow`). Disabled when `prefers-reduced-motion` is active. CSS in `main.css` (`#scroll-progress`, `#scroll-progress-fill`).
-
-### Performance Strategy
-- **All devices including mobile:** Full cinematic experience — no compromises, nothing removed
-- **Slower desktop/laptop devices only:** Remove cursor trail and card stagger animations — cinematic core (hero sphere, experience sphere, icon animations) never touched
-- **prefers-reduced-motion:** All GSAP animations skipped; text visible immediately; scroll hint shown at 0.6 opacity; Three.js spheres jump to full size
+**Motion tokens:** `--t-fast: 100ms` / `--t-base: 200ms` / `--t-slow: 300ms`. Single shared ease curve `cubic-bezier(0.4, 0, 0.2, 1)`. Transitions zeroed under `prefers-reduced-motion: reduce`.
 
 ---
 
-## Page 1 — index.html (Main Page)
+## Pages
+
+### Home — `index.html`
+
+Editorial vault. Five sections, top to bottom.
+
+#### 1. Hero — Magazine masthead
+
+Two-column grid inside `--container-max`. Left column: `PRODUCT MANAGER · BENGALURU, INDIA` mono-caps eyebrow → `Aurajeet Mahapatra` h1 (display) → positioning paragraph (serif, `t-h3`-sized). Right column (340px wide on desktop): editorial portrait photo with a thin tan border. Vertical hairline rule between columns; horizontal rule below hero.
+
+Mobile (<64rem): stacks. Photo above text on portrait orientation.
+
+#### 2. WORK section
+
+`WORK` mono-caps section label. Two cards: NWN, HEBE. 1 column on mobile, 2 columns on ≥48rem.
+
+#### 3. PM PROJECTS section
+
+`PM PROJECTS` mono-caps section label. Two cards: Netflix, Amazon Prime. Same card layout as WORK. Anchored as `#projects` in the nav.
+
+All four cards share identical dimensions, padding (`--sp-10`), internal stack ordering, metric size (`t-h3`), and metric color (`--accent-soft` tan). No featured/minor variants. The visual differentiator between the two sections is the section label only.
+
+#### 4. BACKGROUND section — "The thread."
+
+Two-column grid. Left rail (4/12): `BACKGROUND` mono-caps eyebrow + `<h2>The thread.</h2>`. Right column (8/12): one paragraph + outbound link to `/about`.
+
+#### 5. CONTACT colophon
+
+Lede paragraph + single primary `Email me →` button + `<dl>` grid of Email / LinkedIn / Resume / Phone (each with mono-caps label and clickable value link). Replaces the original four-button contact strip.
+
+#### Footer — slim
+
+Credit + `Back to top ↑` only. The contact colophon directly above carries the actual contact information.
+
+### About — `about.html`
+
+Wide editorial header → narrow body with year-range timeline rail.
+
+#### Header (full container, 1120px)
+
+`ABOUT` eyebrow → 2-column row at ≥48rem: left column (4/12) `t-h1` "Three roles, one thread."; right column (8/12) bio paragraph. Horizontal rule closes the header before the body begins.
+
+#### Body (reading container, 680px, centered)
+
+Five role sections. Mobile: year reads as `t-mono-caps` line above each `<h2>`. Desktop (≥48rem): `grid-template-columns: 140px 1fr` with the year range in a left rail (`--accent-soft` tan), the heading + paragraph in the right column.
+
+| Section | Year rail |
+|---|---|
+| BIT Mesra | `2019–2023` |
+| Nation With NaMo | `2023–2025` |
+| HEBE | `2025–PRESENT` |
+| Why product, why now | `THESIS` |
+| What I'm looking for | `LOOKING FOR` |
+
+#### Tools & methods
+
+`<h2>Tools & methods</h2>` → row of 6 `.tag` chips (SQL, Power BI, Excel, Claude Code, AI Prototyping, Product Instrumentation) → descriptive paragraph (~`--sp-4` breathing room above).
+
+#### Footer
+
+Same colophon + slim footer as the homepage (visual parity).
+
+### Case studies — `case/{nwn,hebe,netflix,amazon-prime}.html`
+
+Four pages, identical layout. Long-form editorial articles with stat ribbons, embedded methods grids, and (for spec-exercise studies) a deck cover card linking to the original PDF.
+
+Layout (top to bottom):
+
+1. Page-level mono-caps eyebrow (`CASE STUDY · 2024 · NWN · INDIA` etc.)
+2. `t-h1` title
+3. `cs__sub` italic serif subtitle
+4. Stat ribbon — 3-up grid of `.stat` blocks (`<value>` `<label>` `<sub>`)
+5. Prose body (within `--reading-max`)
+6. Methods / Tools / Collaborators tan block — 3-column grid, mono-caps headings, `.tag` chips for each item (replaced bulleted lists in v2)
+7. (Netflix, Amazon Prime only) Deep-dive deck cover card — 16:9 first-page JPEG inside an `<a target="_blank">` opening the full PDF in a new tab. Replaced the v1 auto-loaded `<object>` PDF embed (~10 MB → ~474 KB across both pages, mobile-reliable, no JS).
+8. Disclaimer block — for spec exercises only; reads as a publisher's note distinguishing real work (NWN, HEBE) from PM craft demonstrations (Netflix, Amazon Prime).
+9. Prev / All work ↑ / Next nav (3-up flex with equal-width columns; missing prev/next on the edge pages renders as an invisible spacer so the centerpiece stays optically centered).
+10. Full footer (colophon + standard footer — not the slim variant).
+
+Spec-defined non-negotiable: layout, hero, stat ribbon, prose, and methods grid structure are unchanged across the v2 polish pass. Only inner content of `cs__methods` (bullets → chips), the deck embed (object → cover card), and the prev/next slot count (2 → 3) changed.
+
+### 404 — `404.html`
+
+Editorial framing line + the existing `404 — Page not found` mono heading + a short prose paragraph + a return link. Full footer.
 
 ---
 
-### Section 1 — Hero `[BUILT]`
+## Functional behavior
 
-**Files:** `css/hero.css`, `js/hero.js`, `js/sphere.js`
-**Layout:** Full-viewport. No photo. Three.js particle sphere as visual centrepiece. Name and tagline overlaid. Metrics below.
+**No client-side router.** Each route is a static HTML file. Vercel handles `cleanUrls: true` (so `/about` serves `about.html`, `/case/nwn` serves `case/nwn.html`).
 
-#### Content
+**Redirects** (`vercel.json`): `/resume` → Google Drive PDF; `/projects.html` → `/#case-studies`; `/experience.html` → `/about`; `/project-viewer.html?project=netflix` → `/case/netflix`; `/project-viewer.html?project=amazon` → `/case/amazon-prime`. All 301 except `/resume` (302).
 
-**Name:**
-```
-Aurajeet Mahapatra
-```
-*Animation: `hero.js` wraps each character in `.char` spans. GSAP staggers them in (0.3s duration, 0.025s stagger, 0.1s delay) — fires after sphere reveal completes (~2.1s).*
+**Cache headers:** HTML — 5 minutes, must-revalidate. CSS / JS — 5 minutes, must-revalidate. Assets — 1 year, immutable.
 
-**Positioning:**
-```
-Engineer turned Product Manager with experience across growth, analytics,
-and 0-to-1 execution — in political tech, fintech, and bootstrapped products.
-```
-*Fades in 0.84s after sphere reveal (GSAP timeline).*
+**Skip-link** at the top of every page (`Skip to content` → `#main`).
 
-**Skill Tags:**
-```
-Growth & Experimentation · Analytics & Dashboards · 0→1 Product Builds · Cross-functional Leadership
-```
-*Font size: `clamp(0.75rem, 1.2vw, 0.85rem)` — bumped up from the original 0.65rem floor for better legibility.*
+**Scroll-reveal** (`js/reveal.js`, ~30 LoC). IntersectionObserver fades and translates `.reveal` elements into view as they enter the viewport. Respects `prefers-reduced-motion: reduce` (instantly visible, no transform).
 
-**Impact Label:**
-```
-IMPACT
-```
-
-**Metrics (with per-metric attribution):**
-
-| Number | Label | Source |
-|--------|-------|--------|
-| 1.2M+ | Users Acquired | Political campaigns |
-| 35% | Engagement Lifted | Product experiments |
-| 40% | Faster Decisions | Analytics dashboards |
-| 31% | Revenue Grown | Bootstrapped business |
-
-Each metric now displays its own italic source label (`.metric-source`) directly below the metric label. This replaces the previous shared `metrics-context` line ("across state-level campaigns and a bootstrapped business") which was a single attribution for all four metrics.
-
-*Metrics block fades in 1.5s after sphere reveal. Numbers count up simultaneously via IntersectionObserver + requestAnimationFrame (1.8s, ease-out-cubic). Gold numbers, labels fade in after count completes.*
-
-**CTA Strip (between hero and projects):**
-```
-VIEW RESUME  ·  EMAIL  ·  +91 85509 64470
-```
-A centered row of contact buttons (`div.hero-cta-strip`) placed between the hero section and the projects section. Gives hiring managers immediate access to resume and contact info without scrolling to the bottom of the page. Uses the same `contact-btn` component styles as the contact section (primary for resume, secondary for email and phone).
-
-**Scroll Hint:**
-Small pulsing chevron at bottom of hero. Fades in 2.5s after sphere reveal. Floats up/down via CSS `@keyframes scroll-hint-float` (7px, 2s cycle).
-
-#### Sphere Behaviour (As Built)
-**10,000 white particles** (#E8EAF0) form a dense sphere via vein rejection sampling — organic geological texture with great-circle ridges. Rendered in Three.js with custom GLSL shaders.
-
-**Cinematic reveal sequence (all timings from page load):**
-- t = 0ms — page dark; only stars visible
-- t = 300ms — sphere begins expanding from point of light + gold ring 1 launches
-- t = 700ms — gold ring 2 launches
-- t = 1100ms — gold ring 3 launches
-- t = 2100ms — sphere at full size → name fades in
-- t ~ 3500ms — tagline fades in
-- t ~ 4600ms — metrics fade in, countup starts
-
-**Idle:** Slow Y-axis auto-rotation + per-particle breathing (±1.3% radial pulse in vertex shader).
-**Mouse:** Sphere tilts toward cursor (smooth lerp). NDC-space scatter pushes particles outward near cursor.
-**Click/Auto-ripple:** Outward ring wave from surface point; auto-fires every 5–13s.
-
-#### On Scroll — Sphere Fade `[BUILT]`
-
-Sphere fades out gently via scroll-coupled opacity (GSAP ScrollTrigger scrub). Starts fading when hero center reaches viewport center, fully transparent by the time hero bottom reaches viewport top. Clean, simple, doesn't distract from content below.
+**No analytics, no third-party trackers.** Only Google Fonts (preconnected) and Google Drive (resume link).
 
 ---
 
-### Section 2 — Projects `[BUILT]`
+## Decisions log (v2)
 
-**Files:** `css/sections.css`, `index.html`, `js/sections.js`
-**Layout:** Section intro, followed by 3 featured project cards in a row. "View All Projects" button below.
+Confirmed user decisions captured during the redesign brief and the layout polish pass.
 
-#### Content
+### Plan-level
 
-**Section Label:**
-```
-PM PROJECTS
-```
+- **Approach:** rebuild from scratch on `redesign/v2`, not iterate on v1. The old codebase was a write-off.
+- **Style register:** editorial / Swiss Modernism 2.0 (user: *"Go full editorial"*).
+- **Animation budget:** scroll-reveal only. Defer all animation choreography (button polish, hover refinements, sticky-nav scroll state, reading-progress bar) until layout is final.
 
-**Section Heading:**
-```
-Real problems. Real thinking. Real artefacts.
-```
+### Homepage
 
-**Section Sub-heading:**
-```
-Three documents. Three different product problems. Each one is a real artefact of how I think.
-```
+- **Section labels:** `WORK` (real work — NWN, HEBE) and `PM PROJECTS` (spec exercises — Netflix, Amazon Prime). Picked from a shortlist.
+- **Card uniformity:** all four homepage cards share identical dimensions, padding, internal stack, metric size, and metric color. Featured/minor variants removed in the v2 polish pass.
+- **Card metrics:** all tan (`--accent-soft`). Size standardized to the `t-h3` role.
+- **Hero:** photo constrained inside `--container-max`, thin 1px rule border, vertical hairline between text and photo columns, top-aligned.
+- **Contact:** colophon block (lede + single primary "Email me →" button + Email/LinkedIn/Resume/Phone labeled grid) replaces the original 4-button row.
+- **Footer:** on home and about, collapsed to credit + back-to-top only (since the colophon lives just above).
 
-#### Project Cards
+### About
 
-**Card structure (consistent across all 3):**
-- Top left: Document type label (small caps)
-- Top right: PDF badge
-- Title (serif, large)
-- Sub-label: Problem hook (small caps, gold)
-- Description (2–3 lines)
-- Bottom: `VIEW DOCUMENT →`
+- Wide editorial header (full container) → narrow body (reading container).
+- Year-range rail on desktop using `t-mono-caps` in `--accent-soft` tan.
+- Tools/methods rendered as `.tag` chips, not inline `·`-separated text.
 
----
+### Case-study pages
 
-**Card 1 — Jupiter**
-```
-Type label:    TEARDOWN
-Title:         Jupiter "Magic Spends"
-Sub-label:     WHY USERS WEREN'T INVESTING
-Description:   Why users weren't investing and the micro-investment feature that fixes it.
-CTA:           VIEW DOCUMENT →
-```
+- **Layout, hero, stat ribbon, prose, and methods grid structure: unchanged.** Non-negotiable (user: *"I really like the page layout of the project pages. Don't make any drastic change in the layout or grid in that."*).
+- **Methods/Tools/Collaborators block:** tan background kept; bullet lists → `.tag` chips inside each column; mono-caps headings unchanged.
+- **PDF embed (Netflix, Amazon Prime):** replaced with a deck cover card — first-page JPEG (1600×900, ~190–284 KB each, generated via `sips -s format jpeg -s formatOptions 85 -Z 1600`), wrapped as a clickable card opening the full PDF in a new tab. Visible-by-default for the editorial preview feel; reliable on mobile (tap → new tab); no JS surface area.
+- **Prev/next nav:** 3-up flex layout with center `All work ↑` link.
+- **Disclaimer block:** unchanged. Explicitly opted out of restyle.
 
-**Card 2 — Rapido**
-```
-Type label:    FEATURE SPEC
-Title:         Rapido Ride Conversions
-Sub-label:     THE APP-SWITCHING PROBLEM
-Description:   Eliminating app switching during captain-match wait. Research, solutions, metrics.
-CTA:           VIEW DOCUMENT →
-```
+### Typography (v2 polish)
 
-**Card 3 — Amazon Prime Video**
-```
-Type label:    OPPORTUNITY BRIEF
-Title:         Amazon Prime Video
-Sub-label:     PARADOX OF CHOICE
-Description:   80% of users can't pick what to watch. Survey-backed research and four RICE-scored solutions.
-CTA:           VIEW DOCUMENT →
-```
-
-**Below cards:**
-```
-VIEW ALL PROJECTS →
-```
-*Links to projects.html*
-
-#### Project Viewer Flow `[BUILT]`
-Clicking a project card no longer opens the PDF directly. Instead, it navigates (via warp transition) to `project-viewer.html?project=jupiter&from=home`. The viewer page embeds the PDF full-viewport with a fixed top bar containing:
-- **← Back** (left) — returns to origin page (index.html or projects.html) with scroll position restored
-- **Project title** (center, hidden on mobile)
-- **View Prototype →** (right) — golden CTA button, opens prototype in new tab. Shown in disabled state when no prototype URL is configured.
-
-The `from` query parameter tracks the origin page so the back link returns the user to exactly where they left.
-
-#### Card Animations `[BUILT]`
-- Cards fade and slide up from below on scroll entry — staggered, card 1 first then card 2 then card 3, half a beat apart
-- On hover: card lifts with subtle shadow, PDF badge bounces
-- Background atmosphere: warm amber nebula fades in (continuous blend)
+- **10 named roles** replace ad-hoc `font-size + font-weight` declarations site-wide.
+- **All card metrics → `t-h3`** (`--fs-h3` / 700 / serif), color `--accent-soft` tan. Chose `t-h3` over `t-h2` so the metric reads louder than the `t-h4` card title without shouting.
+- **`.section__label` → `--fs-tiny` / 500 / 0.14em tracking.** Custom 11px value dropped.
+- **No inline `style="..."` attributes anywhere on the site.**
 
 ---
 
-### Section 3 — AI Fluency `[BUILT]`
-
-**Files:** `css/sections.css`, `index.html`, `js/sections.js`, `js/ai-animations.js`
-**Layout:** Heading, sub-heading, then 4 tool icons in a row with labels beneath each.
-
-#### Content
-
-**Section Heading:**
-```
-Unfair advantage.
-```
-*Animation: Snaps in with a subtle scale punch — appears at 110% then settles to 100% in 0.3 seconds.*
-
-**Sub-heading:**
-```
-AI is how I think faster, build faster, and ship faster.
-```
-
-**Tools (icons + labels in a row):**
-```
-OpenClaw · Claude Cowork · Claude Code · ChatPRD
-```
-
-#### Icon Animations — Sequential Loop
-Animations play one at a time in sequence. OpenClaw is the main character — always the most prominent.
-
-**OpenClaw (leads every loop):**
-Scurries from its position across the full icon row. Stops at the Claude Code icon. Taps it twice. Returns to its position. Triggers next animation.
-
-**Claude Code (triggered by OpenClaw tap):**
-Lights up. Blinking terminal cursor appears. Single line of code types out. Clears. Returns to idle.
-
-**ChatPRD:**
-Document unfolds from the top — like a PRD rolling out — then folds back to idle.
-
-**Claude Cowork:**
-Faint document appears behind it with a line of text being typed character by character, cursor blinking. Completes, clears.
-
-Loop resets. OpenClaw scurries again.
-All animations accelerate (2x speed) on hover over the tools area.
-
-*Implementation: `js/ai-animations.js` builds a GSAP timeline with `repeat: -1`. IntersectionObserver starts/pauses based on section visibility. Overlay DOM elements (`.tool-code-overlay`, `.tool-prd-overlay`, `.tool-cowork-overlay`) are created dynamically.*
-
-**Background atmosphere:** Cool cyan + muted purple fades in during this section.
-
----
-
-### Section 4 — About / Background `[BUILT]`
-
-**Files:** `css/sections.css`, `index.html`, `js/sections.js`
-**Layout:** Label, body text, single CTA. Minimal.
-
-#### Content
-
-**Label:**
-```
-BACKGROUND
-```
-
-**Body Text:**
-```
-I've spent the last few years building systems under high stakes environments — growth funnels, analytics tools, operational workflows. Different industries, same instinct: find the real problem, then solve it properly.
-```
-
-**CTA:**
-```
-VIEW FULL EXPERIENCE →
-```
-*Links to experience.html*
-
-#### Animation `[BUILT]`
-Entire section fades in as a single block on scroll entry. Simple, clean fade — no stagger, no line-by-line.
-Background atmosphere: warm brown deep field fades in subtly.
-
----
-
-### Section 5 — Contact `[BUILT]`
-
-**Files:** `css/sections.css`, `index.html`, `js/sections.js`
-**Layout:** Label, heading, sub-heading, 4 CTA buttons in a row.
-
-#### Content
-
-**Label:**
-```
-CONTACT
-```
-
-**Heading:**
-```
-Let's connect.
-```
-
-**Sub-heading:**
-```
-Open to product roles. Always happy to have a conversation first.
-```
-
-**Buttons:**
-```
-EMAIL ME        → mailto:aurajeetm@gmail.com
-LINKEDIN        → LinkedIn profile URL
-VIEW RESUME     → Resume PDF
-+91 85509 64470 → tel:+918550964470
-```
-*EMAIL ME uses filled gold style (primary CTA). Other three use outlined style (secondary).*
-
-**Background atmosphere:** Aurora borealis spectrum fades in and sustains.
-
-#### Button Hover Animations `[BUILT]`
-- **EMAIL ME:** Shakes gently like an incoming notification
-- **LINKEDIN:** Pulses like a connection request being sent
-- **VIEW RESUME:** Slides open slightly like a document being pulled from an envelope
-- **PHONE:** Subtle vibration like a ringing phone
-
-*Implementation: CSS `@keyframes` in `sections.css`, wired via mouseenter/animationend handlers in `_initContactHovers()` in `sections.js`.*
-
----
-
-## Page 2 — experience.html `[BUILT]`
-
-**Files:** `experience.html`, `css/experience.css`, `js/experience-main.js`, `js/experience-sphere.js`
-
-### Page Header
-
-**Label:** `EXPERIENCE`
-**Heading:** `The long way round.`
-**Sub-heading:** `Scroll down to see what I picked up along the way.`
-
-Header text is positioned high in the viewport (`padding-bottom: 42vh`) so it appears to float in the sky above the particle sphere. Fades in on load with staggered entrance animations, then fades out scroll-driven as the journey section approaches.
-
-### Particle Sphere — Planet Effect
-
-**File:** `js/experience-sphere.js`
-
-A massive Three.js particle sphere positioned at the bottom ~60% of the viewport, creating a planet-horizon effect. Reuses the same vein rejection sampling as the hero sphere (`sphere.js`) for visual continuity.
-
-- **15,000 white particles** (#E8EAF0) at 2× scale (`scale.set(2, 2, 2)`), effective radius 2.9 world units
-- **Positioned deep below camera** — `position.y = -2.9`, so only the top arc (horizon) is visible
-- **Camera:** `(0, 0, 4)` looking at `(0, -0.3, 0)` — slight downward angle
-- **Particle sizes:** 1.0–1.8 range, 4.5 point size multiplier in GLSL
-- **Idle:** Slow Y-axis auto-rotation + per-particle breathing animation
-- **Mouse:** Tilts toward cursor + NDC-space scatter (same as hero sphere)
-- **Dissolve:** Per-particle scatter effect with staggered thresholds — particles fly outward along their normals with per-particle randomness for organic disintegration. Driven by `setDissolve(0–1)`.
-
-### Scroll Model — Pinned Step-Through
-
-**File:** `js/experience-main.js`
-
-The journey section is pinned via GSAP ScrollTrigger. Each scroll gesture (wheel tick or touch swipe) advances exactly one step — scroll velocity is irrelevant. Input is locked for 300ms between steps to prevent stacking.
-
-**Steps:**
-
-| Step | Visual |
-|------|--------|
-| 0 | Sphere visible, no cards (entry point) |
-| 1 | Card 0 — "Product Manager" (NEXT) |
-| 2 | Card 1 — Business Manager, HEBE |
-| 3 | Card 2 — Associate Consultant, NWN |
-| 4 | Card 3 — B.Tech, BIT Mesra |
-| 5 | Grid reveal — sphere dissolves, all 4 cards visible |
-
-**Boundary behavior:** At step 0, scrolling up exits the section and returns to the header. At step 5, scrolling down exits the section and scrolls past. The user cannot get stuck.
-
-**Scroll hint:** Same pulsing chevron as hero. Appears on load, fades out on first scroll.
-
-**Grid reveal (step 5):**
-- Desktop: 2×2 grid centered in viewport, cards positioned via JS
-- Mobile (≤600px): `.list-mode` class switches the fixed layer to a scrollable vertical flex column with `overscroll-behavior: contain`
-
-**Sphere dissolve:** Animated via GSAP tween (0.5s, `power2.inOut`). Fires when entering step 5, reverses when stepping back.
-
-### Experience Card Design
-
-Cards are absolutely positioned in a fixed layer (`#exp-cards-layer`, `z-index: var(--z-content)`). Glass-morphism style: `rgba(12, 13, 20, 0.88)` background with 16px backdrop blur, 1px border, rounded corners.
-
-**Card structure:**
-```
-Date range (small, muted, uppercase)
-Contextual label (italic, serif)
-Role title (serif, large, bold)
-Company / context (gold, small caps)
-Description (body text)
-Skill tags (outlined gold pills)
-```
-
-### Experience Entries
-
-**Entry 0 — NEXT**
-```
-Date:         NEXT
-Context:      Next stop.
-Title:        Product Manager
-Company:      Wherever the right problem lives
-Description:  I've spent years making decisions with incomplete data, managing people
-              I didn't hire, and shipping outcomes under pressure. Turns out, that's
-              just product management with a different job title. Now I'm making it official.
-Tags:         Systems thinker · Structured by default · Ships under pressure
-```
-
-**Entry 1 — HEBE (2025 – Present)**
-```
-Date:         2025 — PRESENT
-Context:      Then I ran something.
-Title:        Business Manager
-Company:      HEBE · B2B Essential Oil Manufacturing and Trading
-Description:  Inherited a ₹1.6Cr business, a network of 5,000 farmers, and zero digital
-              infrastructure. Left it at ₹2.1Cr, fully digitized, and considerably less chaotic.
-Tags:         P&L ownership · Product-market fit · Go-to-market · Revenue growth · 0 to 1
-```
-
-**Entry 2 — Nation With NaMo (2023 – 2025)**
-```
-Date:         2023 — 2025
-Context:      Before that, I learned to think.
-Title:        Associate Consultant
-Company:      Nation With NaMo · 4 states · 5 campaigns
-Description:  Growth strategy. Experimentation. Analytics infrastructure. Cross-functional
-              team management. All of it at scale, all of it under pressure.
-Tags:         User research · Segmentation · Analytics dashboard · Personalisation ·
-              Campaign lifecycle ownership · Go-to-market strategy
-```
-
-**Entry 3 — BIT Mesra (2019 – 2023)**
-```
-Date:         2019 — 2023
-Context:      And it all started here.
-Title:        B.Tech, Mechanical Engineering
-Company:      Birla Institute of Technology, Mesra · 8.84 / 10
-Description:  Studied mechanical engineering. Somehow ended up in politics, business,
-              and product. The degree didn't predict this. Neither did I.
-Tags:         Systems thinking · First principles · Analytical rigour
-```
-
----
-
-## Page 3 — projects.html (View All Projects) `[BUILT]`
-
-**Files:** `projects.html`, `css/projects.css`, `js/projects-main.js`
-**Layout:** Full grid of 8 project cards. Same card design as main page.
-**Note:** Main page (index.html) shows only 3 featured cards. This page shows all 8.
-**Navigation:** `← Back` link (top left, fixed) returns to `index.html`. Linked from "VIEW ALL PROJECTS →" in the Projects section on the main page. Project cards link to `project-viewer.html?project=<key>` (no `from` param — back returns to projects.html by default).
-**Grid:** 3 columns on desktop (>1024px), 2 columns on tablet (641–1024px), 1 column on mobile (≤640px).
-**Animations:** Header fades in on load (staggered label → heading → sub). Cards fade up with stagger on scroll entry (0.1s between columns). Placeholder cards animate to 55% opacity. `prefers-reduced-motion` shows everything immediately.
-
-### Real Projects (3)
-Same content as the 3 featured cards on the main page — Jupiter, Rapido, Amazon Prime Video.
-
-### Placeholder Cards (5)
-
-Same card design as real projects but slightly dimmed (reduced opacity).
+## File structure
 
 ```
-Type label:    COMING SOON
-Title:         [Untitled Project]
-Sub-label:     IN PROGRESS
-Description:   In progress. Check back soon.
-CTA:           (no CTA — card not clickable)
-```
-
----
-
-## Page 4 — project-viewer.html (PDF Viewer + Prototype CTA) `[BUILT]`
-
-**Files:** `project-viewer.html`, `css/project-viewer.css`, `js/project-viewer-main.js`
-**Layout:** Fixed top bar + full-viewport embedded PDF. No scroll — the PDF has its own internal scroll.
-**URL pattern:** `project-viewer.html?project=<key>&from=<origin>`
-
-### Top Bar
-Fixed at top with backdrop blur (`rgba(4, 5, 10, 0.88)`, 12px blur), 1px bottom border. Three elements:
-
-| Position | Element | Behaviour |
-|----------|---------|-----------|
-| Left | `← Back` | Returns to origin page. If `from=home` → `index.html`, otherwise → `projects.html`. Scroll position restored by PageTransition. |
-| Center | Project title | Serif font, muted color, ellipsis overflow. Hidden on mobile (≤768px). |
-| Right | **View Prototype →** | Golden primary CTA (solid `--color-gold` bg, dark text). Opens in new tab. Disabled state (35% opacity, non-interactive) when no prototype URL is set. |
-
-### Prototype CTA Button
-```css
-background: var(--color-gold);
-color: #04050a;
-font-weight: 700;
-text-transform: uppercase;
-border-radius: var(--radius-md);
-```
-Hover: `--color-gold-bright` background + 24px gold glow + 1px lift.
-
-### Project Data (in `js/project-viewer-main.js`)
-```javascript
-const PROJECTS = {
-  jupiter: { title, pdf, prototype: null },
-  rapido:  { title, pdf, prototype: null },
-  amazon:  { title, pdf, prototype: null },
-};
-```
-Replace `null` with prototype URLs when available. The CTA auto-activates when a URL is present.
-
-### PDF Embed
-Uses `<embed type="application/pdf">` with a fallback download link for browsers without embed support. Fills viewport below the top bar.
-
-### Entrance Animation
-Top bar slides down from -20px with fade. PDF embed fades in 0.15s later. Both respect `prefers-reduced-motion`.
-
----
-
-## Open Items
-
-| # | Item | Status |
-|---|------|--------|
-| 1 | ChatPRD icon asset needed for AI Fluency section | Open |
-| 2 | LinkedIn profile URL to be added | Open |
-| 3 | Jupiter teardown PDF — not in Assets/ | **Missing** |
-| 4 | Rapido feature spec PDF — not in Assets/ | **Missing** |
-| 5 | Amazon Prime PDF — in Assets/ as `Amazon Prime.pdf` | Available |
-| 6 | `Netflix PRD.pdf` in Assets/ — unclear which project this maps to | **Clarify** |
-| 7 | Resume PDF — in Assets/ as `Aurajeet_Mahapatra.pdf` | Available |
-| 8 | Placeholder cards to be replaced as new projects are completed | Ongoing |
-| ~~9~~ | ~~Particle flow system~~ | **Removed** — too visually busy |
-| 10 | `tools/generate-heightmap.mjs` + `Assets/textures/heightmap.png` — dead code from removed terrain planet | **Cleanup** |
-| 11 | `Assets/Hridesh_Resume_December.pdf` — unrelated file in Assets/ | **Cleanup** |
-
----
-
-## Available Assets
-
-| File | Role |
-|------|------|
-| `Assets/Amazon Prime.pdf` | Card 3 project document |
-| `Assets/Netflix PRD.pdf` | Unknown — needs mapping |
-| `Assets/Aurajeet_Mahapatra.pdf` | Resume (Contact section) |
-| `Assets/openclaw.png` | AI Fluency — OpenClaw icon |
-| `Assets/Claude_AI_symbol.svg.png` | AI Fluency — Claude Code icon |
-| `Assets/Claude-Cowork.jpg` | AI Fluency — Claude Cowork icon |
-| `Assets/perplexity-ai-icon.webp` | AI Fluency — Perplexity icon (ChatPRD replacement?) |
-| `Assets/Hridesh_Resume_December.pdf` | Unknown — does not belong to this portfolio |
-| `Assets/textures/heightmap.png` | Dead code — leftover from removed terrain planet |
-
----
-
-## File Structure (As Built)
-
-```
-index.html                  Main page — all sections built
-experience.html             Experience page — built (Phase 4)
-projects.html               Projects page — 8-card grid (Phase 5)
-project-viewer.html         PDF viewer page — embedded PDF + prototype CTA (Phase 7)
-portfolio-PRD.md            This document
+index.html                 Homepage
+about.html                 About page
+404.html                   404 page
+case/
+  nwn.html                 Nation With NaMo (real work)
+  hebe.html                HEBE (real work)
+  netflix.html             Netflix spec exercise
+  amazon-prime.html        Amazon Prime spec exercise
 
 css/
-  main.css                  Design tokens, reset, layer positioning, atmospheres, z-index scale, mobile responsive lighting
-  hero.css                  Hero layout, typography, metrics (with per-metric source), CTA strip, scroll hint
-  sections.css              Nav, projects, AI fluency, about, contact, footer, overlay styles
-  projects.css              Projects page — grid layout, placeholder card styles, responsive
-  project-viewer.css        Project viewer — top bar, prototype CTA, PDF embed, responsive
-  experience.css            Experience page — sphere viewport, cards, scroll hint, responsive
+  tokens.css               Design tokens (color, type, spacing, motion)
+  base.css                 Reset, base typography, 10 typographic roles, spacing utilities
+  components.css           Component primitives (container, card, tag, btn, nav, footer, page-header, etc.)
+  layout.css               Page-level layouts (hero, case grid, background grid, colophon, about)
+  case-study.css           Case-study-specific styles (hero, ribbon, prose, methods chips, deck card, 3-up nav)
 
 js/
-  main.js                   Entry point (index.html) — imports space-bg, hero, sections, ai-animations
-  projects-main.js          Entry point (projects.html) — space-bg + card stagger animations
-  project-viewer-main.js    Entry point (project-viewer.html) — query param routing, PDF/prototype setup
-  space-bg.js               Layer 1 — Three.js star field (3 rotational layers, no parallax)
-  sphere.js                 Layer 2 — Three.js hero sphere (10k particles, GLSL shaders)
-  hero.js                   Hero animation orchestrator (reveal, text, metrics, sphere fade)
-  sections.js               Scroll-triggered section animations, atmospheres (mobile-adjusted), contact hovers
-  ai-animations.js          AI Fluency icon animation loop (GSAP timeline)
-  shooting-stars.js          Shooting star ambient effect (imported by space-bg.js)
-  aurora.js                 Aurora borealis for contact section (mobile-adjusted band positions)
-  cursor-trail.js           Layer 4 — gold dot trail following mouse cursor (desktop only)
-  progress-bar.js           Scroll progress bar — vertical gold line, right edge
-  page-transition.js        Warp-jump transitions — handles query params and hash fragments in URLs
-  perf.js                   Performance detection — isLow flag for slow devices
-  experience-main.js        Experience page orchestrator — pinned step-through scroll model
-  experience-sphere.js      Experience page — 15k-particle sphere (planet effect, dissolve)
-  particles.js              (dead code — not imported, kept for reference)
+  reveal.js                IntersectionObserver scroll-reveal (~30 LoC, only JS file)
 
 Assets/
-  Amazon Prime.pdf          Project document
-  Netflix PRD.pdf           Project document (needs mapping)
-  Aurajeet_Mahapatra.pdf    Resume
-  openclaw.png              AI tool icon
-  Claude_AI_symbol.svg.png  AI tool icon
-  Claude-Cowork.jpg         AI tool icon
-  perplexity-ai-icon.webp   AI tool icon
-  textures/heightmap.png    (dead code — leftover from removed terrain planet)
+  aurajeet-portrait.jpg    Editorial portrait (home hero)
+  netflix-cover.jpg        Netflix deck first-page JPEG
+  amazon-prime-cover.jpg   Amazon Prime deck first-page JPEG
+  Netflix.pdf              Netflix spec exercise (full deck)
+  Amazon Prime.pdf         Amazon Prime spec exercise (full deck)
+  Aurajeet_Mahapatra.pdf   Resume
+  og-default.png           Open Graph default image (1200×630)
+  favicon.svg              SVG favicon
 
-tools/
-  generate-heightmap.mjs    (dead code — leftover from removed terrain planet)
+vercel.json                Routing (cleanUrls, redirects, cache headers)
+serve.py                   Local dev server simulating Vercel cleanUrls + redirects
 
 design-system/
-  aurajeet-mahapatra-portfolio/MASTER.md   Design system reference (updated 2026-04-11)
+  aurajeet-mahapatra-portfolio/MASTER.md   Design system reference (this site)
+
+portfolio-PRD.md           This document
 ```
 
----
-
-## Build Phases
-
-| Phase | Scope | Status |
-|-------|-------|--------|
-| 1 | File structure + Three.js + GSAP setup + deep space background + 2D particle canvas | **Complete** |
-| 2 | Hero — 3D sphere (sphere.js), cinematic reveal, text animations, metrics counter, scroll hint | **Complete** |
-| 3 | Main page sections — Nav, Projects, AI Fluency (with icon animations), About, Contact (with button hovers), Footer, background atmospheres, sphere scroll fade | **Complete** |
-| 4 | Experience page — particle sphere step-through with 4 experience cards + grid reveal | **Complete** |
-| 5 | Projects page — 8-card grid (3 real + 5 placeholder) with stagger animations | **Complete** |
-| 6 | Polish — cursor trail, scroll progress bar, performance detection, cross-page wiring | **Complete** |
-| 7 | Project viewer page + mobile lighting fix + navigation fixes | **Complete** |
-| 8 | Hero copy & UX refinements — positioning rewrite, per-metric attribution, CTA strip, parallax removal, mobile nav robustness | **Complete** |
-
-### Implementation Notes
-
-Key deviations from original plan that are now the canonical design:
-
-1. **Sphere is Three.js, not 2D canvas.** `sphere.js` uses WebGL with custom GLSL shaders for 10,000 vein-textured particles, gold reveal rings, ripple waves, and NDC-space mouse scatter.
-
-2. **2D particle flow system removed.** The drain/flow/orbit/convergence particle system was too visually busy. Removed entirely on 2026-04-11. The hero sphere now fades out gently on scroll instead. `js/particles.js` is dead code.
-
-3. **Background atmospheres at 60% max opacity.** Gradient overlays are scroll-driven but capped at 0.6 to stay subtle.
-
-4. **AI icon animations in dedicated module.** `js/ai-animations.js` handles the sequential OpenClaw/Claude Code/ChatPRD/Cowork animation loop independently from section scroll triggers.
-
-5. **Experience page: terrain planet replaced with particle sphere.** The original spec called for a terrain planet with heightmap displacement, PBR shaders, bloom post-processing, atmospheric scattering, and golden pins. This was replaced on 2026-04-11 with a simpler 15,000-particle sphere (same vein sampling as hero) positioned as a massive planet at the viewport bottom. `js/planet.js` was deleted. `tools/generate-heightmap.mjs` and `Assets/textures/heightmap.png` are dead code.
-
-6. **Experience page: pinned step-through, not continuous scrub.** The original spec used a scroll-scrubbed camera zoom with planet rotation. This was replaced with a discrete pinned step-through model — each scroll gesture advances exactly one step, scroll velocity is irrelevant. Went through three iterations: continuous scrub → snap points → pinned step-through. The pinned model was chosen because it prevents users from accidentally skipping experience entries.
-
-7. **Performance detection module.** `js/perf.js` checks `hardwareConcurrency` and `deviceMemory` to flag slow devices. When `perf.isLow` is true, cursor trail is disabled and card stagger animations are skipped. Core cinematic effects (spheres, icon animations) are never removed.
-
-8. **Cursor trail and progress bar are global.** Both modules are imported and initialized in all three page entry points (`main.js`, `experience-main.js`, `projects-main.js`). The cursor trail is desktop-only (touch devices excluded) and respects `prefers-reduced-motion`.
-
-9. **Project viewer replaces direct PDF links.** Project cards no longer open PDFs in a new tab. They navigate (via warp transition) to `project-viewer.html` which embeds the PDF with a golden "View Prototype" CTA at the top-right. The `from` query param tracks whether the user came from the landing page or the projects page, so the back button returns them to the correct origin with scroll position restored.
-
-10. **Mobile lighting positions recentered.** All atmosphere layer gradients, nebula wisps, and aurora bands were tuned for desktop viewport widths. On mobile (≤768px), gradient centers are pulled toward 50% horizontally, ellipses widened, and ScrollTrigger ranges tightened so lighting aligns with the narrower, taller mobile layout.
-
-11. **PageTransition handles query params and hashes.** The link interceptor originally checked `href.endsWith('.html')`, which failed for URLs with query params (`?project=...`) or hash fragments (`#projects`). Fixed to strip query/hash before checking: `href.split('?')[0].split('#')[0].endsWith('.html')`.
-
-12. **Hero positioning rewritten for recruiter clarity.** The original tagline ("Engineer by training. Consultant at political scale. Business owner by necessity. Product manager by instinct.") was poetic but vague. Replaced with a concrete positioning statement that names specific domains (political tech, fintech, bootstrapped products) and skill areas (growth, analytics, 0-to-1 execution). Reads as a professional summary rather than a narrative hook.
-
-13. **Per-metric source attribution replaces shared context line.** The previous `metrics-context` element was a single line attributing all four metrics to "state-level campaigns and a bootstrapped business." This was replaced with individual `.metric-source` spans under each metric, giving each number its own provenance (e.g., "Political campaigns" for 1.2M+ users, "Bootstrapped business" for 31% revenue). More specific, more credible.
-
-14. **CTA strip placed between hero and projects.** A `div.hero-cta-strip` with View Resume (primary), Email (secondary), and Phone (secondary) buttons sits between the hero section and the projects section. Rationale: hiring managers shouldn't have to scroll to the contact section at the bottom of the page to reach the resume or email. Reuses the existing `contact-btn` component styles.
-
-15. **Star field parallax removed.** The three star-particle layers in `space-bg.js` previously shifted vertically on scroll via a `parallax` multiplier per layer. This was removed — stars now rotate and twinkle but have no scroll-driven vertical movement. Scroll tracking (`_scrollY`, `_initScrollTracking()`) and per-layer `parallax` config values were deleted. Simplifies the star field and avoids competing with the section atmospheres for scroll-driven visual attention.
-
-16. **Mobile nav refactored for robustness.** The `_initNav()` function in `sections.js` was rewritten: GSAP ScrollTrigger call wrapped in try/catch for graceful degradation if GSAP is unavailable. Mobile nav-visible threshold lowered from 50px to 10px (shows sooner). Handler extracted into proper `_attachMobileNav()` / `_detachMobileNav()` functions with cleanup. Added `matchMedia('change')` listener so the handler correctly attaches/detaches when the viewport crosses the 768px breakpoint (e.g., orientation change). Initial state check on load ensures nav is visible immediately if the page loads already scrolled.
+Legacy v1 assets remain in `Assets/` for now (`Claude-Cowork.jpg`, `Claude_AI_symbol.svg.png`, `openclaw.png`, `perplexity-ai-icon.webp`, `textures/`) but are no longer referenced anywhere in v2 markup. Slated for cleanup in a future commit.
 
 ---
 
-*Document updated 2026-04-16 to reflect Phase 8 — hero copy refinements, per-metric attribution, CTA strip, parallax removal, mobile nav robustness.*
+## Acceptance criteria (v2 polish, all met)
+
+- [x] Every typographic style on the site maps to one of the 10 named roles.
+- [x] All four homepage case cards have identical dimensions, padding, and metric size.
+- [x] Homepage has two distinct sections: WORK and PM PROJECTS.
+- [x] Hero photo is constrained inside the container with a thin border.
+- [x] About page has a wide editorial header → narrow body with a year-range rail on desktop.
+- [x] No inline `style="..."` attributes remain in HTML pages.
+- [x] All four case-study pages still pass on `/case/[slug]` and have unchanged hero/ribbon/prose/methods grids.
+- [x] Case-study pages use the deck cover card pattern (no auto-loaded PDFs).
+- [x] Case-study nav has a 3-up layout with a center "All work ↑" link.
+- [x] No regressions: `prefers-reduced-motion`, focus-visible, skip-link, responsive breakpoints all still work.
+
+Pending (sweep work, not blocking deploy):
+
+- [ ] 404 page editorial framing line.
+- [ ] Final dead-CSS sweep (`.about-tools__icons` rules, deprecated `.card--featured` / `.card--minor` doc-comments, legacy `Assets/textures/` and unused tool icons).
+
+---
+
+*Document rewritten 2026-04-27 to reflect the v2 redesign. Replaces the v1 PRD which described the dark-space cinematic theme deprecated 2026-04-26.*
