@@ -537,18 +537,37 @@ a:focus-visible > .t-arrow--left,
   text-transform: uppercase;
 }
 
-/* ─── Reveal-on-scroll (used by js/reveal.js) ─────────── */
+/* ─── Reveal-on-scroll (used by js/reveal.js) ──────────────────────────
+ * Initial state: hidden + 12px below final position. When the element
+ * scrolls into view, the JS observer toggles `.reveal--visible` and the
+ * element fades up to opacity 1 / translateY 0 over `--t-slow` (300ms).
+ *
+ * Sibling stagger: js/reveal.js runs `applyStagger()` at init, finds
+ * groups of `.reveal` elements that share a parent, and sets
+ * `--reveal-delay` per index (80ms × i). The CSS reads it as
+ * `transition-delay`, so cards within the same `.case-grid` cascade
+ * one beat behind the previous instead of all popping at once.
+ *
+ * Reduced motion: opacity 1, no transform, no transition — full state
+ * snaps in immediately. The token-level guard zeroes durations too. */
 .reveal {
   opacity: 0;
-  transition: opacity var(--t-slow) var(--ease);
+  transform: translateY(12px);
+  transition: opacity var(--t-slow) var(--ease),
+              transform var(--t-slow) var(--ease);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
 }
 
 .reveal--visible {
   opacity: 1;
+  transform: translateY(0);
 }
 
 @media (prefers-reduced-motion: reduce) {
   .reveal {
     opacity: 1;
+    transform: none;
+    transition: none;
   }
 }

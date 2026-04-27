@@ -130,6 +130,52 @@
   }
 }
 
+/* ─── Hero choreography (Commit 5b) ──────────────────────────
+ * One-shot fade-up cascade on page load. Each hero element starts
+ * hidden + 12px below its final position and rises into place over
+ * 600ms with an 80ms stagger between siblings. CSS-only — no JS,
+ * no IntersectionObserver — because the hero is above the fold and
+ * runs once per page load.
+ *
+ * `animation-fill-mode: backwards` is critical: it applies the `from`
+ * keyframe state immediately at element load, so the elements stay
+ * hidden during their staggered delay. Without it, they'd flash at
+ * full opacity before the animation begins.
+ *
+ * Reduced-motion: animation disabled site-wide on the hero elements;
+ * they render at their final state immediately. */
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero__role,
+.hero__name,
+.hero__positioning,
+.hero__portrait {
+  animation: hero-rise 600ms var(--ease) backwards;
+}
+
+.hero__role        { animation-delay: 0ms; }
+.hero__name        { animation-delay: 80ms; }
+.hero__positioning { animation-delay: 160ms; }
+.hero__portrait    { animation-delay: 240ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__role,
+  .hero__name,
+  .hero__positioning,
+  .hero__portrait {
+    animation: none;
+  }
+}
+
 /* ─── Case-study grid (home page) ─────────────────────── */
 .case-grid {
   display: grid;
