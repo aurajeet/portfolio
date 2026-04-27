@@ -55,7 +55,12 @@
 /* ─── 4. Card ──────────────────────────────────────────── */
 /* Uniform homepage card. Same padding, same gap, same type scale across all
  * four. The WORK / PM PROJECTS section labels do the work the .card--featured
- * and .card--minor variants used to do, so those modifiers are gone in Commit 1. */
+ * and .card--minor variants used to do, so those modifiers are gone in Commit 1.
+ *
+ * Hover (Commit 5a): paper-feel lift — 2px translate up + soft warm shadow,
+ * plus the existing border-color → accent. Active returns to flat with a
+ * faster duration for tactile press feedback. Reduced-motion users keep the
+ * border-color change but lose the transform/shadow. */
 .card {
   background: var(--bg-card);
   border: 1px solid var(--rule);
@@ -66,16 +71,41 @@
   gap: var(--sp-4);
   text-decoration: none;
   color: var(--text);
-  transition: border-color var(--t-fast) var(--ease);
+  transition: border-color var(--t-base) var(--ease),
+              transform var(--t-base) var(--ease),
+              box-shadow var(--t-base) var(--ease);
 }
 
 a.card:hover {
   border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px -12px rgba(64, 50, 39, 0.20);
   text-decoration: none;
+}
+
+a.card:active {
+  transform: translateY(0);
+  transition-duration: var(--t-fast);
+}
+
+a.card:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
 }
 
 a.card:hover .card__title {
   color: var(--accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  a.card:hover {
+    transform: none;
+    box-shadow: none;
+  }
+  a.card:active {
+    transform: none;
+  }
 }
 
 .card__meta {
@@ -205,9 +235,14 @@ a.card:hover .card__title {
   text-decoration: none;
   cursor: pointer;
   border: 1px solid transparent;
-  transition: background-color var(--t-fast) var(--ease),
-              border-color var(--t-fast) var(--ease),
-              color var(--t-fast) var(--ease);
+  transition: background-color var(--t-base) var(--ease),
+              border-color var(--t-base) var(--ease),
+              color var(--t-base) var(--ease);
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
 }
 
 .btn--primary {
@@ -293,6 +328,66 @@ a.card:hover .card__title {
  * above a tightly-coupled element (e.g., a deep-dive PDF preview). */
 .section__label--tight {
   margin-block-end: var(--sp-3);
+}
+
+/* ─── 13. Animated arrow glyph (Commit 5a) ─────────────────
+ * Wrapped span around trailing →, ↑, ← glyphs in CTAs/links. On
+ * hover or keyboard focus of the parent <a>/<button>, the arrow
+ * translates a few pixels in its natural direction — giving the
+ * link a directional affordance without any layout shift.
+ *
+ * Markup: <span class="t-arrow" aria-hidden="true">→</span>
+ *
+ * Variants:
+ *   .t-arrow         default (right): translateX(+3px) on hover
+ *   .t-arrow--up     translateY(-3px) on hover (back-to-top, all-work)
+ *   .t-arrow--left   translateX(-3px) on hover (← Previous)
+ *
+ * Reduced-motion users see no transform — the static arrow stays. */
+.t-arrow {
+  display: inline-block;
+  transition: transform var(--t-base) var(--ease);
+  will-change: transform;
+}
+
+a:hover > .t-arrow,
+a:focus-visible > .t-arrow,
+.btn:hover > .t-arrow,
+.btn:focus-visible > .t-arrow {
+  transform: translateX(3px);
+}
+
+a:hover > .t-arrow--up,
+a:focus-visible > .t-arrow--up,
+.btn:hover > .t-arrow--up,
+.btn:focus-visible > .t-arrow--up {
+  transform: translateY(-3px);
+}
+
+a:hover > .t-arrow--left,
+a:focus-visible > .t-arrow--left,
+.btn:hover > .t-arrow--left,
+.btn:focus-visible > .t-arrow--left {
+  transform: translateX(-3px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .t-arrow,
+  a:hover > .t-arrow,
+  a:focus-visible > .t-arrow,
+  .btn:hover > .t-arrow,
+  .btn:focus-visible > .t-arrow,
+  a:hover > .t-arrow--up,
+  a:focus-visible > .t-arrow--up,
+  .btn:hover > .t-arrow--up,
+  .btn:focus-visible > .t-arrow--up,
+  a:hover > .t-arrow--left,
+  a:focus-visible > .t-arrow--left,
+  .btn:hover > .t-arrow--left,
+  .btn:focus-visible > .t-arrow--left {
+    transition: none;
+    transform: none;
+  }
 }
 
 /* ─── Site nav ─────────────────────────────────────────── */
