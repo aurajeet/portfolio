@@ -182,12 +182,35 @@
   border: 1px solid var(--rule);
   border-radius: 4px;
   overflow: hidden;
-  transition: border-color var(--t-fast) var(--ease);
+  transition: border-color var(--t-base) var(--ease),
+              transform var(--t-base) var(--ease),
+              box-shadow var(--t-base) var(--ease);
 }
 
 .cs__deck:hover {
   border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px -12px rgba(64, 50, 39, 0.20);
   text-decoration: none;
+}
+
+.cs__deck:active {
+  transform: translateY(0);
+  transition-duration: var(--t-fast);
+}
+
+.cs__deck:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cs__deck:hover,
+  .cs__deck:active {
+    transform: none;
+    box-shadow: none;
+  }
 }
 
 .cs__deck__cover {
