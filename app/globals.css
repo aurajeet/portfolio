@@ -1,26 +1,112 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* =============================================================
+   DESIGN TOKENS — calibrated to BOHOY / Bruno Erdison references
+   Editorial luxury, monochrome chrome, color photography accents
+   ============================================================= */
+
+@theme {
+  /* ---------- Palette ---------- */
+  --color-ink: #0a0a0a;
+  --color-ink-soft: #1f1f1f;
+  --color-paper: #fafaf7;
+  --color-paper-pure: #ffffff;
+  --color-rule: #e6e6e1;
+  --color-mute: #6b6b66;
+  --color-mute-soft: #a8a8a3;
+
+  /* ---------- Typography ---------- */
+  --font-display: var(--font-fraunces), ui-serif, Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system, sans-serif;
+
+  /* Display scale (used for hero & section headings) */
+  --text-display-xs: 1.75rem;   /* 28 */
+  --text-display-sm: 2.5rem;    /* 40 */
+  --text-display-md: 3.75rem;   /* 60 */
+  --text-display-lg: 5.25rem;   /* 84 */
+  --text-display-xl: 7.5rem;    /* 120 — reserved for hero name */
+
+  /* Tracked / eyebrow */
+  --tracking-eyebrow: 0.16em;
+  --tracking-button: 0.12em;
+
+  /* ---------- Motion ---------- */
+  --ease-luxe: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-luxe-in: cubic-bezier(0.7, 0, 0.84, 0);
+
+  /* ---------- Layout ---------- */
+  --container-narrow: 1120px;
+  --container-wide: 1280px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* =============================================================
+   BASE LAYER
+   ============================================================= */
 
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    color-scheme: light;
+  }
+
+  html {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-feature-settings: "ss01", "cv11";
+  }
+
+  ::selection {
+    background: var(--color-ink);
+    color: var(--color-paper);
+  }
+
+  /* Clean focus ring — visible but unobtrusive */
+  :focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* Honor reduced-motion globally */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* =============================================================
+   UTILITIES — small custom helpers used across components
+   ============================================================= */
+
+@utility container-wide {
+  width: 100%;
+  max-width: var(--container-wide);
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+  @media (min-width: 768px) { padding-inline: 2.5rem; }
+  @media (min-width: 1280px) { padding-inline: 3rem; }
+}
+
+@utility container-narrow {
+  width: 100%;
+  max-width: var(--container-narrow);
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+  @media (min-width: 768px) { padding-inline: 2.5rem; }
+}
+
+@utility section-y {
+  padding-block: clamp(80px, 12vw, 200px);
 }
