@@ -75,7 +75,7 @@ export function TeardownMarquee({ teardowns, className }: TeardownMarqueeProps) 
         <ul
           className={cn(
             "flex items-stretch gap-4 md:gap-6",
-            "overflow-x-auto no-scrollbar",
+            "overflow-x-auto no-scrollbar pb-3",
             "snap-x snap-mandatory",
             "scroll-pl-6 md:scroll-pl-10 xl:scroll-pl-12",
             "pr-12 md:pr-16",
@@ -138,7 +138,7 @@ export function TeardownMarquee({ teardowns, className }: TeardownMarqueeProps) 
       <div className="relative">
         <div
           ref={trackRef}
-          className="overflow-x-scroll no-scrollbar"
+          className="overflow-x-scroll no-scrollbar pb-3"
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}
         >
