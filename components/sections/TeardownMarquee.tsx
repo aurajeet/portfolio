@@ -102,10 +102,10 @@ export function TeardownMarquee({ teardowns, className }: TeardownMarqueeProps) 
     <div
       aria-label="Product teardowns"
       role="region"
-      className={cn("relative", className)}
+      className={cn("relative -mr-6 md:-mr-10 xl:-mr-12", className)}
     >
-      {/* Arrow controls — above strip, right-aligned, ink hairline buttons */}
-      <div className="mb-4 flex justify-end gap-2">
+      {/* Arrow controls — right-aligned to container content edge */}
+      <div className="mb-4 flex justify-end gap-2 pr-6 md:pr-10 xl:pr-12">
         <button
           type="button"
           aria-label="Previous teardown"
@@ -134,14 +134,11 @@ export function TeardownMarquee({ teardowns, className }: TeardownMarqueeProps) 
         </button>
       </div>
 
-      {/* Scrollable track wrapper — needed for absolute-positioned fade */}
+      {/* Scrollable track wrapper — fade right-0 is now at viewport edge */}
       <div className="relative">
         <div
           ref={trackRef}
-          className={cn(
-            "-mr-6 md:-mr-10 xl:-mr-12",
-            "overflow-x-scroll no-scrollbar",
-          )}
+          className="overflow-x-scroll no-scrollbar"
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}
         >
