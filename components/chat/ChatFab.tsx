@@ -144,7 +144,7 @@ export function ChatFab() {
         )}
       >
         <AnimatePresence>
-          {labelVisible && !open && (
+          {labelVisible && (
             <motion.div
               key="fab-label"
               aria-hidden="true"
