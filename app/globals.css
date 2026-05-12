@@ -15,6 +15,12 @@
   --color-mute: #6b6b66;
   --color-mute-soft: #a8a8a3;
 
+  /* Editorial accent — a "second ink" used sparingly on top-level section
+     eyebrows, arrow glyphs, ordered-list folio numbers, and the leading
+     section number on the About page. Never on body, headings, hairlines,
+     or fills. Magazine reference: Kinfolk / Cereal considered ochre. */
+  --color-ink-accent: #a8772b;
+
   /* ---------- Typography ---------- */
   --font-display: var(--font-fraunces), ui-serif, Georgia, "Times New Roman", serif;
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system, sans-serif;
@@ -109,4 +115,41 @@
 
 @utility section-y {
   padding-block: clamp(80px, 12vw, 200px);
+}
+
+/* Hide native scrollbar chrome on horizontal-scroll regions (teardown
+   marquee, etc.). Retains touch / wheel scrolling — purely a visual
+   cleanup so the row reads as an editorial strip, not a scrollable list. */
+@utility no-scrollbar {
+  &::-webkit-scrollbar { display: none; }
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+/* =============================================================
+   MARQUEE — continuous horizontal auto-scroll
+   Used by the About page photography gallery (section 4) and any
+   future editorial strip. Pair with a track that contains EXACTLY
+   two copies of the children, side-by-side: the keyframe slides
+   the track by 50% so copy 2 lands where copy 1 was — seamless loop.
+   Duration overridable via the inline `--marquee-duration` CSS var.
+   ============================================================= */
+
+/* Keyframe must live in @layer base — Tailwind v4 + Turbopack drops
+   @keyframes defined at root level outside any layer. */
+@layer base {
+  @keyframes marquee-x {
+    from { transform: translate3d(0, 0, 0); }
+    to   { transform: translate3d(-50%, 0, 0); }
+  }
+}
+
+/* Force Tailwind to include this utility from startup — without
+   @source inline it is only emitted after /about is first visited
+   (About.tsx is the sole consumer and is lazily compiled). */
+@source inline("animate-marquee-x");
+
+@utility animate-marquee-x {
+  animation: marquee-x var(--marquee-duration, 90s) linear infinite;
+  will-change: transform;
 }
