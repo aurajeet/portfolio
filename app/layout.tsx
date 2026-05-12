@@ -4,14 +4,25 @@ import { fraunces, geistSans } from "@/lib/fonts";
 import { SmoothScroll } from "@/lib/smooth-scroll";
 import { Nav } from "@/components/nav/Nav";
 import { Footer } from "@/components/layout/Footer";
+import { ChatFab } from "@/components/chat/ChatFab";
+import { siteUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl()),
   title: {
-    default: "Portfolio — Project Manager",
-    template: "%s — Portfolio",
+    default: "Aurajeet Mahapatra · Project Manager",
+    template: "%s · Aurajeet Mahapatra",
   },
   description:
     "Project Manager portfolio. Selected work, experience, and recent projects.",
+  openGraph: {
+    type: "website",
+    siteName: "Aurajeet Mahapatra",
+    locale: "en_IN",
+  },
+  twitter: {
+    card: "summary_large_image",
+  },
 };
 
 export default function RootLayout({
@@ -30,6 +41,7 @@ export default function RootLayout({
         <Nav />
         <main className="flex-1">{children}</main>
         <Footer />
+        <ChatFab />
       </body>
     </html>
   );
