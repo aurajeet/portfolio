@@ -4,6 +4,7 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useCallback, useEffect, useState, useSyncExternalStore } from "react";
 import { cn } from "@/lib/cn";
 import { ChatDrawer } from "./ChatDrawer";
+import { track } from "@vercel/analytics";
 import { ScrollPromptLabel } from "./ScrollPromptLabel";
 import { useHeroExited, type HeroPromptMode } from "./useHeroExited";
 
@@ -102,6 +103,7 @@ export function ChatFab() {
   }, [seenBefore, dismissedThisSession]);
 
   const handleOpen = useCallback(() => {
+    track("ai_chat_opened");
     setOpen(true);
     // Opening the drawer is also a first-visit signal — mark the label as
     // seen so the FAB doesn't re-prompt on the next visit even if the
