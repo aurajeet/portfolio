@@ -81,7 +81,7 @@ export function Work() {
                     )}
                   >
                     <span className="relative pb-1 after:absolute after:bottom-0 after:left-0 after:h-px after:w-full after:bg-current">
-                      Read case study
+                      See the work
                     </span>
                     <span
                       aria-hidden="true"
