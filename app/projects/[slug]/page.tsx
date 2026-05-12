@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ProjectCaseStudy } from "@/components/sections/ProjectCaseStudy";
 import { TeardownDetail } from "@/components/sections/TeardownDetail";
+import { TrackEvent } from "@/components/analytics/TrackEvent";
 import {
   allProjects,
   getCaseStudy,
@@ -80,13 +81,23 @@ export default async function ProjectPage({ params }: PageProps) {
   const caseStudy = getCaseStudy(slug);
   if (caseStudy) {
     const { prev, next } = getCaseStudyNeighbors(slug);
-    return <ProjectCaseStudy project={caseStudy} prev={prev} next={next} />;
+    return (
+      <>
+        <TrackEvent event="project_opened" properties={{ slug }} />
+        <ProjectCaseStudy project={caseStudy} prev={prev} next={next} />
+      </>
+    );
   }
 
   const teardown = getTeardown(slug);
   if (teardown) {
     const { prev, next } = getTeardownNeighbors(slug);
-    return <TeardownDetail teardown={teardown} prev={prev} next={next} />;
+    return (
+      <>
+        <TrackEvent event="project_opened" properties={{ slug }} />
+        <TeardownDetail teardown={teardown} prev={prev} next={next} />
+      </>
+    );
   }
 
   notFound();

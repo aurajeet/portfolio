@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CaseStudy } from "@/components/sections/CaseStudy";
+import { TrackEvent } from "@/components/analytics/TrackEvent";
 import { caseStudies, getCase, getNeighbors } from "@/content/experience";
 
 // Next.js 16 / 15+: dynamic route `params` is a Promise that must be
@@ -46,5 +47,10 @@ export default async function ExperienceCaseStudyPage({ params }: PageProps) {
 
   const { prev, next } = getNeighbors(slug);
 
-  return <CaseStudy caseStudy={c} prev={prev} next={next} />;
+  return (
+    <>
+      <TrackEvent event="case_study_opened" properties={{ slug }} />
+      <CaseStudy caseStudy={c} prev={prev} next={next} />
+    </>
+  );
 }
