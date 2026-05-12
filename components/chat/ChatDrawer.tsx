@@ -27,7 +27,7 @@ import { SuggestedChips, type ChipLabel } from "./SuggestedChips";
 // ---------------------------------------------------------------------------
 
 const COPY = {
-  header: "ASK THE PORTFOLIO",
+  header: "ASK MY AI ASSISTANT",
   disclosure:
     "AI trained on Aurajeet's portfolio. I answer in his voice — for anything binding, reach out directly.",
   placeholder: "Ask anything...",

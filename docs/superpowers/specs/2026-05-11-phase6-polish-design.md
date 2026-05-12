@@ -42,7 +42,7 @@ FadeUp({
 | Section | What gets wrapped | Stagger |
 |---------|-------------------|---------|
 | Work | Eyebrow + heading block; each `<article>` entry | `index * 0.06s` per entry |
-| Projects | Eyebrow + heading block; top-tier card pair; teardown row header | None (marquee handles its own timing) |
+| Projects | Eyebrow + heading block; each top-tier card (`delay = index * 0.08s`) | Per-card stagger: `0s`, `0.08s` |
 | Contact | Eyebrow + status line + email block | None |
 
 Sections (`Work`, `Projects`, `Contact`) remain server components. Only their inner content blocks are wrapped in `<FadeUp>` — no architecture change to the section files beyond the import and wrapper.
@@ -51,8 +51,8 @@ Sections (`Work`, `Projects`, `Contact`) remain server components. Only their in
 
 ## 2. Teardown Marquee
 
-**File:** `components/sections/Projects.tsx` — `TeardownRow` function
-**Change:** Becomes `"use client"` (or extracted to a `TeardownMarquee.tsx` client component, imported by the server `Projects`)
+**File:** `components/sections/TeardownMarquee.tsx` — **new** `"use client"` component
+**Change:** `TeardownRow` extracted from `Projects.tsx` into this dedicated client file. `Projects.tsx` remains a pure server component and imports `<TeardownMarquee>`.
 
 ### DOM structure
 
@@ -154,5 +154,6 @@ Verify FadeUp causes no layout shift — `translateY 8px` is imperceptible on sm
 |------|--------|
 | `components/ui/FadeUp.tsx` | **New** — scroll reveal wrapper |
 | `components/sections/Work.tsx` | Wrap section header + entries in `<FadeUp>` |
-| `components/sections/Projects.tsx` | Wrap section header + cards; extract `TeardownRow` to client component with marquee |
+| `components/sections/TeardownMarquee.tsx` | **New** — client component with marquee animation + arrow controls |
+| `components/sections/Projects.tsx` | Wrap section header + cards in `<FadeUp>`; replace `TeardownRow` with `<TeardownMarquee>` import |
 | `components/sections/Contact.tsx` | Wrap section header + email block in `<FadeUp>` |

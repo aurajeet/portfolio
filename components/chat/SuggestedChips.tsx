@@ -9,9 +9,9 @@ const luxeEase: [number, number, number, number] = [0.16, 1, 0.3, 1];
 // top-right, bottom-left, bottom-right.
 export const CHIP_LABELS = [
   "30-second overview",
-  "Are they looking?",
-  "Open to remote?",
-  "Notice period?",
+  "Strongest Project?",
+  "Notice Period?",
+  "Team sizes managed?",
 ] as const;
 
 export type ChipLabel = (typeof CHIP_LABELS)[number];
