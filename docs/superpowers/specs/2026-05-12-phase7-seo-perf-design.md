@@ -125,7 +125,11 @@ export const metadata: Metadata = {
 
 ### Per-route updates
 
-Each route's existing `generateMetadata` (or static `metadata` export) gains `openGraph.title`, `openGraph.description`, and `openGraph.url`. The `images` field is omitted — Next.js picks up the co-located `opengraph-image.tsx` automatically.
+**Important — shallow merge behavior:** In Next.js App Router, adding an `openGraph` field to a page's metadata replaces the layout's `openGraph` object entirely (not a deep merge). Each page that exports `openGraph` must include the complete object: `{ type, siteName, locale, title, description, url }`.
+
+The `images` field is omitted from every `openGraph` object — Next.js automatically picks up the co-located `opengraph-image.tsx` file and injects it.
+
+**Home page (`app/page.tsx`):** Currently has no metadata export. When adding one, use `title: { absolute: "Aurajeet Mahapatra · Project Manager" }` to bypass the layout's title template (which would otherwise append "· Aurajeet Mahapatra" again). All other routes use a plain string title and inherit the template correctly.
 
 Routes to update: `app/page.tsx`, `app/about/page.tsx`, `app/projects/page.tsx`, `app/experience/[slug]/page.tsx`, `app/projects/[slug]/page.tsx`.
 
