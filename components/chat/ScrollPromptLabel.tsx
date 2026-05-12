@@ -88,7 +88,7 @@ export function ScrollPromptLabel({ mode, onDismiss, onOpen }: ScrollPromptLabel
           aria-label="Dismiss prompt"
           className={cn(
             "flex h-4 w-4 items-center justify-center text-mute",
-            "cursor-pointer transition-opacity duration-200 ease-[var(--ease-luxe)] hover:text-ink",
+            "cursor-pointer transition-opacity duration-200 ease-[var(--ease-luxe)] hover:opacity-70",
             "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink",
           )}
         >
@@ -110,7 +110,10 @@ export function ScrollPromptLabel({ mode, onDismiss, onOpen }: ScrollPromptLabel
       <button
         type="button"
         onClick={onOpen}
-        className="block w-full cursor-pointer text-left"
+        className={cn(
+          "block w-full cursor-pointer text-left",
+          "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink",
+        )}
       >
         <p className="mb-1.5 font-sans text-[12px] leading-snug text-ink">
           Still exploring? I&apos;m trained on Aurajeet&apos;s entire portfolio.
