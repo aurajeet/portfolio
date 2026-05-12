@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="800" height="800" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Zoom teardown thumbnail  placeholder">
+  <rect width="800" height="800" fill="#FAFAF7"/>
+  <rect x="20" y="20" width="760" height="760" fill="none" stroke="#E6E6E1" stroke-width="2"/>
+  <text x="400" y="380" text-anchor="middle" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif" font-size="44" font-weight="600" fill="#0A0A0A" letter-spacing="-0.5">Zoom</text>
+  <text x="400" y="420" text-anchor="middle" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif" font-size="13" font-weight="500" fill="#6B6B66" letter-spacing="2">TEARDOWN PLACEHOLDER</text>
+  <text x="400" y="446" text-anchor="middle" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif" font-size="11" font-weight="400" fill="#A8A8A3">800 � 800</text>
+</svg>

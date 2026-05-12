@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Blinkit deck cover placeholder">
+  <rect width="1600" height="900" fill="#FAFAF7"/>
+  <rect x="40" y="40" width="1520" height="820" fill="none" stroke="#E6E6E1" stroke-width="2"/>
+  <text x="800" y="380" text-anchor="middle" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif" font-size="64" font-weight="600" fill="#0A0A0A" letter-spacing="-1">BLINKIT</text>
+  <text x="800" y="440" text-anchor="middle" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif" font-size="20" font-weight="500" fill="#6B6B66" letter-spacing="3.5">DECK COVER PLACEHOLDER</text>
+  <text x="800" y="490" text-anchor="middle" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif" font-size="14" font-weight="400" fill="#A8A8A3">1600 � 900 � 16:9</text>
+  <text x="800" y="540" text-anchor="middle" font-family="ui-serif, Georgia, serif" font-size="14" font-style="italic" fill="#A8A8A3">Real cover swaps in when the deck is finalized</text>
+</svg>

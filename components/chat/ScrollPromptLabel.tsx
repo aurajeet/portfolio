@@ -67,13 +67,13 @@ export function ScrollPromptLabel({ mode, onDismiss, onOpen }: ScrollPromptLabel
           ? { duration: 0 }
           : { duration: 0.4, ease: luxeEase }
       }
-      className="pointer-events-auto max-w-[210px] border border-rule bg-paper px-3 py-2.5"
+      className="pointer-events-auto w-[420px] md:w-[500px] border border-rule bg-paper px-6 py-5 md:px-7 md:py-5"
     >
       {/* Eyebrow row — X sits inline-right of the hairline divider */}
-      <div className="mb-2 flex items-center justify-between border-b border-rule pb-2">
+      <div className="mb-4 pb-4 md:mb-3 md:pb-3 flex items-center justify-between border-b border-rule">
         <span
           className={cn(
-            "font-sans text-[9px] font-medium uppercase text-mute",
+            "font-sans text-[18px] md:text-[13px] font-medium uppercase text-mute",
             "tracking-[var(--tracking-eyebrow)]",
           )}
         >
@@ -87,19 +87,18 @@ export function ScrollPromptLabel({ mode, onDismiss, onOpen }: ScrollPromptLabel
           }}
           aria-label="Dismiss prompt"
           className={cn(
-            "flex h-4 w-4 items-center justify-center text-mute",
+            "flex h-8 w-8 md:h-6 md:w-6 items-center justify-center text-mute",
             "cursor-pointer transition-opacity duration-200 ease-[var(--ease-luxe)] hover:opacity-70",
             "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink",
           )}
         >
           <svg
-            width={8}
-            height={8}
             viewBox="0 0 12 12"
             fill="none"
             stroke="currentColor"
             strokeWidth="1.5"
             aria-hidden="true"
+            className="h-4 w-4 md:h-3 md:w-3"
           >
             <path d="M1.5 1.5 L10.5 10.5 M10.5 1.5 L1.5 10.5" />
           </svg>
@@ -115,10 +114,10 @@ export function ScrollPromptLabel({ mode, onDismiss, onOpen }: ScrollPromptLabel
           "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink",
         )}
       >
-        <p className="mb-1.5 font-sans text-[12px] leading-snug text-ink">
+        <p className="mb-3 md:mb-2.5 font-sans text-[24px] md:text-[20px] leading-snug text-ink">
           Still exploring? I&apos;m trained on Aurajeet&apos;s entire portfolio.
         </p>
-        <p className="font-sans text-[11px] text-mute">Ask me anything →</p>
+        <p className="font-sans text-[22px] md:text-[18px] text-mute">Ask me anything →</p>
       </button>
     </motion.div>
   );

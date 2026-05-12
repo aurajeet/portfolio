@@ -40,3 +40,13 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# working / reference folders
+.superpowers/
+.work/
+Reference/
+Case Studies/
+Cases/
+Photos/
+hero-section-photos/
+AI Bot.md

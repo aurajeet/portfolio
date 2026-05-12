@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" width="50" height="50">
+  <!--
+    AI Bot FAB icon. Source asset: icons8-robot-50 (chunky rounded-rectangular
+    robot head with side appendages, two square slit eyes, mouth slit, and a
+    4-point AI sparkle bottom-right). The embedded PNG is ink-on-transparent;
+    the `feColorMatrix` invert filter flips it to paper-on-transparent so the
+    icon sits cleanly on the ink-colored FAB without a runtime color filter.
+
+    Spec: AI Bot.md �8.1. The sparkle is the deliberate AI semaphore  it lets
+    a recruiter parse "AI / chat" without decoding the silhouette.
+  -->
+  <defs>
+    <filter id="paper-on-ink" color-interpolation-filters="sRGB">
+      <feColorMatrix type="matrix" values="-1 0 0 0 1   0 -1 0 0 1   0 0 -1 0 1   0 0 0 1 0"/>
+    </filter>
+  </defs>
+  <image
+    width="50"
+    height="50"
+    filter="url(#paper-on-ink)"
+    href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAADT0lEQVR4nO2Yy29NURTGf60bSkdloCpBO/GMVyjRCiGopkZIOmGkYiQmBh5RTBSDiz8AJQyMPIpQJFQn6hG3DxratEkrlXLNVBrJlZ2sk6yc3J5Pe+/pjfMle7L22mut75y99tprQ4QIESJEiBDh/0I+sBaoA84AV4CbQBPQCnQBPcAQkJQxAqRk/FHyIdHtkrVNYsvYPAscBMrF54RhGnAUGFBBZWsMim8Tw7iwEOhUhnuBa0A9cBjYB9QAFcBSoAwoBopkFChbBUpeLLpLZG2N2DI2T4mPXuXX/LlFQUkYJ8PKUBWQR3axQ33IYflYvjAD+CwGzP4tzEycnmO5L7F0+43luCxM2LbHFGAbcBK4BDSKk1dAu49kHxbdDqBFbDSKTWN7OxBTfk0MH8WOmXdFqy3ZNqu5UuB9FhP9g+SRhU22+ddORLTiVyWPSZ5k+9T6ZPsz3bZ5T0TMr7ZQHQKJlAxzolm4GoTIMSWvD5HI6TS564vIbiW/5eBog81GpYfg/Ky5rfT2BiGyQsnbHBy52RnvmjalsyoIkflK3hcikX6lUxKEyEwlT4ZIJKl0ZgUhMlXJRx0cmf2tsdEDET9rRpVeYSaJZHqMqjhiXom0KCXzGy38DJFI0hbjG5Gba5EjBtMke3+IRPoICOs+tdLj8eulTmhU+LTVFpTII58FMd0wwY4FLwUzNUZBNGgGnnghcnkSX1HKlFxv/bQ4JIrXlWznJLk01iq5ua44olwUv9gaqo4QSHTarvFxNXfRjUi+dHn2xmoB8DaLJN5JM6fRbpt3xQmHVneLzMdl+90FXopujxzfVkv7WzkeUfJvopuQenBPbMXF9lbx5Vb913tp+K2O8GHIjw8Cc9N0hymJ0TwtOWIx8F21nNVZfg7Kk3y9APxy2ILm1tEgr6B5Tg90CVuVbVQPdPuBXVIblsnxWKIe4qYrWzElL5L9v1xqTpWcQroIvwiQV8+cvozJkSMuPUkm7lXPA6xv9vqrVwMH1CP2DeCBXDY7JIEHxkj2v0qelA+TkCeox8AdqWH2rdXg0g/9AM4Ba0J4CfWNOerl015nZpNjqExDZB05ioQiYYpzziKuiJwnh1GriOwhh1GqiMwjx/HUa2MVIQITh3/vBVOqc2166wAAAABJRU5ErkJggg=="
+  />
+</svg>

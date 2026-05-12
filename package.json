@@ -9,13 +9,20 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@ai-sdk/google": "^3.0.71",
+    "@ai-sdk/react": "^3.0.179",
+    "@upstash/ratelimit": "^2.0.8",
+    "@upstash/redis": "^1.38.0",
+    "ai": "^6.0.177",
     "clsx": "^2.1.1",
     "framer-motion": "^12.23.34",
     "lenis": "^1.3.13",
     "next": "16.2.6",
     "react": "19.2.4",
     "react-dom": "19.2.4",
-    "tailwind-merge": "^3.5.0"
+    "react-markdown": "^10.1.0",
+    "tailwind-merge": "^3.5.0",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
