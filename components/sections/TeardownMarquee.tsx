@@ -178,7 +178,6 @@ function TeardownCard({ teardown }: TeardownCardProps) {
   return (
     <Link
       href={`/projects/${teardown.slug}`}
-      aria-label={`Open the ${teardown.product} teardown`}
       className="group flex flex-col h-full border border-rule"
     >
       <div className="overflow-hidden bg-paper-pure">

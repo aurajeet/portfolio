@@ -84,7 +84,7 @@ export function Hero() {
 
       <div className="container-wide relative z-10">
         <motion.div
-          initial={reduced ? false : "hidden"}
+          initial={false}
           animate="visible"
           variants={containerVariants}
           className="max-w-full md:max-w-[62%]"

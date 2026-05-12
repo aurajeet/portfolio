@@ -62,7 +62,6 @@ function ProjectCard({ project }: ProjectCardProps) {
     <article>
       <Link
         href={`/projects/${project.slug}`}
-        aria-label={`Read case study: ${project.title}`}
         className="group block"
       >
         <div className="overflow-hidden border border-rule bg-paper-pure">

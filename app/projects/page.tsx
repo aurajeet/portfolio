@@ -124,7 +124,6 @@ function CaseStudyIndexCard({ project }: CaseStudyIndexCardProps) {
     <article>
       <Link
         href={`/projects/${project.slug}`}
-        aria-label={`Read case study: ${project.title}`}
         className="group block"
       >
         <div className="overflow-hidden border border-rule bg-paper-pure">
@@ -193,7 +192,6 @@ function TeardownIndexCard({ teardown }: TeardownIndexCardProps) {
     <article>
       <Link
         href={`/projects/${teardown.slug}`}
-        aria-label={`Open the ${teardown.product} teardown`}
         className="group block"
       >
         <div className="overflow-hidden border border-rule bg-paper-pure">

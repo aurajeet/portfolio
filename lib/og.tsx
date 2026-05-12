@@ -3,7 +3,7 @@ import { readFileSync } from "fs";
 import { join } from "path";
 
 const fraunces = readFileSync(
-  join(process.cwd(), "public/fonts/Fraunces-LightItalic.ttf")
+  join(process.cwd(), "public/fonts/Fraunces-LightItalic-static.ttf")
 );
 
 // Geist is optional — fall back to system-ui if the file isn't present.

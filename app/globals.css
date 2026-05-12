@@ -19,7 +19,7 @@
      eyebrows, arrow glyphs, ordered-list folio numbers, and the leading
      section number on the About page. Never on body, headings, hairlines,
      or fills. Magazine reference: Kinfolk / Cereal considered ochre. */
-  --color-ink-accent: #a8772b;
+  --color-ink-accent: #966a22;
 
   /* ---------- Typography ---------- */
   --font-display: var(--font-fraunces), ui-serif, Georgia, "Times New Roman", serif;

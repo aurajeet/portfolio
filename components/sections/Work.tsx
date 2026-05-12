@@ -26,7 +26,6 @@ export function Work() {
               >
                 <Link
                   href={`/experience/${c.slug}`}
-                  aria-label={`Read case study: ${c.title}`}
                   className="group block"
                 >
                   <Eyebrow>{c.eyebrow}</Eyebrow>
