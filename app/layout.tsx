@@ -5,6 +5,7 @@ import { SmoothScroll } from "@/lib/smooth-scroll";
 import { Nav } from "@/components/nav/Nav";
 import { Footer } from "@/components/layout/Footer";
 import { ChatFab } from "@/components/chat/ChatFab";
+import { Analytics } from "@vercel/analytics/next";
 import { siteUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -42,6 +43,7 @@ export default function RootLayout({
         <main className="flex-1">{children}</main>
         <Footer />
         <ChatFab />
+        <Analytics />
       </body>
     </html>
   );
