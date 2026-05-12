@@ -5,7 +5,7 @@ import { track } from "@vercel/analytics";
 
 interface TrackEventProps {
   event: string;
-  properties?: Record<string, string>;
+  properties?: Record<string, string | number | boolean | null | undefined>;
 }
 
 export function TrackEvent({ event, properties }: TrackEventProps) {
