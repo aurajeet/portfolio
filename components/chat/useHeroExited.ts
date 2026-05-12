@@ -31,6 +31,12 @@ export function useHeroExited(): { triggered: boolean; mode: HeroPromptMode } {
     const observer = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting) {
         heroWasSeen = true;
+        // Start idle timer only once the hero is actually in view.
+        if (idleTimer === null) {
+          idleTimer = setTimeout(() => {
+            fire("idle");
+          }, IDLE_TIMEOUT_MS);
+        }
       } else if (heroWasSeen) {
         fire("scroll");
         observer.disconnect();
@@ -49,10 +55,6 @@ export function useHeroExited(): { triggered: boolean; mode: HeroPromptMode } {
     }
 
     window.addEventListener("scroll", onScroll, { passive: true });
-
-    idleTimer = setTimeout(() => {
-      fire("idle");
-    }, IDLE_TIMEOUT_MS);
 
     return () => {
       observer.disconnect();
