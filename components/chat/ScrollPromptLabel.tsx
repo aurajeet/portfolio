@@ -67,7 +67,7 @@ export function ScrollPromptLabel({ mode, onDismiss, onOpen }: ScrollPromptLabel
           ? { duration: 0 }
           : { duration: 0.4, ease: luxeEase }
       }
-      className="pointer-events-auto w-[420px] md:w-[500px] border border-rule bg-paper px-6 py-5 md:px-7 md:py-5"
+      className="pointer-events-auto w-[420px] max-w-[calc(100vw-6rem)] md:max-w-none md:w-[500px] border border-rule bg-paper px-6 py-5 md:px-7 md:py-5"
     >
       {/* Eyebrow row — X sits inline-right of the hairline divider */}
       <div className="mb-4 pb-4 md:mb-3 md:pb-3 flex items-center justify-between border-b border-rule">

@@ -151,5 +151,4 @@
 
 @utility animate-marquee-x {
   animation: marquee-x var(--marquee-duration, 90s) linear infinite;
-  will-change: transform;
 }

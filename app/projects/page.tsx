@@ -139,7 +139,7 @@ function CaseStudyIndexCard({ project }: CaseStudyIndexCardProps) {
               decoding="async"
               className={cn(
                 "block w-full h-auto",
-                "aspect-[9/19.5] md:aspect-[3/2]",
+                "aspect-[4/3] md:aspect-[3/2]",
                 "object-cover",
               )}
             />

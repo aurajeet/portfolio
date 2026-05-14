@@ -435,7 +435,7 @@ export function ChatDrawer({ open, onClose }: ChatDrawerProps) {
                 aria-label="Message input"
                 className={cn(
                   "min-h-[44px] w-full resize-none border border-rule bg-paper px-3 py-2.5",
-                  "font-sans text-[13px] leading-[1.45] text-ink placeholder:text-mute",
+                  "font-sans text-base md:text-[13px] leading-[1.45] text-ink placeholder:text-mute",
                   "outline-none transition-colors duration-200 ease-[var(--ease-luxe)]",
                   "focus-visible:border-ink",
                 )}
