@@ -359,7 +359,7 @@ function SingleTile({ img }: { img: AboutImage }) {
   const h = img.height ?? 1200;
   return (
     <li
-      className="relative shrink-0 overflow-hidden border border-rule bg-paper-pure"
+      className="relative shrink-0 h-full overflow-hidden border border-rule bg-paper-pure"
       style={{ aspectRatio: `${w}/${h}` }}
     >
       <Image
@@ -385,7 +385,7 @@ function StackTile({
   const th = top.height ?? 1200;
   return (
     <li
-      className="relative shrink-0 flex flex-col gap-1 md:gap-1.5"
+      className="relative shrink-0 h-full flex flex-col gap-1 md:gap-1.5"
       style={{ aspectRatio: `${tw}/${th * 2}` }}
     >
       <div className="relative flex-1 overflow-hidden border border-rule bg-paper-pure">
