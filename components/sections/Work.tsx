@@ -20,8 +20,7 @@ export function Work() {
             <FadeUp key={c.slug} delay={i * 0.06}>
               <article
                 className={cn(
-                  "pt-12 md:pt-16",
-                  i > 0 && "mt-12 border-t border-rule md:mt-16",
+                  i > 0 && "mt-12 border-t border-rule pt-12 md:mt-16 md:pt-16",
                 )}
               >
                 <Link

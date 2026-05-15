@@ -1,9 +1,13 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 import Lenis from "lenis";
 
 export function SmoothScroll() {
+  const lenisRef = useRef<Lenis | null>(null);
+  const pathname = usePathname();
+
   useEffect(() => {
     if (typeof window === "undefined") return;
 
@@ -17,6 +21,8 @@ export function SmoothScroll() {
       smoothWheel: true,
     });
 
+    lenisRef.current = lenis;
+
     let rafId = 0;
     function raf(time: number) {
       lenis.raf(time);
@@ -27,8 +33,16 @@ export function SmoothScroll() {
     return () => {
       cancelAnimationFrame(rafId);
       lenis.destroy();
+      lenisRef.current = null;
     };
   }, []);
+
+  // Scroll to top immediately on every client-side route change.
+  // Without this, Lenis retains the previous page's scroll position
+  // because it intercepts window.scrollTo, which Next.js calls internally.
+  useEffect(() => {
+    lenisRef.current?.scrollTo(0, { immediate: true });
+  }, [pathname]);
 
   return null;
 }

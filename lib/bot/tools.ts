@@ -61,14 +61,13 @@ export const NAVIGATE_TO_SECTION_HREF: Record<NavigateToSection, string> = {
   contact: "/#contact",
 };
 
-/** All 11 valid project slugs (2 case studies + 9 teardowns). Mirrors
+/** All 10 valid project slugs (2 case studies + 8 teardowns). Mirrors
  *  `ProjectCaseStudySlug | ProjectTeardownSlug` in `content/projects.ts`. */
 export const PROJECT_SLUGS = [
   "netflix",
   "amazon-prime",
   "cred",
   "blinkit",
-  "sportskeeda",
   "groww",
   "spotify",
   "cult-fit",

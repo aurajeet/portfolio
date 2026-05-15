@@ -231,6 +231,14 @@ export async function POST(req: Request): Promise<Response> {
     stopWhen: stepCountIs(MAX_TOOL_STEPS),
     maxOutputTokens: MAX_OUTPUT_TOKENS,
     temperature: TEMPERATURE,
+    // Gemini 2.5 Flash enables thinking tokens by default. Those tokens
+    // count against maxOutputTokens, consuming most of the 300-token budget
+    // and leaving almost nothing for the visible reply — causing responses to
+    // get cut off mid-sentence. Thinking is unnecessary for a recruiter FAQ
+    // bot answering straightforward portfolio questions, so disable it.
+    providerOptions: {
+      google: { thinkingConfig: { thinkingBudget: 0 } },
+    },
   });
 
   // 8. Stream back to the client in the AI-SDK UI-message format

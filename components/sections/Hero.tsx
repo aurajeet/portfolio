@@ -14,7 +14,7 @@ export const HERO_EYEBROW =
   "PRODUCT MANAGER · BASED IN BANGALORE · OPEN TO PRODUCT ROLES";
 export const HERO_NAME = "aurajeet mahapatra";
 export const HERO_TAGLINE =
-  "I build products under hard constraints — short cycles, partial data, real consequences.";
+  "Two years running growth experiments across five state-level campaigns. One year rebuilding a ₹2 Cr business from the inside. Now figuring out what AI-native product work actually looks like.";
 
 const luxeEase: [number, number, number, number] = [0.16, 1, 0.3, 1];
 

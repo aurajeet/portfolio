@@ -46,11 +46,6 @@ const PROJECT_CARDS: Record<ProjectSlug, ProjectCard> = {
     outcome: "Ten-minute groceries on a dark-store network.",
     thumb: "/projects/teardowns/blinkit.svg",
   },
-  sportskeeda: {
-    title: "Sportskeeda",
-    outcome: "Global sports and esports news for hardcore fans.",
-    thumb: "/projects/teardowns/sportskeeda.svg",
-  },
   groww: {
     title: "Groww",
     outcome: "Investing simplified for first-time Indian investors.",
