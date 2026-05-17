@@ -85,7 +85,7 @@ const PROJECT_CARDS: Record<ProjectSlug, ProjectCard> = {
 const CONTACT_LINKEDIN_DISPLAY = LINKEDIN_URL.replace(/^https?:\/\//, "")
   .replace(/\/$/, "");
 
-const RESUME_FILENAME = "Aurajeet-Mahapatra.pdf";
+const RESUME_FILENAME = "Aurajeet_Mahapatra_Product.pdf";
 const RESUME_HREF = "/resume.pdf";
 
 // ---------------------------------------------------------------------------
