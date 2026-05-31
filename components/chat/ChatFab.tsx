@@ -4,6 +4,9 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useCallback, useEffect, useState, useSyncExternalStore } from "react";
 import { cn } from "@/lib/cn";
 import { ChatDrawer } from "./ChatDrawer";
+import { ColorOrb } from "./ColorOrb";
+import { PillGlow } from "./PillGlow";
+import { PageRipple } from "./PageRipple";
 import { track } from "@vercel/analytics";
 import { ScrollPromptLabel } from "./ScrollPromptLabel";
 import { useHeroExited, type HeroPromptMode } from "./useHeroExited";
@@ -57,6 +60,10 @@ function writeScrollPromptSeen() {
 export function ChatFab() {
   const reduced = useReducedMotion();
   const [open, setOpen] = useState(false);
+  // Once the user opens the chat, the attention glow stops for good.
+  const [hasEngaged, setHasEngaged] = useState(false);
+  // Bumped on every open to fire the page-wide ocean ripple.
+  const [openCount, setOpenCount] = useState(0);
 
   // Has the user seen the "Ask me anything" label on a prior visit? Read
   // from localStorage via `useSyncExternalStore` so we don't hit React 19's
@@ -105,6 +112,8 @@ export function ChatFab() {
   const handleOpen = useCallback(() => {
     track("ai_chat_opened");
     setOpen(true);
+    setHasEngaged(true);
+    setOpenCount((c) => c + 1);
     // Opening the drawer is also a first-visit signal — mark the label as
     // seen so the FAB doesn't re-prompt on the next visit even if the
     // user opened before the 4s timer fired.
@@ -187,29 +196,35 @@ export function ChatFab() {
           )}
         </AnimatePresence>
 
-        <button
-          type="button"
-          onClick={handleOpen}
-          aria-label="Open chat"
-          aria-expanded={open}
-          className={cn(
-            "pointer-events-auto flex h-16 w-16 items-center justify-center",
-            "bg-ink p-3",
-            "cursor-pointer transition-colors duration-200 ease-[var(--ease-luxe)]",
-            "hover:bg-ink-soft",
-            "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink",
-          )}
-        >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/ai-bot-icon.png"
-            alt=""
-            width={40}
-            height={40}
-            className="block h-10 w-10 invert"
-          />
-        </button>
+        {/* Relative wrapper anchors the one-shot glow behind the pill. The
+            glow blooms once when the hero scrolls out of view (`triggered`),
+            drawing the eye to the launcher. */}
+        <div className="pointer-events-none relative flex items-center">
+          <PillGlow active={!hasEngaged} />
+          <button
+            type="button"
+            onClick={handleOpen}
+            aria-label="Open chat"
+            aria-expanded={open}
+            className={cn(
+              "pointer-events-auto relative z-10 flex h-14 items-center gap-3 rounded-full",
+              "bg-ink py-2 pr-6 pl-2.5",
+              "cursor-pointer transition-colors duration-200 ease-[var(--ease-luxe)]",
+              "hover:bg-ink-soft",
+              "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink",
+            )}
+          >
+            {/* Base tone matches the ink pill so the orb's core blends into it,
+                while the accents stay colorful — the glowing-ball look. */}
+            <ColorOrb dimension="32px" tones={{ base: "oklch(22.64% 0 0)" }} />
+            <span className="font-sans text-[15px] font-medium text-paper select-none">
+              Ask AI
+            </span>
+          </button>
+        </div>
       </div>
+
+      <PageRipple fireKey={openCount} />
 
       <ChatDrawer open={open} onClose={handleClose} />
     </>

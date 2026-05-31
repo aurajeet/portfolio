@@ -20,6 +20,7 @@ import {
 import type { ChatMessage as ChatMessageType } from "@/lib/bot/tools";
 import { cn } from "@/lib/cn";
 import { ChatMessage } from "./ChatMessage";
+import { ColorOrb } from "./ColorOrb";
 import { SuggestedChips, type ChipLabel } from "./SuggestedChips";
 
 // ---------------------------------------------------------------------------
@@ -279,14 +280,17 @@ export function ChatDrawer({ open, onClose }: ChatDrawerProps) {
               "px-5 py-3.5",
             )}
           >
-            <p
-              className={cn(
-                "font-sans text-[11px] font-medium uppercase text-ink",
-                "tracking-[var(--tracking-eyebrow)]",
-              )}
-            >
-              {COPY.header}
-            </p>
+            <div className="flex items-center gap-2.5">
+              <ColorOrb dimension="24px" tones={{ base: "oklch(22.64% 0 0)" }} />
+              <p
+                className={cn(
+                  "font-sans text-[11px] font-medium uppercase text-ink",
+                  "tracking-[var(--tracking-eyebrow)]",
+                )}
+              >
+                {COPY.header}
+              </p>
+            </div>
             <button
               type="button"
               onClick={onClose}
