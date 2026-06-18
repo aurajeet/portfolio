@@ -37,7 +37,7 @@ function ProseBody({ blocks }: { blocks: ProseBlock[] }) {
                 key={idx}
                 variant="h2"
                 as="h2"
-                className="mt-20 max-w-[24ch] text-balance first-of-type:mt-16"
+                className="mt-14 max-w-[24ch] text-balance first-of-type:mt-12"
               >
                 {block.text}
               </Heading>
@@ -48,7 +48,7 @@ function ProseBody({ blocks }: { blocks: ProseBlock[] }) {
                 key={idx}
                 variant="h3"
                 as="h3"
-                className="mt-12 max-w-[28ch] text-balance"
+                className="mt-10 max-w-[28ch] text-balance"
               >
                 {block.text}
               </Heading>
