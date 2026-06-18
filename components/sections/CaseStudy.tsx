@@ -21,6 +21,7 @@ interface CaseStudyProps {
 // component because it's purely presentational (the content file owns the
 // long titles; the deep-dive nav reads better with a tight brand mark).
 const shortLabels: Record<CaseStudyData["slug"], string> = {
+  amberlink: "AmberLink",
   nwn: "Nation With NaMo",
   hebe: "HEBE",
 };

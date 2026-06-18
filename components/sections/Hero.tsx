@@ -5,6 +5,7 @@ import { motion, useReducedMotion, type Variants } from "framer-motion";
 import { ButtonLink } from "@/components/ui/Button";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { cn } from "@/lib/cn";
+import { EASE_LUXE } from "@/lib/motion";
 
 // Locked Hero copy. Exported so the AI bot's knowledge assembler
 // (`lib/bot/knowledge.ts`) can read the same source-of-truth strings
@@ -14,9 +15,9 @@ export const HERO_EYEBROW =
   "PRODUCT MANAGER · BASED IN BANGALORE · OPEN TO PRODUCT ROLES";
 export const HERO_NAME = "aurajeet mahapatra";
 export const HERO_TAGLINE =
-  "Two years running growth experiments across five state-level campaigns. One year rebuilding a ₹2 Cr business from the inside. Now figuring out what AI-native product work actually looks like.";
+  "Co-founded AmberLink, a 0→1 B2B marketplace at ₹7.5 L MRR in two months. Before that: a ₹2 Cr business rebuilt from the inside, and two years of growth experiments across five state-level campaigns.";
 
-const luxeEase: [number, number, number, number] = [0.16, 1, 0.3, 1];
+const luxeEase = EASE_LUXE;
 
 export function Hero() {
   const reduced = useReducedMotion();

@@ -255,9 +255,13 @@ function aboutBrief(eyebrow: string, headline: string, body: string[]): string {
  *  brand label and role title used in the bot's narrative voice. */
 const EXPERIENCE_BRAND_MAP: Record<string, { company: string; role: string }> =
   {
+    amberlink: {
+      company: "AmberLink",
+      role: "Product Lead & Co-Founder",
+    },
     hebe: {
       company: "HEBE",
-      role: "Product & Operations Lead",
+      role: "Product Lead",
     },
     nwn: {
       company: "Nation With NaMo (NWN)",

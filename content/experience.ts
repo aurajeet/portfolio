@@ -13,7 +13,7 @@ export type ProseBlock =
   | { kind: "ul"; items: string[] };
 
 export type CaseStudy = {
-  slug: "nwn" | "hebe";
+  slug: "amberlink" | "nwn" | "hebe";
   eyebrow: string;
   title: string;
   dek: { short: string; long: string };
@@ -28,64 +28,150 @@ export type CaseStudy = {
 
 export const caseStudies: CaseStudy[] = [
   {
-    slug: "hebe",
-    eyebrow: "HEBE · PRODUCT & OPERATIONS LEAD · JUL '25 TO PRESENT",
+    slug: "amberlink",
+    eyebrow: "AMBERLINK · PRODUCT LEAD & CO-FOUNDER · MAR '26 TO PRESENT",
     title:
-      "Rebuilding a ₹1.6 Cr B2B essential-oil business as a digitally instrumented supply chain",
+      "Building AmberLink, a 0→1 B2B essential-oil marketplace, to ₹7.5 L MRR in two months",
     dek: {
       short:
-        "Inherited a 5,000+ farmer supplier network and almost no digital infrastructure. Took revenue to ₹2.1 Cr in 12 months by building a B2B marketplace with farmer-level traceability.",
-      long: "Inherited a B2B essential-oil business with a 5,000+ farmer supplier network, 100+ workers, and almost no digital infrastructure. Owned P&L. Took revenue to ₹2.1 Cr in 12 months by building a B2B marketplace with farmer-level traceability, integrating payments and operational workflows, and rebuilding pricing and supply-demand alignment from scratch.",
+        "Co-founded and led product for a 0→1 multi-sided B2B essential-oil marketplace — from 60+ discovery interviews to ₹7.5 L MRR and 16K+ users in two months.",
+      long: "Co-founded AmberLink and owned product end-to-end: a 0→1 multi-sided B2B marketplace connecting essential-oil buyers with traders and aggregators, with payments, logistics, and quality-assurance workflows across six stakeholder groups. Took it from 60+ discovery interviews to 16K+ users, 500+ transactions at ₹3 L AOV, and ₹7.5 L MRR within two months — and cut end-to-end procurement time in half.",
     },
     metrics: [
-      { value: "₹1.6 Cr → ₹2.1 Cr", label: "Revenue in 12 months" },
-      { value: "5,000+", label: "Farmer suppliers" },
+      { value: "₹7.5 L MRR", label: "Within 2 months" },
+      { value: "16K+", label: "Users" },
       { value: "0 → 1", label: "Marketplace built" },
     ],
-    tags: ["P&L", "Marketplace", "Supply Chain", "Pricing", "0-to-1", "GTM"],
+    tags: [
+      "0-to-1",
+      "Multi-sided Marketplace",
+      "Growth Experimentation",
+      "Payments & Escrow",
+      "Supply Chain",
+      "GTM",
+    ],
     ribbon: [
-      { value: "₹1.6 Cr → ₹2.1 Cr", label: "Revenue · 31% YoY" },
-      { value: "5,000+", label: "Farmer suppliers" },
-      { value: "0 → 1", label: "B2B marketplace built" },
+      { value: "₹7.5 L MRR", label: "Within 2 months" },
+      { value: "16K+", label: "Users" },
+      { value: "500+", label: "Transactions · ₹3 L AOV" },
+      { value: "18 → 9 days", label: "Procurement · −50%" },
     ],
     prose: [
       { kind: "h2", text: "Context" },
       {
         kind: "p",
-        text: "HEBE is a B2B essential-oil manufacturing and trading business and a family enterprise. When I took over as Product and Operations Lead in July 2025, the business was running ₹1.6 Cr in annual revenue across a network of 5,000+ farmers supplying raw aromatic crops, 100+ workers across processing and operations, and a B2B customer base of fragrance and flavor wholesalers and a handful of specialty buyers.",
-      },
-      {
-        kind: "p",
-        text: "The diagnosis was straightforward and uncomfortable: the business had no instrumentation. Supplier relationships lived in WhatsApp threads. Pricing decisions were made on the phone, on the day. Customer mix had drifted toward a small number of repeat buyers. Margins were uneven across batches in ways no one could explain after the fact. Buyer trust was the quiet bottleneck. Without traceability from farmer to finished oil, larger buyers would not commit to volume. The core business was real, but the operating layer was held together by relationships and memory.",
+        text: "Essential-oil B2B trade in India is fragmented, opaque, and trust-poor. Discovery happens offline through relationships, buyers can't verify quality or provenance before committing, and procurement drags on for weeks. AmberLink's bet: a multi-sided marketplace that makes supply discoverable and trades trustworthy.",
       },
       { kind: "h2", text: "My role" },
       {
         kind: "p",
-        text: "I owned the P&L. I owned product, operations, and digital infrastructure. I did not own manufacturing (one specialist plus a small processing crew handled that) or finance compliance (handled by a part-time CA). Every other lever (supplier onboarding, pricing, customer acquisition, sales operations, the marketplace itself) was mine.",
+        text: "Co-founder and Product Lead. I owned product strategy, roadmap, and agile delivery across six stakeholder groups — buyers, sellers (traders and aggregators), trade specialists, admin, lab partners, and warehouse operations — and built the product AI-assisted (Claude) on a modern stack (Next.js / NestJS, PostgreSQL, Razorpay, Meilisearch).",
       },
       { kind: "h2", text: "Approach" },
-      { kind: "h3", text: "Diagnosis" },
+      { kind: "h3", text: "Discovery" },
       {
         kind: "p",
-        text: "Month one was a top-to-bottom audit. I rebuilt the previous twelve months of revenue from invoices and bank statements into a single sheet broken down by customer, product line, and batch. Three findings dropped out: (1) margin variance across batches was not random, but tracked the supplier district where raw material was sourced; (2) about 60% of revenue came from four customers, all of whom were on hand-shake pricing that hadn't been revisited in over a year; (3) onboarding a new supplier cost roughly two weeks of someone's time, mostly on paperwork that could be templated.",
+        text: "I ran 60+ user interviews across every user group and synthesized them into the roadmap. The dominant signal was that trust — not selection or price — was the bottleneck, and that end-to-end procurement took roughly 18 days. That pointed the early roadmap at trust and supply-chain features over breadth.",
       },
-      {
-        kind: "h3",
-        text: "Building the B2B marketplace with farmer-level traceability",
-      },
+      { kind: "h3", text: "The marketplace build" },
       {
         kind: "p",
-        text: "The single biggest unlock was a B2B marketplace built from scratch, a digital surface that connected farmer-level supply data to buyer-facing inventory, with traceability all the way from district of origin through batch and dispatch. The platform integrated payments (so farmers got paid on a deterministic schedule, not a phone call) and operational workflows (procurement orders, batch tracking, dispatch planning). Once buyers could see provenance and quality data per batch, two things happened: trust gaps closed, and we could credibly address larger order volumes that had been off the table before.",
+        text: "We shipped the multi-sided core: listings and RFQs with quotes, real-time chat, escrow payments, warehouse logistics, lab-testing quality assurance with digital certificates, and a reviews and trust-score layer — an end-to-end flow from discovery to a quality-verified, escrow-backed delivered order.",
       },
-      { kind: "h3", text: "Supplier-network and pricing rebuild" },
+      { kind: "h3", text: "The trust pivot" },
       {
         kind: "p",
-        text: 'The supplier-onboarding flow was the highest-leverage rebuild. I templated a one-page agreement, built the supplier database with district-level metadata (so we could trace yield-vs-district patterns), and shifted payment terms from variable to a tier system. Onboarding time dropped from roughly two weeks to about three days. The variance between districts on yield and quality became visible inside the database, which is what we then used to renegotiate procurement priorities. On the customer side, I rebuilt pricing as a tier system mapped to product grade and order volume, with an explicit floor below which we would not negotiate. We lost two of the previously locked-in repeat buyers; we gained four new mid-volume buyers in adjacent product categories. Customer mix shifted from "four buyers / 60% of revenue" to "eight buyers / 50% of revenue", a healthier base.',
+        text: "The first version was a P2P connection layer where buyers and sellers dealt directly. Discovery and early usage showed that direct dealing reintroduced the exact trust gaps we set out to fix, so we pivoted to a managed-brokerage model: counterparties are masked to each other, and a platform-assigned Trade Specialist brokers every deal end-to-end. Trust stopped being something we tried to disintermediate and became the product itself.",
       },
-      { kind: "h3", text: "Operations digitization" },
+      { kind: "h3", text: "Growth" },
       {
         kind: "p",
-        text: "Most of the operations layer was paper or memory. I moved supplier records, batch tracking, and invoicing into a single shared system (intentionally simple; there was no headcount for a real ERP). The new rule: nothing ships from the warehouse without a row in the batch-tracking sheet. Within four months we could tell, for the first time, what each batch had cost us and what it had earned.",
+        text: "I defined the North Star and acquisition metrics, then ran A/B tests, cohort analysis, and funnel optimization to scale supply and demand together: 600+ active sellers, 150+ buyers, and a 15K+ farmer supply base, driving 500+ transactions at ₹3 L average order value and ₹7.5 L MRR within two months — while cutting procurement time in half, from 18 to 9 days.",
+      },
+      { kind: "h2", text: "Outcomes" },
+      { kind: "p", text: "Within two months of launch:" },
+      {
+        kind: "ul",
+        items: [
+          "₹7.5 L MRR within 2 months of launch.",
+          "16K+ users across buyers, traders/aggregators, and a 15K+ farmer supply base.",
+          "500+ transactions at ₹3 L average order value.",
+          "Procurement time halved: 18 → 9 days.",
+          "Pivoted from a P2P connection layer to a managed brokerage based on user research.",
+        ],
+      },
+      { kind: "h2", text: "Reflections" },
+      {
+        kind: "p",
+        text: "The pivot was the lesson. We built the obvious thing — let buyers and sellers find each other — and the data told us the obvious thing recreated the problem. The marketplace only worked once we stopped trying to disintermediate trust and started selling it as the product.",
+      },
+    ],
+    methods: [
+      "Product discovery",
+      "User research",
+      "Marketplace design",
+      "A/B & cohort analysis",
+      "Funnel optimization",
+      "Roadmapping",
+    ],
+    tools: [
+      "Claude Code",
+      "Next.js / NestJS",
+      "PostgreSQL + Prisma",
+      "Razorpay (escrow)",
+      "Meilisearch",
+      "SQL / Analytics",
+    ],
+    collaborators: [
+      "Co-founding team",
+      "Trade specialists (brokerage ops)",
+      "Empaneled lab partners",
+      "Warehouse operations",
+    ],
+  },
+  {
+    slug: "hebe",
+    eyebrow: "HEBE · PRODUCT LEAD · JUL '25 TO PRESENT",
+    title:
+      "Turning a ₹1.6 Cr family essential-oil business into a digitally instrumented operation",
+    dek: {
+      short:
+        "Took over a ₹1.6 Cr family essential-oil business running on WhatsApp and memory. Instrumented operations with a real-time dashboard and built an AI-driven B2B sales engine — growing it to ₹2.1 Cr in 12 months.",
+      long: "Took over a ₹1.6 Cr family essential-oil manufacturing and trading business running on WhatsApp and memory. In 12 months I grew it to ₹2.1 Cr by instrumenting operations with a real-time dashboard — cutting fulfilment time from 21 to 14 days and tripling the supplier base — and by building an AI-driven B2B sales engine that filtered a noisy inbound pipeline into 15+ enterprise clients.",
+    },
+    metrics: [
+      { value: "₹1.6 Cr → ₹2.1 Cr", label: "Revenue in 12 months" },
+      { value: "3×", label: "Supplier base" },
+      { value: "15+", label: "Enterprise clients" },
+    ],
+    tags: ["P&L", "Operations", "AI Automation", "B2B Growth", "Supply Chain", "Analytics"],
+    ribbon: [
+      { value: "₹1.6 Cr → ₹2.1 Cr", label: "Revenue · 31% YoY" },
+      { value: "3×", label: "Supplier base" },
+      { value: "21 → 14 days", label: "Fulfilment · −33%" },
+      { value: "15+", label: "Enterprise clients" },
+    ],
+    prose: [
+      { kind: "h2", text: "Context" },
+      {
+        kind: "p",
+        text: "HEBE is a family-run B2B essential-oil manufacturing and trading business doing ₹1.6 Cr in annual revenue when I took over as Product Lead in July 2025, selling to fragrance and flavor wholesalers. The business was real but uninstrumented: procurement and vendor relationships lived in WhatsApp threads, reporting was manual and after-the-fact, order fulfilment took roughly 21 days, and the inbound B2B pipeline was high-noise — plenty of enquiries, little signal on which were worth chasing.",
+      },
+      { kind: "h2", text: "My role" },
+      {
+        kind: "p",
+        text: "I owned the P&L, operations, vendor management, and B2B growth. I did not own manufacturing (a specialist plus a small processing crew handled that) or finance compliance (a part-time CA). Every other lever — supplier and vendor management, operations instrumentation, customer acquisition, and sales — was mine.",
+      },
+      { kind: "h2", text: "Approach" },
+      { kind: "h3", text: "A real-time operations dashboard" },
+      {
+        kind: "p",
+        text: "The first build was instrumentation. I built a real-time operations dashboard with automated reporting and alerts across procurement, vendor management, and fulfilment. For the first time, vendor performance and order status were visible as they happened rather than reconstructed after the fact — which is what let us widen the supply base safely. The supplier base grew 3×, and order fulfilment time dropped 33%, from 21 to 14 days.",
+      },
+      { kind: "h3", text: "An AI-driven B2B sales engine" },
+      {
+        kind: "p",
+        text: "The second build went after the noisy inbound pipeline. I built an AI-powered lead-qualification and outreach automation system that filtered high-volume, low-signal B2B enquiries down to the buyers actually worth pursuing, then ran personalized outreach against that shortlist. It landed 15+ enterprise clients and drove 31% year-over-year revenue growth, from ₹1.6 Cr to ₹2.1 Cr.",
       },
       { kind: "h2", text: "Outcomes" },
       { kind: "p", text: "End of year 1 in this role:" },
@@ -93,44 +179,38 @@ export const caseStudies: CaseStudy[] = [
         kind: "ul",
         items: [
           "Revenue: ₹1.6 Cr → ₹2.1 Cr in 12 months. 31% YoY growth.",
-          "B2B marketplace launched with farmer-level traceability, payments integration, and operational workflows.",
-          "Customer mix: shifted from 60% concentrated in 4 buyers to ~50% across 8 buyers.",
-          "Supplier onboarding time: ~2 weeks → ~3 days.",
-          "Supply transparency: every dispatched batch traceable to its source district within 24 hours of dispatch (previously untracked).",
+          "Supplier base: grew 3×.",
+          "Fulfilment time: 21 → 14 days (−33%).",
+          "15+ enterprise clients acquired via the AI-driven sales engine.",
+          "Operations moved from WhatsApp and memory to a single real-time dashboard with automated reporting and alerts.",
         ],
       },
       { kind: "h2", text: "Reflections" },
       {
         kind: "p",
-        text: "The thing I underestimated was how much of this role was relationship management with farmers and old-line customers. The digital infrastructure rebuild was the easy part. The harder part was renegotiating pricing with buyers who had a personal relationship with the previous owner, and explaining the new traceability flow to farmers who had never been asked to report district-level yield data. Software does not solve those conversations; it just makes the trade-offs visible enough to have them seriously.",
-      },
-      {
-        kind: "p",
-        text: "What I would do differently: I would have introduced batch-level cost tracking in month one, not month four. Three months of unattributable margins is three months of business decisions made on instinct.",
+        text: "The dashboard was the easy part. The harder part was getting a relationship-run business to trust a system over a phone call — the instrumentation only mattered once people actually acted on what it showed. What I would do differently: introduce the reporting layer in week one, not month two. Every week the business ran on instinct was a week of decisions I could not later explain with data.",
       },
     ],
     methods: [
-      "P&L decomposition",
-      "Marketplace design",
-      "Pricing strategy",
-      "Supplier-network design",
-      "Operations digitization",
-      "Customer-mix rebalancing",
+      "Operations instrumentation",
+      "Vendor management",
+      "AI lead qualification",
+      "Outreach automation",
+      "B2B sales",
+      "Analytics & reporting",
     ],
     tools: [
       "SQL",
       "Power BI",
       "Excel / Sheets",
       "Claude Code",
-      "Perplexity",
       "WhatsApp Business",
     ],
     collaborators: [
       "1 manufacturing specialist",
       "~5-person processing crew",
       "Part-time CA (compliance)",
-      "5,000+ farmer supplier network",
-      "100+ workers across operations",
+      "Supplier & vendor network",
     ],
   },
   {
@@ -197,7 +277,7 @@ export const caseStudies: CaseStudy[] = [
       { kind: "h3", text: "Governance advisory: policy & research" },
       {
         kind: "p",
-        text: "Two interventions stand out from the governance side of the work. The first: a Pink Booth campaign in rural Ratlam (Madhya Pradesh), aimed at increasing female voter turnout. We analyzed participation data to identify safety concerns at specific polling locations, then deployed a high-visibility community outreach effort promoting 1,296 designated Pink Booths. Female voter turnout in those areas rose 38% relative to the previous cycle.",
+        text: "Two interventions stand out from the governance side of the work. The first: a Pink Booth campaign in rural Raisen (Madhya Pradesh), aimed at increasing female voter turnout. We analyzed participation data to identify safety concerns at specific polling locations, then deployed a high-visibility community outreach effort promoting 1,296 designated Pink Booths. Female voter turnout in those areas rose 38% relative to the previous cycle.",
       },
       {
         kind: "p",
@@ -213,7 +293,7 @@ export const caseStudies: CaseStudy[] = [
           "35% engagement lift via experimentation across 6M+ user data points.",
           "65,000+ polling booths classified into priority cohorts; 25% improvement in resource allocation.",
           "1.5M+ voter profiles modeled via geospatial clustering; ~40% reduction in leadership decision-making time.",
-          "38% female voter turnout lift in rural Ratlam via the 1,296-Pink-Booth campaign.",
+          "38% female voter turnout lift in rural Raisen via the 1,296-Pink-Booth campaign.",
           "2,800+ tribal families granted formal land titles via the Forest Rights Act digitization initiative within nine months.",
         ],
       },
