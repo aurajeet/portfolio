@@ -27,7 +27,7 @@ import { cn } from "@/lib/cn";
  */
 export function About() {
   return (
-    <article className="section-y pt-40 md:pt-48">
+    <article className="section-y overflow-x-clip pt-40 md:pt-48">
       <Container width="narrow">
         {/* ---------- Page header ---------- */}
         <header>
@@ -97,14 +97,14 @@ function MagazineSection({ section }: { section: AboutSection }) {
     const imageBlock = (
       <div
         className={cn(
-          "overflow-hidden border border-rule bg-paper-pure",
+          "aspect-[4/3] overflow-hidden border border-rule bg-paper-pure",
           isImageLeft && "md:order-1",
         )}
       >
         <PlaceholderImg
           src={image.src}
           alt={image.alt}
-          className="block aspect-[4/3] w-full object-cover"
+          className="block h-full w-full object-cover"
         />
       </div>
     );
@@ -147,12 +147,12 @@ function MagazineSection({ section }: { section: AboutSection }) {
           {images.map((img, i) => (
             <div
               key={img.src + i}
-              className="overflow-hidden border border-rule bg-paper-pure"
+              className="aspect-square overflow-hidden border border-rule bg-paper-pure"
             >
               <PlaceholderImg
                 src={img.src}
                 alt={img.alt}
-                className="block aspect-square w-full object-cover"
+                className="block h-full w-full object-cover"
               />
             </div>
           ))}

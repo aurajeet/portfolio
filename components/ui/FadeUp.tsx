@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useInView, useReducedMotion } from "framer-motion";
+import { EASE_LUXE } from "@/lib/motion";
 
 interface FadeUpProps {
   children: React.ReactNode;
@@ -24,7 +25,7 @@ export function FadeUp({ children, delay = 0, className }: FadeUpProps) {
       className={className}
       initial={{ opacity: 0, y: 8 }}
       animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
-      transition={{ duration: 0.4, delay, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.4, delay, ease: EASE_LUXE }}
     >
       {children}
     </motion.div>

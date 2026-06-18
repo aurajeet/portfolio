@@ -173,12 +173,16 @@ function renderKnowledgeBody(knowledge: BotKnowledge): string {
   sections.push("## About Aurajeet\n" + renderBio(knowledge));
 
   sections.push(
-    "## Logistics (the four locked starter chips resolve from here)\n" +
+    "## Logistics (the Notice Period starter chip resolves from here)\n" +
       renderLogistics(knowledge) +
       "\n\n" +
+      // Keep these four labels in sync with `CHIP_LABELS` in
+      // components/chat/SuggestedChips.tsx — that array is what the UI renders.
       "Chip mappings — the recruiter sees these four starter chips: " +
-      "`30-second overview`, `Are they looking?`, `Open to remote?`, `Notice period?`. " +
-      "Resolve them from the logistics above. The first is a synthesis chip — " +
+      "`30-second overview`, `Strongest Project?`, `Notice Period?`, `Team sizes managed?`. " +
+      "`Notice Period?` resolves from the logistics above; `Strongest Project?` and " +
+      "`Team sizes managed?` resolve from the experience and projects detailed elsewhere " +
+      "in this prompt. The first is a synthesis chip — " +
       "answer it as a 3-bullet TL;DR (current role + standout, top recent win, " +
       "what I'm looking for), and surface `downloadResume` and `getContact` " +
       "in the same reply.",

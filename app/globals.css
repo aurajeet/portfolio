@@ -21,6 +21,15 @@
      or fills. Magazine reference: Kinfolk / Cereal considered ochre. */
   --color-ink-accent: #966a22;
 
+  /* AI assistant orb + iridescent "Apple Intelligence" effects — single
+     source of truth for the triad shared by ColorOrb and PillGlow (and the
+     two orb bases: the light fallback core and the dark pill core). */
+  --orb-base-light: oklch(95% 0.02 264.695);
+  --orb-base-dark: oklch(22.64% 0 0);
+  --iris-1: oklch(75% 0.15 350);
+  --iris-2: oklch(80% 0.12 200);
+  --iris-3: oklch(78% 0.14 280);
+
   /* ---------- Typography ---------- */
   --font-display: var(--font-fraunces), ui-serif, Georgia, "Times New Roman", serif;
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system, sans-serif;
@@ -31,6 +40,11 @@
   --text-display-md: 3.75rem;   /* 60 */
   --text-display-lg: 5.25rem;   /* 84 */
   --text-display-xl: 7.5rem;    /* 120 — reserved for hero name */
+
+  /* Eyebrow / micro-label sizes (uppercase tracked labels) */
+  --text-eyebrow: 0.75rem;      /* 12 */
+  --text-eyebrow-sm: 0.6875rem; /* 11 */
+  --text-eyebrow-xs: 0.625rem;  /* 10 */
 
   /* Tracked / eyebrow */
   --tracking-eyebrow: 0.16em;

@@ -19,6 +19,7 @@ import {
 } from "react";
 import type { ChatMessage as ChatMessageType } from "@/lib/bot/tools";
 import { cn } from "@/lib/cn";
+import { EASE_LUXE } from "@/lib/motion";
 import { ChatMessage } from "./ChatMessage";
 import { ColorOrb } from "./ColorOrb";
 import { SuggestedChips, type ChipLabel } from "./SuggestedChips";
@@ -31,6 +32,7 @@ const COPY = {
   header: "ASK MY AI ASSISTANT",
   disclosure:
     "AI trained on Aurajeet's portfolio. I answer in his voice — for anything binding, reach out directly.",
+  disclosureShort: "AI · answers in Aurajeet's voice",
   placeholder: "Ask anything...",
   send: "Send message",
   close: "Close chat",
@@ -41,6 +43,8 @@ const COPY = {
     network: "Connection hiccup. Try again in a moment.",
     unknown:
       "I'm having trouble forming that thought. Try again, or rephrase?",
+    unavailable:
+      "The assistant is offline right now. Email's at the bottom of the page for a faster path.",
   },
 } as const;
 
@@ -134,6 +138,13 @@ export function ChatDrawer({ open, onClose }: ChatDrawerProps) {
   const [input, setInput] = useState("");
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
 
+  // ----- Focus management -----
+  // Non-modal dialog (the page stays interactive), but we still move focus
+  // into the drawer on open, restore it to the trigger (the FAB) on close,
+  // and wire Escape-to-close — the baseline a11y contract for a dialog.
+  const asideRef = useRef<HTMLElement | null>(null);
+  const previouslyFocusedRef = useRef<HTMLElement | null>(null);
+
   // Auto-grow textarea — caps at ~4 lines visible, then scrolls.
   useLayoutEffect(() => {
     const el = textareaRef.current;
@@ -209,6 +220,19 @@ export function ChatDrawer({ open, onClose }: ChatDrawerProps) {
     }
   }, [open, isBusy, stop]);
 
+  // ----- Move focus into the drawer on open, restore it on close -----
+  useEffect(() => {
+    if (open) {
+      previouslyFocusedRef.current =
+        (document.activeElement as HTMLElement | null) ?? null;
+      // Focus the dialog container (not the textarea) so we don't pop the
+      // mobile keyboard; screen readers announce the dialog label on entry.
+      const id = requestAnimationFrame(() => asideRef.current?.focus());
+      return () => cancelAnimationFrame(id);
+    }
+    previouslyFocusedRef.current?.focus?.();
+  }, [open]);
+
   // ----- Mobile drag-to-dismiss handler -----
   // Threshold: 120px drag OR > 600px/s flick. Below threshold, the spring
   // returns to 0. Desktop drawer disables drag via `dragConstraints` left/right
@@ -228,6 +252,8 @@ export function ChatDrawer({ open, onClose }: ChatDrawerProps) {
       {open && (
         <motion.aside
           key="chat-drawer"
+          ref={asideRef}
+          tabIndex={-1}
           role="dialog"
           aria-modal="false"
           aria-label="Chat with the portfolio"
@@ -253,7 +279,7 @@ export function ChatDrawer({ open, onClose }: ChatDrawerProps) {
           transition={
             reduced
               ? { duration: 0 }
-              : { duration: 0.7, ease: [0.16, 1, 0.3, 1] }
+              : { duration: 0.7, ease: EASE_LUXE }
           }
           // Mobile drag-to-dismiss — vertical only, disabled above the md
           // breakpoint by clamping `dragConstraints.top = 0` so down-only
@@ -281,15 +307,20 @@ export function ChatDrawer({ open, onClose }: ChatDrawerProps) {
             )}
           >
             <div className="flex items-center gap-2.5">
-              <ColorOrb dimension="24px" tones={{ base: "oklch(22.64% 0 0)" }} />
-              <p
-                className={cn(
-                  "font-sans text-[11px] font-medium uppercase text-ink",
-                  "tracking-[var(--tracking-eyebrow)]",
-                )}
-              >
-                {COPY.header}
-              </p>
+              <ColorOrb dimension="24px" tones={{ base: "var(--orb-base-dark)" }} />
+              <div className="flex flex-col gap-0.5">
+                <p
+                  className={cn(
+                    "font-sans text-[11px] font-medium uppercase text-ink",
+                    "tracking-[var(--tracking-eyebrow)]",
+                  )}
+                >
+                  {COPY.header}
+                </p>
+                <p className="font-sans text-[10px] leading-none text-mute">
+                  {COPY.disclosureShort}
+                </p>
+              </div>
             </div>
             <button
               type="button"
@@ -297,8 +328,7 @@ export function ChatDrawer({ open, onClose }: ChatDrawerProps) {
               aria-label={COPY.close}
               className={cn(
                 "flex h-8 w-8 items-center justify-center text-ink",
-                "cursor-pointer transition-opacity duration-200 ease-[var(--ease-luxe)] hover:opacity-60",
-                "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink",
+                "cursor-pointer transition-opacity duration-300 ease-[var(--ease-luxe)] hover:opacity-60",
               )}
             >
               <CloseIcon />
@@ -318,7 +348,7 @@ export function ChatDrawer({ open, onClose }: ChatDrawerProps) {
                 transition={
                   reduced
                     ? { duration: 0 }
-                    : { duration: 0.3, ease: [0.16, 1, 0.3, 1] }
+                    : { duration: 0.3, ease: EASE_LUXE }
                 }
                 className="flex-shrink-0 border-b border-rule bg-paper"
               >
@@ -332,8 +362,7 @@ export function ChatDrawer({ open, onClose }: ChatDrawerProps) {
                     aria-label="Dismiss disclosure"
                     className={cn(
                       "flex h-6 w-6 flex-shrink-0 items-center justify-center text-mute",
-                      "cursor-pointer transition-opacity duration-200 ease-[var(--ease-luxe)] hover:opacity-60",
-                      "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink",
+                      "cursor-pointer transition-opacity duration-300 ease-[var(--ease-luxe)] hover:opacity-60",
                     )}
                   >
                     <CloseIcon size={10} />
@@ -380,7 +409,7 @@ export function ChatDrawer({ open, onClose }: ChatDrawerProps) {
                   transition={
                     reduced
                       ? { duration: 0 }
-                      : { duration: 0.3, ease: [0.16, 1, 0.3, 1] }
+                      : { duration: 0.3, ease: EASE_LUXE }
                   }
                   className="overflow-hidden"
                 >
@@ -390,7 +419,7 @@ export function ChatDrawer({ open, onClose }: ChatDrawerProps) {
                     className={cn(
                       "block px-5 pt-3 font-sans text-[10px] font-medium uppercase",
                       "tracking-[var(--tracking-eyebrow)] text-mute",
-                      "cursor-pointer transition-opacity duration-200 ease-[var(--ease-luxe)] hover:opacity-70",
+                      "cursor-pointer transition-opacity duration-300 ease-[var(--ease-luxe)] hover:opacity-70",
                     )}
                   >
                     {COPY.moreQuestions}{" "}
@@ -413,7 +442,7 @@ export function ChatDrawer({ open, onClose }: ChatDrawerProps) {
                   transition={
                     reduced
                       ? { duration: 0 }
-                      : { duration: 0.3, ease: [0.16, 1, 0.3, 1] }
+                      : { duration: 0.3, ease: EASE_LUXE }
                   }
                   className="overflow-hidden"
                 >
@@ -440,7 +469,7 @@ export function ChatDrawer({ open, onClose }: ChatDrawerProps) {
                 className={cn(
                   "min-h-[44px] w-full resize-none border border-rule bg-paper px-3 py-2.5",
                   "font-sans text-base md:text-[13px] leading-[1.45] text-ink placeholder:text-mute",
-                  "outline-none transition-colors duration-200 ease-[var(--ease-luxe)]",
+                  "outline-none transition-colors duration-300 ease-[var(--ease-luxe)]",
                   "focus-visible:border-ink",
                 )}
               />
@@ -451,10 +480,9 @@ export function ChatDrawer({ open, onClose }: ChatDrawerProps) {
                 className={cn(
                   "flex h-11 w-11 flex-shrink-0 items-center justify-center",
                   "bg-ink text-paper",
-                  "cursor-pointer transition-colors duration-200 ease-[var(--ease-luxe)]",
+                  "cursor-pointer transition-colors duration-300 ease-[var(--ease-luxe)]",
                   "hover:bg-ink-soft",
                   "disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-ink",
-                  "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink",
                 )}
               >
                 <span aria-hidden="true" className="text-[16px] leading-none">
@@ -591,7 +619,7 @@ function EmptyChipsState({
 function ErrorRow({ message }: { message: string }) {
   return (
     <p
-      role="status"
+      role="alert"
       className={cn(
         "mt-4 border-l-2 border-ink px-3 py-2",
         "font-sans text-[12px] leading-snug text-ink",
@@ -605,6 +633,8 @@ function ErrorRow({ message }: { message: string }) {
 function resolveErrorCopy(error: Error): string {
   const msg = error.message || "";
   if (/429|rate ?limit|too many/i.test(msg)) return COPY.errors.rateLimit;
+  if (/503|not configured|service unavailable|unavailable/i.test(msg))
+    return COPY.errors.unavailable;
   if (/network|fetch|failed to fetch|connection/i.test(msg))
     return COPY.errors.network;
   return COPY.errors.unknown;

@@ -30,7 +30,7 @@ export function StatRibbon({ items, className, ...props }: StatRibbonProps) {
         <div
           key={item.label}
           className={cn(
-            "flex flex-col",
+            "flex min-w-0 flex-col",
             idx > 0 && [
               "mt-8 border-t border-rule pt-8",
               "md:mt-0 md:border-t-0 md:pt-0",
@@ -41,7 +41,7 @@ export function StatRibbon({ items, className, ...props }: StatRibbonProps) {
           <span
             className={cn(
               "font-display font-normal text-ink",
-              "leading-tight tracking-[-0.02em] text-balance",
+              "leading-tight tracking-[-0.02em] text-balance break-words",
               "text-3xl md:text-4xl lg:text-5xl",
             )}
           >
@@ -49,7 +49,7 @@ export function StatRibbon({ items, className, ...props }: StatRibbonProps) {
           </span>
           <span
             className={cn(
-              "mt-3 font-sans text-[11px] font-medium uppercase text-mute",
+              "mt-3 font-sans text-eyebrow-sm font-medium uppercase text-mute",
               "tracking-[var(--tracking-eyebrow)]",
             )}
           >

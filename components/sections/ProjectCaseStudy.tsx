@@ -234,7 +234,7 @@ export function ProjectCaseStudy({
           )}
 
           <div className="md:justify-self-center">
-            <TextLink href="/#projects">All projects</TextLink>
+            <TextLink href="/projects">All projects</TextLink>
           </div>
 
           {next ? (

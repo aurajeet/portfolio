@@ -3,11 +3,12 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { useEffect, useRef } from "react";
 import { cn } from "@/lib/cn";
+import { EASE_LUXE } from "@/lib/motion";
 import type { HeroPromptMode } from "./useHeroExited";
 
 const SCROLL_DISMISS_MS = 6_000;
 const IDLE_POST_SCROLL_MS = 2_000;
-const luxeEase: [number, number, number, number] = [0.16, 1, 0.3, 1];
+const luxeEase = EASE_LUXE;
 
 interface ScrollPromptLabelProps {
   mode: Exclude<HeroPromptMode, null>;
@@ -89,7 +90,6 @@ export function ScrollPromptLabel({ mode, onDismiss, onOpen }: ScrollPromptLabel
           className={cn(
             "flex h-8 w-8 md:h-6 md:w-6 items-center justify-center text-mute",
             "cursor-pointer transition-opacity duration-200 ease-[var(--ease-luxe)] hover:opacity-70",
-            "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink",
           )}
         >
           <svg
@@ -111,7 +111,6 @@ export function ScrollPromptLabel({ mode, onDismiss, onOpen }: ScrollPromptLabel
         onClick={onOpen}
         className={cn(
           "block w-full cursor-pointer text-left",
-          "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink",
         )}
       >
         <p className="mb-3 md:mb-2.5 font-sans text-[24px] md:text-[20px] leading-snug text-ink">

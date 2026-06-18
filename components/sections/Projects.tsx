@@ -64,7 +64,7 @@ function ProjectCard({ project }: ProjectCardProps) {
         href={`/projects/${project.slug}`}
         className="group block"
       >
-        <div className="overflow-hidden border border-rule bg-paper-pure">
+        <div className="aspect-[4/3] overflow-hidden border border-rule bg-paper-pure md:aspect-[3/2]">
           <picture>
             <source
               media="(min-width: 768px)"
@@ -75,11 +75,7 @@ function ProjectCard({ project }: ProjectCardProps) {
               alt={project.banner.alt}
               loading="lazy"
               decoding="async"
-              className={cn(
-                "block w-full h-auto",
-                "aspect-[4/3] md:aspect-[3/2]",
-                "object-cover",
-              )}
+              className="block h-full w-full object-cover"
             />
           </picture>
         </div>

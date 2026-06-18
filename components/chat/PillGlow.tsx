@@ -39,10 +39,10 @@ export function PillGlow({ active }: PillGlowProps) {
           opacity: 0;
           background: conic-gradient(
             from var(--pg-angle),
-            oklch(75% 0.15 350),
-            oklch(80% 0.12 200),
-            oklch(78% 0.14 280),
-            oklch(75% 0.15 350)
+            var(--iris-1),
+            var(--iris-2),
+            var(--iris-3),
+            var(--iris-1)
           );
           filter: blur(18px);
           will-change: transform, opacity;

@@ -25,10 +25,10 @@ export const ColorOrb: React.FC<OrbProps> = ({
   spinDuration = 20,
 }) => {
   const fallbackTones = {
-    base: "oklch(95% 0.02 264.695)",
-    accent1: "oklch(75% 0.15 350)",
-    accent2: "oklch(80% 0.12 200)",
-    accent3: "oklch(78% 0.14 280)",
+    base: "var(--orb-base-light)",
+    accent1: "var(--iris-1)",
+    accent2: "var(--iris-2)",
+    accent3: "var(--iris-3)",
   };
 
   const palette = { ...fallbackTones, ...tones };

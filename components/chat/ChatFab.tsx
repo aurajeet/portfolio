@@ -3,6 +3,7 @@
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useCallback, useEffect, useState, useSyncExternalStore } from "react";
 import { cn } from "@/lib/cn";
+import { EASE_LUXE } from "@/lib/motion";
 import { ChatDrawer } from "./ChatDrawer";
 import { ColorOrb } from "./ColorOrb";
 import { PillGlow } from "./PillGlow";
@@ -169,7 +170,7 @@ export function ChatFab() {
               transition={
                 reduced
                   ? { duration: 0 }
-                  : { duration: 0.4, ease: [0.16, 1, 0.3, 1] }
+                  : { duration: 0.4, ease: EASE_LUXE }
               }
               className={cn(
                 "pointer-events-none border border-rule bg-paper px-2 py-1.5",
@@ -209,14 +210,13 @@ export function ChatFab() {
             className={cn(
               "pointer-events-auto relative z-10 flex h-14 items-center gap-3 rounded-full",
               "bg-ink py-2 pr-6 pl-2.5",
-              "cursor-pointer transition-colors duration-200 ease-[var(--ease-luxe)]",
+              "cursor-pointer transition-colors duration-300 ease-[var(--ease-luxe)]",
               "hover:bg-ink-soft",
-              "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink",
             )}
           >
             {/* Base tone matches the ink pill so the orb's core blends into it,
                 while the accents stay colorful — the glowing-ball look. */}
-            <ColorOrb dimension="32px" tones={{ base: "oklch(22.64% 0 0)" }} />
+            <ColorOrb dimension="32px" tones={{ base: "var(--orb-base-dark)" }} />
             <span className="font-sans text-[15px] font-medium text-paper select-none">
               Ask AI
             </span>

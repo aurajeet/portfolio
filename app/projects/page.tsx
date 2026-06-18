@@ -15,21 +15,21 @@ import { cn } from "@/lib/cn";
 export const metadata: Metadata = {
   title: "Projects",
   description:
-    "Every project, sorted by recency. Two case studies (Netflix India, Amazon Prime Video) and nine product teardowns from the SIGMA · PM & Tech Club series.",
+    "Every project, sorted by recency. Two case studies (Netflix India, Amazon Prime Video) and eight product teardowns from the SIGMA · PM & Tech Club series.",
   openGraph: {
     type: "website",
     siteName: "Aurajeet Mahapatra",
     locale: "en_IN",
     title: "Projects · Aurajeet Mahapatra",
     description:
-      "Every project, sorted by recency. Two case studies (Netflix India, Amazon Prime Video) and nine product teardowns from the SIGMA · PM & Tech Club series.",
+      "Every project, sorted by recency. Two case studies (Netflix India, Amazon Prime Video) and eight product teardowns from the SIGMA · PM & Tech Club series.",
     url: "/projects",
   },
   twitter: {
     card: "summary_large_image",
     title: "Projects · Aurajeet Mahapatra",
     description:
-      "Every project, sorted by recency. Two case studies (Netflix India, Amazon Prime Video) and nine product teardowns from the SIGMA · PM & Tech Club series.",
+      "Every project, sorted by recency. Two case studies (Netflix India, Amazon Prime Video) and eight product teardowns from the SIGMA · PM & Tech Club series.",
   },
 };
 
@@ -49,7 +49,7 @@ export default function ProjectsPage() {
           </Heading>
           <p className="mt-10 max-w-[60ch] font-display italic text-ink/85 text-lg leading-snug md:text-xl">
             Two self-directed case studies on the Indian streaming market, and
-            nine product teardowns authored as part of the SIGMA · PM &amp;
+            eight product teardowns authored as part of the SIGMA · PM &amp;
             Tech Club series.
           </p>
         </header>
@@ -126,7 +126,7 @@ function CaseStudyIndexCard({ project }: CaseStudyIndexCardProps) {
         href={`/projects/${project.slug}`}
         className="group block"
       >
-        <div className="overflow-hidden border border-rule bg-paper-pure">
+        <div className="aspect-[4/3] overflow-hidden border border-rule bg-paper-pure md:aspect-[3/2]">
           <picture>
             <source
               media="(min-width: 768px)"
@@ -137,11 +137,7 @@ function CaseStudyIndexCard({ project }: CaseStudyIndexCardProps) {
               alt={project.banner.alt}
               loading="lazy"
               decoding="async"
-              className={cn(
-                "block w-full h-auto",
-                "aspect-[4/3] md:aspect-[3/2]",
-                "object-cover",
-              )}
+              className="block h-full w-full object-cover"
             />
           </picture>
         </div>
@@ -194,14 +190,14 @@ function TeardownIndexCard({ teardown }: TeardownIndexCardProps) {
         href={`/projects/${teardown.slug}`}
         className="group block"
       >
-        <div className="overflow-hidden border border-rule bg-paper-pure">
+        <div className="aspect-square overflow-hidden border border-rule bg-paper-pure">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={teardown.thumb.src}
             alt={teardown.thumb.alt}
             loading="lazy"
             decoding="async"
-            className="block aspect-square w-full object-cover"
+            className="block h-full w-full object-cover"
           />
         </div>
 

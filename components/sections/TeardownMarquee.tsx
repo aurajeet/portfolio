@@ -14,7 +14,7 @@ interface TeardownMarqueeProps {
 // Scroll increment per arrow click (lg card width + gap).
 // Matches the li sizing below: w-[240px] + gap-6 (24px) = 264px.
 const CARD_STEP = 264;
-// Speed: 68px/s → 2376px (9 cards × 264px) / 68 ≈ 35s per loop.
+// Speed: 68px/s → 2112px (8 cards × 264px) / 68 ≈ 31s per loop.
 const PX_PER_MS = 0.068;
 
 export function TeardownMarquee({ teardowns, className }: TeardownMarqueeProps) {
@@ -111,9 +111,9 @@ export function TeardownMarquee({ teardowns, className }: TeardownMarqueeProps) 
           aria-label="Previous teardown"
           onClick={() => advance(-1)}
           className={cn(
-            "flex h-8 w-8 items-center justify-center",
+            "flex h-11 w-11 items-center justify-center",
             "border border-rule text-sm text-ink",
-            "transition-colors duration-200 ease-[var(--ease-luxe)]",
+            "transition-colors duration-300 ease-[var(--ease-luxe)]",
             "hover:border-ink hover:bg-ink hover:text-paper",
           )}
         >
@@ -124,9 +124,9 @@ export function TeardownMarquee({ teardowns, className }: TeardownMarqueeProps) 
           aria-label="Next teardown"
           onClick={() => advance(1)}
           className={cn(
-            "flex h-8 w-8 items-center justify-center",
+            "flex h-11 w-11 items-center justify-center",
             "border border-rule text-sm text-ink",
-            "transition-colors duration-200 ease-[var(--ease-luxe)]",
+            "transition-colors duration-300 ease-[var(--ease-luxe)]",
             "hover:border-ink hover:bg-ink hover:text-paper",
           )}
         >
@@ -141,6 +141,8 @@ export function TeardownMarquee({ teardowns, className }: TeardownMarqueeProps) 
           className="overflow-x-scroll no-scrollbar pb-3"
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}
+          onTouchStart={() => setPaused(true)}
+          onTouchEnd={() => setTimeout(() => setPaused(false), 1500)}
         >
           {/* Two copies of card list for seamless RAF loop */}
           <ul className="flex items-stretch gap-4 md:gap-6 pr-12 md:pr-16">
@@ -180,14 +182,14 @@ function TeardownCard({ teardown }: TeardownCardProps) {
       href={`/projects/${teardown.slug}`}
       className="group flex flex-col h-full border border-rule"
     >
-      <div className="overflow-hidden bg-paper-pure">
+      <div className="aspect-square overflow-hidden bg-paper-pure">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={teardown.thumb.src}
           alt={teardown.thumb.alt}
           loading="lazy"
           decoding="async"
-          className="block aspect-square w-full object-cover"
+          className="block h-full w-full object-cover"
         />
       </div>
 

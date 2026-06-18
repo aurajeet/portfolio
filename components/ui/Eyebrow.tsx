@@ -17,7 +17,7 @@ export function Eyebrow({ className, tone = "default", ...props }: EyebrowProps)
   return (
     <p
       className={cn(
-        "font-sans text-xs font-medium uppercase",
+        "font-sans text-eyebrow font-medium uppercase",
         "tracking-[var(--tracking-eyebrow)]",
         tone === "accent" ? "text-ink-accent" : "text-mute",
         className,

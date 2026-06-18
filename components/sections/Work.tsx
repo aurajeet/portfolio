@@ -9,10 +9,17 @@ import { cn } from "@/lib/cn";
 
 export function Work() {
   return (
-    <section id="work" className="section-y border-t border-rule">
+    <section
+      id="work"
+      aria-labelledby="work-heading"
+      className="section-y border-t border-rule"
+    >
       <Container>
         <FadeUp>
           <Eyebrow tone="accent">EXPERIENCE</Eyebrow>
+          <h2 id="work-heading" className="sr-only">
+            Experience
+          </h2>
         </FadeUp>
 
         <div className="mt-12 md:mt-16">
@@ -31,7 +38,7 @@ export function Work() {
 
                   <Heading
                     variant="h3"
-                    as="h2"
+                    as="h3"
                     className="mt-6 max-w-[24ch] text-balance"
                   >
                     {c.title}

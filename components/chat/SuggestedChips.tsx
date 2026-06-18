@@ -2,8 +2,9 @@
 
 import { motion, useReducedMotion, type Variants } from "framer-motion";
 import { cn } from "@/lib/cn";
+import { EASE_LUXE } from "@/lib/motion";
 
-const luxeEase: [number, number, number, number] = [0.16, 1, 0.3, 1];
+const luxeEase = EASE_LUXE;
 
 // Locked Package E + Style B labels (AI Bot.md §8.7). Order: top-left,
 // top-right, bottom-left, bottom-right.
@@ -69,9 +70,8 @@ export function SuggestedChips({ onPick }: SuggestedChipsProps) {
             "flex h-10 items-center justify-center border border-rule bg-paper px-3",
             "text-center font-sans text-[11px] font-medium text-ink",
             "cursor-pointer select-none",
-            "transition-colors duration-200 ease-[var(--ease-luxe)]",
+            "transition-colors duration-300 ease-[var(--ease-luxe)]",
             "hover:bg-ink hover:text-paper",
-            "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink",
           )}
         >
           {label}

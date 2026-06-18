@@ -78,7 +78,7 @@ export function Contact() {
             >
               <a
                 href={PHONE_HREF}
-                className="transition-opacity duration-300 ease-[var(--ease-luxe)] hover:opacity-60"
+                className="inline-block py-1 transition-opacity duration-300 ease-[var(--ease-luxe)] hover:opacity-60"
                 aria-label={`Call Aurajeet at ${PHONE_DISPLAY}`}
               >
                 {PHONE_DISPLAY}
@@ -91,7 +91,7 @@ export function Contact() {
                 target="_blank"
                 rel="noopener"
                 className={cn(
-                  "group inline-flex items-center gap-2",
+                  "group inline-flex items-center gap-2 py-1",
                   "transition-opacity duration-300 ease-[var(--ease-luxe)] hover:opacity-60",
                 )}
               >

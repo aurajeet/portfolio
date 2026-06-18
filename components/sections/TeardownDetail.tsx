@@ -246,7 +246,7 @@ export function TeardownDetail({ teardown, prev, next }: TeardownDetailProps) {
           )}
 
           <div className="md:justify-self-center">
-            <TextLink href="/#projects">All projects</TextLink>
+            <TextLink href="/projects">All projects</TextLink>
           </div>
 
           {next ? (

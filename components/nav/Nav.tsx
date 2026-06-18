@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { cn } from "@/lib/cn";
+import { EASE_LUXE } from "@/lib/motion";
 
 type NavLink = {
   label: string;
@@ -13,14 +14,14 @@ type NavLink = {
 };
 
 const links: NavLink[] = [
-  { label: "Work", href: "/#work" },
+  { label: "Experience", href: "/#work" },
   { label: "Projects", href: "/#projects" },
   { label: "About", href: "/about" },
   { label: "Resume", href: "/resume.pdf", download: true },
   { label: "Contact", href: "/#contact" },
 ];
 
-const luxeEase: [number, number, number, number] = [0.16, 1, 0.3, 1];
+const luxeEase = EASE_LUXE;
 
 export function Nav() {
   const pathname = usePathname();
