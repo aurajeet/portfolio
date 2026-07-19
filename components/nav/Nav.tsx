@@ -16,7 +16,8 @@ type NavLink = {
 const links: NavLink[] = [
   { label: "Experience", href: "/#work" },
   { label: "Projects", href: "/#projects" },
-  { label: "About", href: "/about" },
+  // About is temporarily pulled from the nav while the page is reworked.
+  // Restore alongside `app/about/` and the sitemap entry when it ships.
   { label: "Resume", href: "/resume.pdf", download: true },
   { label: "Contact", href: "/#contact" },
 ];

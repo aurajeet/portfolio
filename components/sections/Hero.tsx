@@ -15,7 +15,7 @@ export const HERO_EYEBROW =
   "PRODUCT MANAGER · BASED IN BANGALORE · OPEN TO PRODUCT ROLES";
 export const HERO_NAME = "aurajeet mahapatra";
 export const HERO_TAGLINE =
-  "Co-founded AmberLink, a 0→1 B2B marketplace at ₹7.5 L MRR in two months. Before that: a ₹2 Cr business rebuilt from the inside, and two years of growth experiments across five state-level campaigns.";
+  "Co-founded AmberLink, a 0→1 B2B marketplace at ₹85K MRR and ₹1.8 Cr+ GMV in two months. Before that: an essential-oil business rebuilt from the inside, and two years of growth experiments across five state-level campaigns.";
 
 const luxeEase = EASE_LUXE;
 

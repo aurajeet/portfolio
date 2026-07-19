@@ -261,7 +261,7 @@ const EXPERIENCE_BRAND_MAP: Record<string, { company: string; role: string }> =
     },
     hebe: {
       company: "HEBE",
-      role: "Product Lead",
+      role: "Product & Operations Lead",
     },
     nwn: {
       company: "Nation With NaMo (NWN)",
